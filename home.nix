@@ -55,20 +55,20 @@ let
     installPhase = ''
       mkdir -p $out/share/icons/Griffin-Ghost
       cp -R ./* $out/share/icons/Griffin-Ghost
-      # ${pkgs.gtk2}/bin/gtk-update-icon-cache "$out/share/icons/$dir" 
+      # ${pkgs.gtk2}/bin/gtk-update-icon-cache "$out/share/icons/$dir"
     '';
   };
 
   gnome-standard-themes-red = pkgs.gnome3.gnome_themes_standard.overrideDerivation (attrs: {
     install = ''
     echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    ls -al 
+    ls -al
     echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     '';
   });
 in {
   programs.home-manager.enable = true;
-  programs.home-manager.path = "https://github.com/mogria/home-manager/archive/master.tar.gz";
+  programs.home-manager.path = "\$HOME/Code/home-manager";
 
   home.packages = [
     pkgs.gnome3.gnome_terminal
