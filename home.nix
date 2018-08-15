@@ -116,7 +116,41 @@ in {
     pkgs.gcc
   ];
 
-  programs.rofi.enable = true;
+  programs.rofi = {
+    enable = true;
+    borderWidth = 2;
+    lines = 20;
+    width = 60;
+    padding = 6;
+    rowHeight = 1;
+    separator = "solid";
+    scrollbar = false;
+    location = "bottom";
+    xoffset = 0;
+    yoffset = 0;
+    colors = let
+      red = "argb:90e01010";
+      white = "#a0a0a0";
+    in {
+      window = {
+        background = "argb:e0101010";
+        border = red;
+        separator = red;
+      };
+
+      rows = {
+        normal = {
+          foreground = white;
+          background = "argb:00000000";
+          backgroundAlt = "argb:90101010";
+          highlight = {
+            background = red;
+            foreground = white;
+          };
+        };
+      };
+    };
+  };
 
   programs.git = {
     enable = true;
