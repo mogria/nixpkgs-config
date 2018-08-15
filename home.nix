@@ -210,9 +210,16 @@ in {
           source "$HOME/.zinputrc"
       fi
 
+      if [ -e "$HOME/.zprofile" ]; then
+          source "$HOME/.zprofile"
+      fi
+
       export TERM="xterm-256color"
       export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
       plugins=(git dircycle composer)
+
+      # case sensitive completion, etc.
+      CASE_SENSITIVE=true
 
       POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(command_execution_time status root_indicator)
       POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(dir vcs)
@@ -221,6 +228,10 @@ in {
       export ZSH_THEME="../../../../../../../../../../../${powerlevel9k}/share/powerlevel9k/powerlevel9k"
       source $ZSH/oh-my-zsh.sh
 
+      # make sure prompt gets printed on a new line
+      setopt PROMPT_SP
+      setopt PROMPT_CR
+      export PROMPT_EOL_MARK=%B%S%#%s%b
     '';
   };
 
