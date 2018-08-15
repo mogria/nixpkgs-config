@@ -17,21 +17,103 @@ let
       cp powerlevel9k.zsh-theme $out/share/powerlevel9k
     '';
   };
+  faience-ng-icon-theme = stdenv.mkDerivation rec {
+    name = "${pname}-${version}";
+    pname = "faience-ng-icon-theme";
+    version = "v${releasedate}";
+    releasedate = "20180126";
+    src =  pkgs.fetchurl {
+      url = "https://github.com/faience/${pname}/releases/download/${version}/${pname}-${releasedate}.tar.gz";
+      sha256 = "0szpzclsanfjqqaza45am4qfykfprxz4fs5q8hw159xflk91fqv4";
+    };
+    sourceRoot = ".";
+    postUnpack = ''
+      mkdir theme
+      mv Faience* theme/
+    '';
+    installPhase = ''
+      mkdir -p $out/share/icons
+      find theme -mindepth 1 -maxdepth 1 -type d -iname 'Faience-ng*' | while IFS= read dir
+      do
+        cp -R "$dir" $out/share/icons
+        # ${pkgs.gtk2}/bin/gtk-update-icon-cache "$out/share/icons/$dir" 
+      done
+    '';
+  };
+
+  griffin-ghost-icon-theme= stdenv.mkDerivation rec {
+    name = "${pname}-${version}";
+    pname = "griffin-ghost-icon-theme";
+    version = "v${releasedate}";
+    releasedate = "20180126";
+    src =  pkgs.fetchFromGitHub {
+      owner = "Shenron007";
+      repo = "Griffin-Icons";
+      rev = "5cc20750a79dc9897e67f08ae5d1b6a26ac6e322";
+      sha256 = "0ayg1vzlad6zjvaizkanc6vjyznv4af0yd0lpyi7h1zzw17alsbx";
+    };
+    installPhase = ''
+      mkdir -p $out/share/icons/Griffin-Ghost
+      cp -R ./* $out/share/icons/Griffin-Ghost
+      # ${pkgs.gtk2}/bin/gtk-update-icon-cache "$out/share/icons/$dir" 
+    '';
+  };
+
+  gnome-standard-themes-red = pkgs.gnome3.gnome_themes_standard.overrideDerivation (attrs: {
+    install = ''
+    echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    ls -al 
+    echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    '';
+  });
 in {
   programs.home-manager.enable = true;
   programs.home-manager.path = "https://github.com/mogria/home-manager/archive/master.tar.gz";
 
   home.packages = [
     pkgs.gnome3.gnome_terminal
-    pkgs.jq
-    pkgs.tree
-    pkgs.dropbox
-    pkgs.keepassx
 
+    /* basic graphical programs */
+    pkgs.feh
+    pkgs.keepassx
+    pkgs.meld
+
+    /* heavier graphical programs */
+    pkgs.dropbox
+    pkgs.clementine
+    pkgs.firefox
+
+    /* theming stuff */
+    faience-ng-icon-theme
+    gnome-standard-themes-red
+    griffin-ghost-icon-theme
+
+    /* shell environment programs */
+    pkgs.tmux
+    /* zsh, direnv is already included */
+    /* vim is still in the nixos configuration :/ share it with root??? */
+
+    /* shell utilities */
+    pkgs.jq
+    pkgs.ripgrep
+    pkgs.tree
+    pkgs.binutils
+    pkgs.moreutils
+    pkgs.coreutils
+    pkgs.utillinux
+    pkgs.fd
+    pkgs.exa
+    pkgs.netcat
+
+    /* system management utilities */
     pkgs.iotop
     pkgs.htop
+    pkgs.lsof
+    pkgs.ltrace
 
-    pkgs.direnv
+    /* programming utilities */
+    pkgs.gdb
+    pkgs.gcc
   ];
 
   programs.rofi.enable = true;
@@ -40,6 +122,23 @@ in {
     enable = true;
     userName = "Mogria";
     userEmail = "m0gr14@gmail.com";
+    aliases = {
+      "s" = "status";
+      "a" = "add";
+      "c" = "commit";
+      "b" = "branch";
+      "d" = "difftool";
+      "co" = "checkout";
+      "gd" = "diff";
+      "gp" = "push";
+      "gl" = "pull";
+    };
+    ignores = [ "*~"  ".*.sw?" ".env" ];
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   programs.zsh = {
@@ -52,20 +151,26 @@ in {
       "gs" = "git status";
       "ga" = "git add";
       "gc" = "git commit";
+      "gb" = "git branch";
+      "gco" = "git checkout";
       "gd" = "git diff";
       "gp" = "git push";
+      "gl" = "git pull";
       # make alias expansion work with the following commands as prefix
       "xargs" = "xargs ";
       "sudo" = "sudo ";
+      "home-config" = "vim ~/.config/nixpkgs/home.nix";
+      "system-config" = "sudo vim /etc/nixos/configuration.nix";
     };
     history = {
       ignoreDups = true;
       share = true;
     };
-    initExtra = ''
-      eval "$(direnv hook zsh)"
-      export EDITOR=vi
+    profileExtra = ''
+      export EDITOR=vim
       export VISUAL=vim
+    '';
+    initExtra = ''
 
       if [ -e "$HOME/.zinputrc" ]; then
           source "$HOME/.zinputrc"
