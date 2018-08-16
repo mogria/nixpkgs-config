@@ -191,10 +191,13 @@ in {
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    changeDirWidgetOptions = [ "--preview 'tree -C {} | head -200'" ];
-    fileWidgetOptions = [ "--preview 'file {}; head {}'" ];
-    historyWidgetOptions = [ "--sort" "--exact" ];
+    defaultCommand = [ "${pkgs.fd}/bin/fd" "--type" "f" ];
     defaultOptions = [ "--height 40%" "--border" ];
+    fileWidgetCommand = [ "${pkgs.fd}/bin/fd" "--type" "f" ];
+    fileWidgetOptions = [ "--preview 'file {}; head {}'" ];
+    changeDirWidgetCommand = [ "${pkgs.fd}/bin/fd" "--type" "d" ];
+    changeDirWidgetOptions = [ "--preview 'tree -C {} | head -200'" ];
+    historyWidgetOptions = [ "--sort" "--exact" ];
   };
 
   programs.zsh = {
@@ -254,6 +257,19 @@ in {
       setopt PROMPT_SP
       setopt PROMPT_CR
       export PROMPT_EOL_MARK=%B%S%#%s%b
+
+      # make sure the FZF keybindings work
+      bindkey '^I' fzf-completion
+      bindkey '^T' fzf-file-widget
+      bindkey '\ec' fzf-cd-widget
+      bindkey '^R' fzf-history-widget
+
+      # make most keybindings also work in vim normal mode
+      bindkey -M vicmd '^I' fzf-completion
+      bindkey -M vicmd '^T' fzf-file-widget
+      bindkey -M vicmd '\ec' fzf-cd-widget
+      bindkey -M vicmd '^R' fzf-history-widget
+
     '';
   };
 
