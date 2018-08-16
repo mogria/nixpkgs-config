@@ -152,8 +152,31 @@ in {
       "gd" = "diff";
       "gp" = "push";
       "gl" = "pull";
+      "prune" = "fetch --prune";
+      "undo" = "reset --soft HEAD^";
+      "forward" = "merge --ff-only";
     };
     ignores = [ "*~"  ".*.sw?" ".env" ];
+    extraConfig = {
+      merge = {
+        conflictStyle = "diff3";
+      };
+
+      push = {
+        default = "simple";
+      };
+
+      transfer = {
+        fsckobjects = true;
+      };
+
+      diff = {
+        tool = "vimdiff";
+      };
+      difftool = {
+        prompt = false;
+      };
+    };
   };
 
   programs.direnv = {
