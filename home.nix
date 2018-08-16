@@ -68,6 +68,7 @@ in {
     pkgs.dropbox
     pkgs.clementine
     pkgs.firefox
+    pkgs.thunderbird
 
     /* theming stuff */
     faience-ng-icon-theme
