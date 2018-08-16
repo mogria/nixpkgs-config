@@ -225,33 +225,33 @@ in {
       ignoreDups = true;
       share = true;
     };
+
+    oh-my-zsh= {
+      enable = true;
+      plugins = [ "git" "sudo" "dircycle" "composer" ];
+      /* ugly hack: oh my zsh only wants a relative path, so lets go bback to the system root */
+      theme = "../../../../../../../../../../../${pkgs.zsh-powerlevel9k}/share/zsh-powerlevel9k/powerlevel9k";
+    };
+
     profileExtra = ''
       export EDITOR=vim
       export VISUAL=vim
+      export TERM="xterm-256color"
     '';
     initExtra = ''
-
-      if [ -e "$HOME/.zinputrc" ]; then
-          source "$HOME/.zinputrc"
-      fi
+      # use the vi keymap
+      setopt vi
 
       if [ -e "$HOME/.zprofile" ]; then
           source "$HOME/.zprofile"
       fi
 
-      export TERM="xterm-256color"
-      export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
-      plugins=(git dircycle composer)
-
-      # case sensitive completion, etc.
-      CASE_SENSITIVE=true
-
       POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(command_execution_time status root_indicator)
       POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(dir vcs)
       POWERLEVEL9K_STATUS_VERBOSE=true
-      # ugly hack: oh my zsh only wants a relative path, so lets go bback to the system root
-      export ZSH_THEME="../../../../../../../../../../../${pkgs.zsh-powerlevel9k}/share/zsh-powerlevel9k/powerlevel9k"
-      source $ZSH/oh-my-zsh.sh
+
+      # case sensitive completion, etc.
+      CASE_SENSITIVE=true
 
       # make sure prompt gets printed on a new line
       setopt PROMPT_SP
