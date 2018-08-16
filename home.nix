@@ -161,6 +161,15 @@ in {
     enableZshIntegration = true;
   };
 
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    changeDirWidgetOptions = [ "--preview 'tree -C {} | head -200'" ];
+    fileWidgetOptions = [ "--preview 'file {}; head {}'" ];
+    historyWidgetOptions = [ "--sort" "--exact" ];
+    defaultOptions = [ "--height 40%" "--border" ];
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
