@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 let
+  config = import ./user-config.nix;
   stdenv = pkgs.stdenv;
   fetchgit = pkgs.fetchgit;
   faience-ng-icon-theme = stdenv.mkDerivation rec {
@@ -54,7 +55,9 @@ let
   });
 in {
   programs.home-manager.enable = true;
-  programs.home-manager.path = "\$HOME/Code/home-manager";
+  programs.home-manager.path = if config.homemanager.development
+      then "${config.getDirectory "code"}/home-manager"
+      else config.homemanager.repo "http";
 
   home.packages = [
     pkgs.gnome3.gnome_terminal
@@ -141,8 +144,8 @@ in {
 
   programs.git = {
     enable = true;
-    userName = "Mogria";
-    userEmail = "m0gr14@gmail.com";
+    userName = config.name;
+    userEmail = config.git.email;
     aliases = {
       "s" = "status";
       "a" = "add";
