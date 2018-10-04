@@ -45,20 +45,13 @@ let
       # ${pkgs.gtk2}/bin/gtk-update-icon-cache "$out/share/icons/$dir"
     '';
   };
-
-  gnome-standard-themes-red = pkgs.gnome3.gnome_themes_standard.overrideDerivation (attrs: {
-    install = ''
-    echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    ls -al
-    echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    '';
-  });
 in {
   programs.home-manager.enable = true;
   programs.home-manager.path = if config.homemanager.development
       then "${config.getDirectory "code"}/home-manager"
       else config.homemanager.repo "http";
 
+  home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
   home.packages = [
     pkgs.gnome3.gnome_terminal
 
