@@ -110,15 +110,15 @@ in {
 
   programs.rofi = {
     enable = true;
-    borderWidth = 2;
-    lines = 20;
-    width = 60;
-    padding = 6;
+    borderWidth = 1;
+    lines = 50;
+    width = 30;
+    padding = 1;
     rowHeight = 1;
     separator = "solid";
     scrollbar = false;
-    location = "bottom";
-    xoffset = 0;
+    location = "top-right";
+    xoffset = 0; # 150; # right beside the xfce panel
     yoffset = 0;
     colors = let
       red = "argb:90e01010";
