@@ -753,6 +753,8 @@ in {
     '';
   };
 
+  programs.command-not-found.enable = true;
+
   systemd.user.services = {
     dropbox = {
       Unit = {
