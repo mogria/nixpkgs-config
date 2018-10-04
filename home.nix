@@ -68,7 +68,6 @@ in {
 
     /* theming stuff */
     faience-ng-icon-theme
-    gnome-standard-themes-red
     griffin-ghost-icon-theme
 
     /* shell environment programs */
