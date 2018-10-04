@@ -777,9 +777,12 @@ in {
         " complete brackets etc.
 
         " add the closing bracket when breaking the line
-        inoremap {<CR> {<CR>}<C-O>O
-        inoremap (<CR> (<CR>)<C-O>O
-        inoremap [<CR> [<CR>]<C-O>O
+        " inoremap {<CR> {<CR>}<C-O>O
+        " inoremap (<CR> (<CR>)<C-O>O
+        " inoremap [<CR> [<CR>]<C-O>O
+
+        Plugin 'rstacruz/vim-closer'
+        Plugin 'tpope/vim-endwise'
       " }}}
 
       " PHP SUPPORT (unneeded?){{{
