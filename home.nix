@@ -337,6 +337,18 @@ in {
     '';
   };
 
+  programs.gnome-terminal = {
+     enable = false;
+     profile."Default" = {
+       default = true;
+       font = "Source Code Pro For Powerline";
+       scrollbackLines = 1000;
+       visibleName = "GTerm";
+       showScrollbar = false;
+     };
+     showMenubar = false;
+  };
+
   home.file.".tmux.conf" = {
   text = let
       loadPlugin = plugin: "run-shell ${plugin}/${plugin.name}\n";
