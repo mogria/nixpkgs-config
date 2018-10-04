@@ -72,7 +72,7 @@ in {
 
     /* shell environment programs */
     # pkgs.tmux /* already installed by the nixos module */
-    pkgs.xclip # required by tmux for copy paste into X clipboard
+    pkgs.xsel # required by tmux for copy paste into X clipboard
 
     /* zsh, direnv is already included */
     /* there is also still a vim in the nixos configuration :/ share it with root??? */
@@ -352,6 +352,7 @@ in {
 
       # Plugins
       ${loadPlugin yankPlugin}
+      set -g @yank_selection 'clipboard'
 
       # remap prefix from 'C-b' to 'C-a'
       unbind C-b
