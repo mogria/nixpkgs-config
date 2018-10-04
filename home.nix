@@ -537,6 +537,7 @@ in {
 
         " always show vim command autocompletion
         set wildmenu
+        set wildmode=longest,full
 
         " use space as the mapleader for easy combos to type
         let mapleader=" "
