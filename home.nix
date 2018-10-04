@@ -230,17 +230,111 @@ in {
         save = 100000;
       };
 
-    oh-my-zsh= {
-      enable = true;
-      plugins = [ "git" "sudo" "dircycle" "composer" ];
-      /* ugly hack: oh my zsh only wants a relative path, so lets go bback to the system root */
-      theme = "../../../../../../../../../../../${pkgs.zsh-powerlevel9k}/share/zsh-powerlevel9k/powerlevel9k";
-    };
+      oh-my-zsh= {
+        enable = true;
+        plugins = [ "git" "sudo" "dircycle" "composer" ];
+        /* ugly hack: oh my zsh only wants a relative path, so lets go bback to the system root */
+        theme = "../../../../../../../../../../../${pkgs.zsh-powerlevel9k}/share/zsh-powerlevel9k/powerlevel9k";
+      };
 
-    profileExtra = ''
-      export EDITOR=vim
-      export VISUAL=vim
-      export TERM="xterm-256color"
+      sessionVariables = {
+        EDITOR = "vim";
+        VISUAL = "vim";
+        FZF_TMUX = "1";
+        FZF_TMUX_HEIGHT = "30%";
+        # for times the escape needed, because \ is not escaped! when pasting
+        # into the bash file
+        FZF_COMPLETION_TRIGGER = "\\\\";
+      };
+      initExtra = ''
+        # disable standard terminal function CTRL-Q and CTRL-S
+        # to stop output and resume
+        stty -ixon
+
+        # use the vi keymap
+        setopt vi
+
+        if printf "%s\n" /dev/tty? /dev/tty?? | grep -Fx "$TTY"; then
+          export TERM="linux"
+        else
+          export TERM="xterm-256color" # force zsh theme to load
+        fi
+
+        if [ -e "$HOME/.zprofile" ]; then
+            source "$HOME/.zprofile"
+        fi
+
+        POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(command_execution_time status root_indicator)
+        POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(dir vcs)
+        POWERLEVEL9K_STATUS_VERBOSE=true
+
+        # case sensitive completion, etc.
+        CASE_SENSITIVE=true
+        # auto-command correction
+        ENABLE_CORRECTION=true
+        # don't show if files are dirty in a git repo
+        # as it takes a long time
+        DISABLE_UNTRACKED_FILES_DIRTY=true
+
+        # make sure prompt gets printed on a new line
+        setopt PROMPT_SP
+        setopt PROMPT_CR
+        export PROMPT_EOL_MARK=%B%S%#%s%b
+
+        f() {
+          local searchterm="''${1:-""}"
+          shift
+          local out="$(rg -n "$searchterm" "$@" | fzf | cut -d: -f1-2)"
+          local file="''${out%:*}"
+          if [ -n "$file" ]; then
+            "$EDITOR" "$file" +"$(printf "%s\n" "$out" | cut -d: -f2)"
+          fi
+          return $?
+        }
+        zle -N fzf-search-files
+        bindkey '^F' fzf-search-files
+
+        # shift-tab : go backward in menu (invert of tab)
+        bindkey '^[[Z' reverse-menu-complete
+
+        # make sure the FZF keybindings work
+        bindkey '^I' fzf-completion
+        bindkey '^T' fzf-file-widget
+        bindkey '\ec' fzf-cd-widget
+        bindkey '^R' fzf-history-widget
+
+        # make most keybindings also work in vim normal mode
+        bindkey -M vicmd '^I' fzf-completion
+        bindkey -M vicmd '^T' fzf-file-widget
+        bindkey -M vicmd '\ec' fzf-cd-widget
+        bindkey -M vicmd '^R' fzf-history-widget
+
+        # common emacs keybindings for insert mode
+        bindkey -M viins '^A' beginning-of-line
+        bindkey -M viins '^E' end-of-line
+        bindkey -M viins '^F' forward-char
+        bindkey -M viins '^B' backward-char
+        bindkey -M viins '^W' kill-word
+        bindkey -M viins '^[f' forward-word
+        bindkey -M viins '^[f' backward-word
+        bindkey '^[[1;5C' forward-word # arrow-key right
+        bindkey '^[[1;5D' backward-word # arrow-key left
+
+        # in some terminals the delete character doesn't
+        # work properly, so make sure it's bound
+        bindkey    "^[[3~"          delete-char
+        bindkey    "^[3;5~"         delete-char
+
+        # start tmux automatically
+        if which tmux 2>&1 >/dev/null; then
+          # These environment variables are checked in order
+          # to avoid nesting. Because when tmux starts a new
+          # shell in it, it will try to launch tmux again!
+          if [ -z "$TMUX" ] && [ "$TERM" != "screen-256color" ] && [ "$TERM" != "screen" ]; then
+            tmux
+          fi
+        fi
+    '';
   };
 
   home.file.".tmux.conf" = {
@@ -331,39 +425,7 @@ in {
       # bell
       set-window-option -g window-status-bell-style fg=black,bg=red #base02, red
     '';
-    initExtra = ''
-      # use the vi keymap
-      setopt vi
-
-      if [ -e "$HOME/.zprofile" ]; then
-          source "$HOME/.zprofile"
-      fi
-
-      POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(command_execution_time status root_indicator)
-      POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(dir vcs)
-      POWERLEVEL9K_STATUS_VERBOSE=true
-
-      # case sensitive completion, etc.
-      CASE_SENSITIVE=true
-
-      # make sure prompt gets printed on a new line
-      setopt PROMPT_SP
-      setopt PROMPT_CR
-      export PROMPT_EOL_MARK=%B%S%#%s%b
-
-      # make sure the FZF keybindings work
-      bindkey '^I' fzf-completion
-      bindkey '^T' fzf-file-widget
-      bindkey '\ec' fzf-cd-widget
-      bindkey '^R' fzf-history-widget
-
-      # make most keybindings also work in vim normal mode
-      bindkey -M vicmd '^I' fzf-completion
-      bindkey -M vicmd '^T' fzf-file-widget
-      bindkey -M vicmd '\ec' fzf-cd-widget
-      bindkey -M vicmd '^R' fzf-history-widget
-    '';
-  }
+  };
 
   home.file.".vimrc" = let
     languages = {
