@@ -776,7 +776,11 @@ in {
           \   'tpl': ['{', '$', '.'],
           \ }
         " complete brackets etc.
-        Plugin 'jiangmiao/auto-pairs'
+
+        " add the closing bracket when breaking the line
+        inoremap {<CR> {<CR>}<C-O>O
+        inoremap (<CR> (<CR>)<C-O>O
+        inoremap [<CR> [<CR>]<C-O>O
       " }}}
 
       " PHP SUPPORT (unneeded?){{{
