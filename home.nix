@@ -298,14 +298,14 @@ in {
         bindkey '^[[Z' reverse-menu-complete
 
         # make sure the FZF keybindings work
-        bindkey '^I' fzf-completion
-        bindkey '^T' fzf-file-widget
+        bindkey '^N' fzf-completion
+        bindkey '^P' fzf-file-widget
         bindkey '\ec' fzf-cd-widget
         bindkey '^R' fzf-history-widget
 
         # make most keybindings also work in vim normal mode
-        bindkey -M vicmd '^I' fzf-completion
-        bindkey -M vicmd '^T' fzf-file-widget
+        bindkey -M vicmd '^N' fzf-completion
+        bindkey -M vicmd '^P' fzf-file-widget
         bindkey -M vicmd '\ec' fzf-cd-widget
         bindkey -M vicmd '^R' fzf-history-widget
 
@@ -315,8 +315,10 @@ in {
         bindkey -M viins '^F' forward-char
         bindkey -M viins '^B' backward-char
         bindkey -M viins '^W' kill-word
+        bindkey -M viins '^K' kill-line
+        bindkey -M viins '^T' transpose-chars
         bindkey -M viins '^[f' forward-word
-        bindkey -M viins '^[f' backward-word
+        bindkey -M viins '^[b' backward-word
         bindkey '^[[1;5C' forward-word # arrow-key right
         bindkey '^[[1;5D' backward-word # arrow-key left
 
