@@ -222,11 +222,12 @@ in {
       "sudo" = "sudo ";
       "home-config" = "vim ~/.config/nixpkgs/home.nix";
       "system-config" = "sudo vim /etc/nixos/configuration.nix";
-    history = {
-      ignoreDups = true;
-      share = true;
-    };
       "tmux" = "TERM=screen-256color tmux";
+      };
+      history = {
+        ignoreDups = true;
+        share = true;
+        save = 100000;
       };
 
     oh-my-zsh= {
