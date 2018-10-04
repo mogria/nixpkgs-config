@@ -71,7 +71,9 @@ in {
     griffin-ghost-icon-theme
 
     /* shell environment programs */
-    pkgs.tmux
+    # pkgs.tmux /* already installed by the nixos module */
+    pkgs.xclip # required by tmux for copy paste into X clipboard
+
     /* zsh, direnv is already included */
     /* vim is still in the nixos configuration :/ share it with root??? */
 
@@ -212,11 +214,12 @@ in {
       "sudo" = "sudo ";
       "home-config" = "vim ~/.config/nixpkgs/home.nix";
       "system-config" = "sudo vim /etc/nixos/configuration.nix";
-    };
     history = {
       ignoreDups = true;
       share = true;
     };
+      "tmux" = "TERM=screen-256color tmux";
+      };
 
     oh-my-zsh= {
       enable = true;
@@ -229,6 +232,95 @@ in {
       export EDITOR=vim
       export VISUAL=vim
       export TERM="xterm-256color"
+  };
+
+  home.file.".tmux.conf" = {
+  text = let
+      loadPlugin = plugin: "run-shell ${plugin}/${plugin.name}\n";
+      yankPlugin = pkgs.fetchFromGitHub {
+          name = "yank.tmux";
+          owner = "tmux-plugins";
+          repo = "tmux-yank";
+          rev = "c6a73eba6bfcde51edf57e1cc5fa12c4c7bd98d9";
+          sha256 = "04cnr9chq6lwg6zlqvp0zrbn7mzn8w862r1g5b3hmp8ammdvp07x";
+      };
+    in ''
+      # TMUX CONFIGURATION FILE
+
+      # Plugins
+      ${loadPlugin yankPlugin}
+
+      # remap prefix from 'C-b' to 'C-a'
+      unbind C-b
+      unbind C-a
+      set-option -g prefix C-q
+      bind-key C-q send-prefix
+
+      # split panes using | and -
+      unbind '%'
+      unbind '"'
+      bind | split-window -h
+      bind - split-window -v
+
+      # reload config file
+      bind r source-file ~/.tmux.conf \; \
+           display-message "reloaded config"
+
+      # mouse integration (not that we would need it much... but it's nice)
+      set -g mouse on
+      # set -g mouse-utf8 off
+
+      # have tmux count the windows/panes from 1, not from 0, better keymapping
+      set -g base-index 1
+      set -g pane-base-index 1
+
+
+      # vi style pane selection
+      bind -r h select-pane -L
+      bind -r j select-pane -D
+      bind -r k select-pane -U
+      bind -r l select-pane -R
+
+      # vi style pane selection
+      bind -r C-h resize-pane -L 11
+      bind -r C-j resize-pane -D 7
+      bind -r C-k resize-pane -U 7
+      bind -r C-l resize-pane -R 10
+
+
+      #### COLOUR THEME (Solarized dark)
+      # default statusbar colors
+      set-option -g status-bg black #base02
+      set-option -g status-fg yellow #yellow
+      set-option -g status-attr default
+
+      # default window title colors
+      set-window-option -g window-status-fg brightblue #base0
+      set-window-option -g window-status-bg default
+      #set-window-option -g window-status-attr dim
+
+      # active window title colors
+      set-window-option -g window-status-current-fg brightred #orange
+      set-window-option -g window-status-current-bg default
+      #set-window-option -g window-status-current-attr bright
+
+      # pane border
+      set-option -g pane-border-fg black #base02
+      set-option -g pane-active-border-fg brightgreen #base01
+
+      # message text
+      set-option -g message-bg black #base02
+      set-option -g message-fg brightred #orange
+
+      # pane number display
+      set-option -g display-panes-active-colour blue #blue
+      set-option -g display-panes-colour brightred #orange
+
+      # clock
+      set-window-option -g clock-mode-colour green #green
+
+      # bell
+      set-window-option -g window-status-bell-style fg=black,bg=red #base02, red
     '';
     initExtra = ''
       # use the vi keymap
