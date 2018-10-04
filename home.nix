@@ -53,8 +53,6 @@ in {
 
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
   home.packages = [
-    pkgs.gnome3.gnome_terminal
-
     /* basic graphical programs */
     pkgs.feh
     pkgs.keepassx
