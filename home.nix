@@ -57,6 +57,7 @@ in {
     pkgs.feh
     pkgs.keepassx
     pkgs.meld
+    pkgs.qutebrowser
 
     /* heavier graphical programs */
     pkgs.dropbox
