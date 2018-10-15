@@ -221,7 +221,6 @@ in {
       "sudo" = "sudo ";
       "home-config" = "vim ~/.config/nixpkgs/home.nix";
       "system-config" = "sudo vim /etc/nixos/configuration.nix";
-      "tmux" = "TERM=screen-256color tmux";
       };
       history = {
         ignoreDups = true;
@@ -252,12 +251,6 @@ in {
 
         # use the vi keymap
         setopt vi
-
-        if printf "%s\n" /dev/tty? /dev/tty?? | grep -Fx "$TTY"; then
-          export TERM="linux"
-        else
-          export TERM="xterm-256color" # force zsh theme to load
-        fi
 
         if [ -e "$HOME/.zprofile" ]; then
             source "$HOME/.zprofile"
@@ -327,11 +320,11 @@ in {
         bindkey    "^[3;5~"         delete-char
 
         # start tmux automatically
-        if which tmux 2>&1 >/dev/null; then
-          # These environment variables are checked in order
+        if command tmux -V 2>&1 >/dev/null; then
+          # This Environment variable is checked in order
           # to avoid nesting. Because when tmux starts a new
           # shell in it, it will try to launch tmux again!
-          if [ -z "$TMUX" ] && [ "$TERM" != "screen-256color" ] && [ "$TERM" != "screen" ]; then
+          if [ -z "$TMUX" ]; then
             tmux
           fi
         fi
