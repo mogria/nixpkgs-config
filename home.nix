@@ -363,6 +363,14 @@ in {
       set-option -g prefix C-q
       bind-key C-q send-prefix
 
+      # lower the ncurses escape time, for faster mode switch
+      # in vim etc.
+      set-option -s escape-time 10
+
+      # only set this here, don't set TERM in .profile, for
+      # correct termcap in every environment
+      set -g default-terminal "screen-256color"
+
       # split panes using | and -
       unbind '%'
       unbind '"'
@@ -373,7 +381,7 @@ in {
       bind r source-file ~/.tmux.conf \; \
            display-message "reloaded config"
 
-      # mouse integration (not that we would need it much... but it's nice)
+      # mouse integration (not that it's needed  much... but it's nice)
       set -g mouse on
       # set -g mouse-utf8 off
 
@@ -392,7 +400,7 @@ in {
       bind -r C-h resize-pane -L 11
       bind -r C-j resize-pane -D 7
       bind -r C-k resize-pane -U 7
-      bind -r C-l resize-pane -R 10
+      bind -r C-l resize-pane -R 11
 
       ## Yank into system clipboard
 
