@@ -356,9 +356,6 @@ in {
     in ''
       # TMUX CONFIGURATION FILE
 
-      # Plugins
-      ${loadPlugin yankPlugin}
-      set -g @yank_selection 'clipboard'
 
       # remap prefix from 'C-b' to 'C-a'
       unbind C-b
@@ -396,6 +393,21 @@ in {
       bind -r C-j resize-pane -D 7
       bind -r C-k resize-pane -U 7
       bind -r C-l resize-pane -R 10
+
+      ## Yank into system clipboard
+
+      bind-key -r Space copy-mode
+      set -g @yank_selection 'clipboard' # use system clipboard 
+      ${loadPlugin yankPlugin}
+      # use v or space to start selecting
+      bind-key -T copy-mode-vi v send-keys -X begin-selection # 
+      # use y or enter to copy the selection
+      bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xsel -i --clipboard"
+      # use y to yank a line into the clipboard
+      bind-key -T copy-mode-vi Y send-keys -X start-of-line \; send-keys -X start-of-line \; send-keys -X end-of-line \; send-keys -X copy-pipe-and-cancel "xsel -i --clipboard"
+      # copy selection into clipboard when releasing mouse
+      bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection-and-cancel
+      bind-key -T copy-mode-vi Escape send-keys -X cancel
 
 
       #### COLOUR THEME (Solarized dark)
