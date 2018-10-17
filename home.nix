@@ -55,7 +55,7 @@ in {
   home.packages = [
     /* basic graphical programs */
     pkgs.feh
-    pkgs.keepassx
+    (pkgs.keepass.override { xdotool = pkgs.xdotool; })
     pkgs.meld
     pkgs.qutebrowser
 
