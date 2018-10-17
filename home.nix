@@ -75,6 +75,7 @@ in {
 
     /* zsh, direnv is already included */
     /* there is also still a vim in the nixos configuration :/ share it with root??? */
+    pkgs.nix-zsh-completions
     (pkgs.vim_configurable.override {
       pythonSupport = true; # needed for YouCompleteMe Plugin
       python = pkgs.python3; # needed for YouCompleteMe Plugin
