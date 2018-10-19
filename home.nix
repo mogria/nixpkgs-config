@@ -34,15 +34,14 @@ let
     version = "v${releasedate}";
     releasedate = "20180126";
     src =  pkgs.fetchFromGitHub {
-      owner = "Shenron007";
+      owner = "LordShenron";
       repo = "Griffin-Icons";
-      rev = "5cc20750a79dc9897e67f08ae5d1b6a26ac6e322";
-      sha256 = "0ayg1vzlad6zjvaizkanc6vjyznv4af0yd0lpyi7h1zzw17alsbx";
+      rev = "4edbd4cb24eb28d38b3c458ff07f6aba2b6c2712";
+      sha256 = "05i37bv3fw3dsw9323cq4pnbrd03p364f67iif2yg775n3ixrzzg";
     };
     installPhase = ''
       mkdir -p $out/share/icons/Griffin-Ghost
       cp -R ./* $out/share/icons/Griffin-Ghost
-      # ${pkgs.gtk2}/bin/gtk-update-icon-cache "$out/share/icons/$dir"
     '';
   };
 in {
@@ -231,7 +230,7 @@ in {
 
       oh-my-zsh= {
         enable = true;
-        plugins = [ "git" "sudo" "dircycle" "composer" ];
+        plugins = [ "gitfast" "sudo" "dircycle" "zsh-navigation-tools" ];
         /* ugly hack: oh my zsh only wants a relative path, so lets go bback to the system root */
         theme = "../../../../../../../../../../../${pkgs.zsh-powerlevel9k}/share/zsh-powerlevel9k/powerlevel9k";
       };
