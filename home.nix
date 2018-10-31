@@ -69,6 +69,7 @@ in {
     griffin-ghost-icon-theme
 
     /* shell environment programs */
+    pkgs.alacritty
     # pkgs.tmux /* already installed by the nixos module */
     pkgs.xsel # required by tmux for copy paste into X clipboard
 
@@ -243,6 +244,7 @@ in {
         # for times the escape needed, because \ is not escaped! when pasting
         # into the bash file
         FZF_COMPLETION_TRIGGER = "\\\\";
+        XDG_CONFIG_HOME = "$HOME/.config";
       };
       initExtra = ''
         # disable standard terminal function CTRL-Q and CTRL-S
@@ -331,17 +333,7 @@ in {
     '';
   };
 
-  programs.gnome-terminal = {
-     enable = false;
-     profile."Default" = {
-       default = true;
-       font = "Source Code Pro For Powerline";
-       scrollbackLines = 1000;
-       visibleName = "GTerm";
-       showScrollbar = false;
-     };
-     showMenubar = false;
-  };
+  xdg.configFile."alacritty/alacritty.yml".source = ./alacritty/alacritty.yml;
 
   home.file.".tmux.conf" = {
   text = let
