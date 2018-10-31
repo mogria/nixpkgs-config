@@ -186,12 +186,12 @@
         let g:gutentags_modules = ['ctags', 'gtags_cscope']
 
         " config project root markers. .envrc is from direnv and "shell" project management
-        let g:gutentags_project_root = ['.root', '.envrc']
+        let g:gutentags_project_root = ['.root', '.envrc', '.git']
 
         " generate datebases in my cache directory, prevent gtags files polluting my project
         let g:gutentags_cache_dir = expand('~/.cache/tags')
 
-        " forbid gutentags adding gtags databases
+        " allow gutentags adding gtags databases
         let g:gutentags_auto_add_gtags_cscope = 1
       " }}}
 
