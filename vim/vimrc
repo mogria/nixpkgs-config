@@ -186,16 +186,16 @@
         Plugin 'jremmen/vim-ripgrep'
 
         noremap <Leader>f <ESC>:Files<CR>
-        noremap <Leader>m <ESC>:BLines<CR>
+        noremap <Leader>m <ESC>:BLines<CR> " search buffer lines
         noremap <Leader>t <Esc>:Tags<CR>
         noremap <Leader>T <Esc>:BTags<CR>
         noremap <Leader>f <ESC>:Rg <C-R>/
         noremap <Leader>F <ESC>:Rg <C-R><C-W>
         noremap <Leader>h <ESC>:Helptags<CR>
-        noremap <Leader>/  <ESC>:History/<CR>
-        noremap <Leader>:  <ESC>:History\:<CR>
-        noremap <Leader><Enter> <ESC>:History<CR>
-        noremap <Leader><Space> <ESC>:BTags<CR>
+        noremap <Leader>/  <ESC>:History/<CR> " search history
+        noremap <Leader>:  <ESC>:History\:<CR> " command mode history
+        noremap <Leader><Enter> <ESC>:History<CR> " open recent file
+        noremap <Leader><Space> <ESC>:BTags<CR> " search tags in current file
       " }}}
 
       " TAGS GENERAL {{{
