@@ -44,10 +44,6 @@
         " show line & column number
         set ruler
 
-        " always show vim command autocompletion
-        set wildmenu
-        set wildmode=longest,full
-
         " use space as the mapleader for easy combos to type
         let mapleader=" "
 
@@ -68,6 +64,18 @@
         " SHIFT-ENTER builds
         noremap <S-Enter> :make<CR>
         inoremap <S-Enter> :make<CR>
+
+      " }}}
+
+      " FINDING FILES WITH STANDARD VIM BEHAVIOUR {{{
+        " ignore these files
+        set wildignore+=*.o,*.so,*.a,*.dylib,*.dll,.*.sw?,.DS_STORE,.root
+        set wildignorecase " case insensitive
+        set wildoptions=tagfile " press CTRL-D while in ex mode to complete tags
+
+        " always show vim command autocompletion
+        set wildmenu
+        set wildmode=list:longest
 
         " have all files in current directory in file and cd path
         " when using ex commands or gf in normal mode
