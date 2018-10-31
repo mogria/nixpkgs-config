@@ -141,8 +141,12 @@
 
         set expandtab " convert tabs to spaces
         set smarttab " delete whole tab at once on backspace, even when they are spaces
+
+
+        set list " enable showing other chars instead of spaces etc.
+        set listchars= " clear to not show $ at end of lin
         set listchars+=tab:»· " show tabs
-        set listchars+=trail:·, " show trailing spaces
+        set listchars+=trail:· " show trailing spaces
 
         set tabstop=4  "four is a good default
         set softtabstop=4 " you can use :set sts=2 for temporarily changing tabstop & shiftwidth
@@ -162,7 +166,7 @@
         set showbreak=⮕
 
         " in case nowrap gets set, show arrows
-        set listchars+=precedes:⮕,extends:⬅
+        set listchars+=precedes:⬅,extends:⮕
       " }}}
 
       " FZF FUZZY SEARCH {{{
