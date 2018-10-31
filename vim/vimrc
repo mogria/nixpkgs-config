@@ -236,6 +236,9 @@
         noremap <Leader>gL <ESC>:Gllog<CR>
         noremap <Leader>gd <ESC>:Gdiff<CR>
         noremap <Leader>gc <ESC>:Gcommit<CR>
+        noremap <Leader>ga <ESC>:!git add -p -- %<CR>
+        " u stands for unstage or undo
+        noremap <Leader>gu <ESC>:!git reset HEAD -p -- %<CR>
       " }}}
 
       " VIM SURROUND {{{
