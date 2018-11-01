@@ -71,6 +71,7 @@ in {
     /* shell environment programs */
     pkgs.alacritty
     # pkgs.tmux /* already installed by the nixos module */
+    # pkgs.tmux-256colors-terminfo /* own terminfo for tmux */
     pkgs.xsel # required by tmux for copy paste into X clipboard
 
     /* zsh, direnv is already included */
@@ -361,7 +362,12 @@ in {
 
       # only set this here, don't set TERM in .profile, for
       # correct termcap in every environment
-      set -g default-terminal "screen-256color"
+      # - uses custom tmux-256-colors to make italics work
+      set -g default-terminal "tmux-256colors" # tmux-256color is a terminfo that doesn't really work
+      # this should make strikethrough work
+      set -as terminal-overrides ',*:sitm=\E[3m' # either this or the custom terminfo...
+      # set -as terminal-overrides ',*:smxx=\E[9m' # this should enable strikethrough but doesn't
+                                                   # even with the custom terminfo
 
       # split panes using | and -
       unbind '%'
