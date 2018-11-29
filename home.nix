@@ -363,17 +363,18 @@ in {
       # only set this here, don't set TERM in .profile, for
       # correct termcap in every environment
       # - uses custom tmux-256-colors to make italics work
-      set -g default-terminal "tmux-256colors" # tmux-256color is a terminfo that doesn't really work
+      set -g default-terminal "screen-256color" # tmux-256color is a terminfo that doesn't really work
       # this should make strikethrough work
       set -as terminal-overrides ',*:sitm=\E[3m' # either this or the custom terminfo...
       # set -as terminal-overrides ',*:smxx=\E[9m' # this should enable strikethrough but doesn't
                                                    # even with the custom terminfo
 
-      # split panes using | and -
+      # split panes using | and - and keep the current directory
       unbind '%'
       unbind '"'
-      bind | split-window -h
-      bind - split-window -v
+      bind | split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
+
 
       # reload config file
       bind r source-file ~/.tmux.conf \; \
