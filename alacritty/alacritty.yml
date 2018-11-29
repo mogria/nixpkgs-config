@@ -257,7 +257,7 @@ hide_cursor_when_typing: false
 # - Block
 # - Underline
 # - Beam
-cursor_style: Block
+cursor_style: Beam
 
 # Whether the cursor should be a hollow block on window focus loss
 unfocused_hollow_cursor: true
