@@ -106,6 +106,8 @@ in {
     pkgs.fd
     pkgs.exa
     pkgs.netcat
+    pkgs.unrar
+    pkgs.man-pages
 
     /* system management utilities */
     pkgs.iotop
@@ -113,9 +115,20 @@ in {
     pkgs.lsof
     pkgs.ltrace
 
+
     /* programming utilities */
     pkgs.gdb
     pkgs.gcc
+    pkgs.gnumake
+    pkgs.cmake
+
+    /* LaTeX */
+    pkgs.evince # used  by vim for tex preview as well
+    pkgs.texlive.combined.scheme-full
+
+    /* onedrive */
+    # pkgs.onedrive
+
   ];
 
   programs.rofi = {
