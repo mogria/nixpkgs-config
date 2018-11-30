@@ -89,7 +89,7 @@ in {
     (pkgs.vim_configurable.override {
       pythonSupport = true; # needed for YouCompleteMe Plugin
       python = pkgs.python3; # needed for YouCompleteMe Plugin
-      cscopeSupport = true; # gutenberg plugin uses cscope
+      cscopeSupport = true; # gutentags plugin uses cscope
     })
     pkgs.universal-ctags
     pkgs.cscope
@@ -242,7 +242,7 @@ in {
       oh-my-zsh= {
         enable = true;
         plugins = [ "gitfast" "sudo" "dircycle" "zsh-navigation-tools" ];
-        /* ugly hack: oh my zsh only wants a relative path, so lets go bback to the system root */
+        /* ugly hack: oh my zsh only wants a relative path, so lets go back to the system root */
         theme = "../../../../../../../../../../../${pkgs.zsh-powerlevel9k}/share/zsh-powerlevel9k/powerlevel9k";
       };
 
