@@ -56,27 +56,36 @@ in {
     pkgs.feh
     (pkgs.keepass.override { xdotool = pkgs.xdotool; })
     pkgs.meld
-    pkgs.qutebrowser
+    pkgs.qutebrowser # maybe use this instead of firefox in the furture
+    pkgs.pavucontrol
+    pkgs.xdg-user-dirs
 
     /* heavier graphical programs */
     pkgs.dropbox
     pkgs.clementine
     pkgs.firefox
+    pkgs.chromium  # 2nd browser for specific stuff # uncommented because of build from source.
     pkgs.thunderbird
+    pkgs.okular
+    pkgs.audacity
 
     /* theming stuff */
+    pkgs.gnome-themes-standard
     faience-ng-icon-theme
     griffin-ghost-icon-theme
 
     /* shell environment programs */
     pkgs.alacritty
+    pkgs.w3m
+    /* pkgs.postgresql
+       pkgs.pspg */
     # pkgs.tmux /* already installed by the nixos module */
     # pkgs.tmux-256colors-terminfo /* own terminfo for tmux */
     pkgs.xsel # required by tmux for copy paste into X clipboard
 
     /* zsh, direnv is already included */
     /* there is also still a vim in the nixos configuration :/ share it with root??? */
-    pkgs.nix-zsh-completions
+
     (pkgs.vim_configurable.override {
       pythonSupport = true; # needed for YouCompleteMe Plugin
       python = pkgs.python3; # needed for YouCompleteMe Plugin
