@@ -245,6 +245,9 @@ in {
       "sudo" = "sudo ";
       "home-config" = "vim ~/.config/nixpkgs/home.nix";
       "system-config" = "sudo vim /etc/nixos/configuration.nix";
+      # for now use xdg-open, maybe use rifle in the future
+      # this is also for having similar behaviour for open like on MacOS
+      "open" = "xdg-open";
       };
       history = {
         ignoreDups = true;
