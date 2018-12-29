@@ -68,19 +68,22 @@
         " copy all into system clipboard
         noremap <Leader>ya ggvG$"+y<C-O><C-O>
         noremap <Leader>yy "+yy
-        vnoremap <Leader>yy "+yy
+        vnoremap <Leader>y "+y
+        noremap <Leader>p :set paste<CR>"+p:set nopaste<CR>
+        noremap <Leader>P :set paste<CR>"+P:set nopaste<CR>
+        vnoremap <Leader>p "+p
 
       " }}}
 
       " FINDING FILES WITH STANDARD VIM BEHAVIOUR {{{
         " ignore these files
-        set wildignore+=*.o,*.so,*.a,*.dylib,*.dll,.*.sw?,.DS_STORE,.root
+        set wildignore+=*.o,*.so,*.a,*.dylib,*.dll,.*.sw?,.DS_STORE,.root,vendor,node_modules,.cache,.nix-profile
         set wildignorecase " case insensitive
         set wildoptions=tagfile " press CTRL-D while in ex mode to complete tags
 
         " always show vim command autocompletion
         set wildmenu
-        set wildmode=list:longest
+        set wildmode=longest,list,full
 
         " have all files in current directory in file and cd path
         " when using ex commands or gf in normal mode
@@ -217,7 +220,7 @@
         " config project root markers. .envrc is from direnv and "shell" project management
         let g:gutentags_project_root = ['.root', '.envrc', '.git']
 
-        " generate datebases in my cache directory, prevent gtags files polluting my project
+        " generate databases in my cache directory, prevent gtags files polluting my project
         let g:gutentags_cache_dir = expand('~/.cache/tags')
 
         " allow gutentags adding gtags databases
