@@ -61,9 +61,14 @@
         " SHIFT-! in normal mode, runs current line as bash command
         noremap <C-S-1> "lyy:!<C-R>l
 
-        " SHIFT-ENTER builds
-        noremap <S-Enter> :make<CR>
-        inoremap <S-Enter> :make<CR>
+        " SHIFT-ENTER builds not used and doesnt work
+        " noremap <S-Enter> :make<CR>
+        " inoremap <S-Enter> :make<CR>
+
+        " copy all into system clipboard
+        noremap <Leader>ya ggvG$"+y<C-O><C-O>
+        noremap <Leader>yy "+yy
+        vnoremap <Leader>yy "+yy
 
       " }}}
 
