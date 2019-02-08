@@ -47,6 +47,15 @@
         " use space as the mapleader for easy combos to type
         let mapleader=" "
 
+        if &term =~ '^screen'
+            " tmux will send xterm-style keys when its xterm-keys option
+            " is on
+            execute "set <xUp>=\e[1;*A"
+            execute "set <xDown>=\e[1;*B"
+            execute "set <xRight>=\e[1;*C"
+            execute "set <xLeft>=\e[1;*D"
+        endif
+
         " reload .vimrc and install plugins
         noremap <Leader>r :source ~/.vimrc<CR>
         noremap <Leader>R :source ~/.vimrc<CR>:PluginInstall<CR>

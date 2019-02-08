@@ -317,6 +317,10 @@ in {
       # set -as terminal-overrides ',*:smxx=\E[9m' # this should enable strikethrough but doesn't
                                                    # even with the custom terminfo
 
+      # Make sure CTRL-Shift and such works
+      set-window-option -g xterm-keys on
+
+
       # split panes using | and - and keep the current directory
       unbind '%'
       unbind '"'
