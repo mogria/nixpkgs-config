@@ -9,10 +9,13 @@ if [ -e "$HOME/.zprofile" ]; then
     source "$HOME/.zprofile"
 fi
 
+# Configure powerlevel9k prompt {{{
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(command_execution_time status root_indicator)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(dir vcs)
 POWERLEVEL9K_STATUS_VERBOSE=true
+# }}}
 
+# Oh My ZSH settings{{{
 # case sensitive completion, etc.
 CASE_SENSITIVE=true
 # auto-command correction
@@ -20,6 +23,8 @@ ENABLE_CORRECTION=true
 # don't show if files are dirty in a git repo
 # as it takes a long time
 DISABLE_UNTRACKED_FILES_DIRTY=true
+# }}}
+#
 
 # make sure prompt gets printed on a new line
 setopt PROMPT_SP
