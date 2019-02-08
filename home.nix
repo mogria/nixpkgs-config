@@ -235,7 +235,8 @@ in {
     enableAutosuggestions = true;
     shellAliases = {
       "vi" = "vim";
-      "ll" = "ls -lAtr";
+      "ls" = "exa --git";
+      "ll" = "exa -l -a --sort=modified --git";
       "gs" = "git status";
       "ga" = "git add";
       "gc" = "git commit";
