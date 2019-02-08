@@ -31,6 +31,13 @@ setopt PROMPT_SP
 setopt PROMPT_CR
 export PROMPT_EOL_MARK=%B%S%#%s%b
 
+
+# Make directory listing when chaging directory {{{
+function chpwd() {
+    exa -l --sort=modified -r --git --git-ignore --color=always | head -n23 | sed '23s/^.*$/  (there are more files in this folder)/g'
+}
+# }}}
+#
 f() {
   local searchterm="''${1:-""}"
   shift
