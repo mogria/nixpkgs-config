@@ -416,6 +416,9 @@ in {
         ];
         fileSearchPath = [ "/etc/nixos" "~/.config/nixpkgs" ];
       };
+      "ruby" = {
+        indent = { size = 2; useTabls = false; };
+      };
       "python" = {
         indent = { useTabs = true; };
       };
@@ -443,7 +446,7 @@ in {
               then "cindent"
               else "smartindent";
         in ''
-          " autocmd FileType ${lang} * set expandtab tabstop=${indent} softtabstop=${indent} shiftwidth=${indent} ${cIndent}
+          autocmd FileType ${lang} * set expandtab tabstop=${indent} softtabstop=${indent} shiftwidth=${indent} ${cIndent}
           ${if tabsOption then "\"autocmd FileType ${lang} * set noexpandtab" else ""
           }'';
       in generateAllVimConfigLanguageOptions "indent" vimConfigFunc;
