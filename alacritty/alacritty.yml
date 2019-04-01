@@ -97,7 +97,7 @@ font:
   # screens and make reading text a little easier.
   # On X11 it is possible to change the DPI for each instance of alacritty by using
   # `WINIT_HIDPI_FACTOR=1.0 alacritty` to scale the font.
-  scale_with_dpi: true
+  # scale_with_dpi: true option was removed
 
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
@@ -106,10 +106,6 @@ font:
 
 # Should display the render timer
 render_timer: false
-
-# Use custom cursor colors. If true, display the cursor in the cursor.foreground
-# and cursor.background colors, otherwise invert the colors of the cursor.
-custom_cursor_colors: false
 
 # Colors (Solarized Dark costumized to be ugly and red)
 colors:
@@ -234,7 +230,7 @@ mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
 
-  # Faux Scrollback
+  # Faux Scrollack
   #
   # The `faux_scrollback_lines` setting controls the number
   # of lines the terminal should scroll when the alternate
@@ -242,25 +238,27 @@ mouse:
   # scrolling for applications like `man`.
   #
   # To disable this completely, set `faux_scrollback_lines` to 0.
-  faux_scrollback_lines: 1
+  # Note: has been replaced by faux_scrolling lines
+  faux_scrolling_lines: 1
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
 dynamic_title: true
 
-hide_cursor_when_typing: false
+cursor:
+    # Style of the cursor
+    #
+    # Values for 'cursor_style':
+    # - Block
+    # - Underline
+    # - Beam
+    cursor_style: Beam
 
-# Style of the cursor
-#
-# Values for 'cursor_style':
-# - Block
-# - Underline
-# - Beam
-cursor_style: Beam
+    hide_when_typing: false
 
-# Whether the cursor should be a hollow block on window focus loss
-unfocused_hollow_cursor: true
+    # Whether the cursor should be a hollow block on window focus loss
+    unfocused_hollow: true
 
 # Live config reload (changes require restart)
 live_config_reload: true
