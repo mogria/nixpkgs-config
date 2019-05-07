@@ -31,8 +31,9 @@
           au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
         endif
 
-        " open a quickfix window when using :grep or :Ggrep (from vim-fugitive/git)
+        " open a quickfix window when using :grep or :Ggrep or :make(from vim-fugitive/git)
         autocmd QuickFixCmdPost *grep* cwindow
+        autocmd QuickFixCmdPost *make* cwindow
         " quickly jump in quickfix list
         noremap <Leader>n :cnext<CR>
         noremap <Leader>N :cprevious<CR>
