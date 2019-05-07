@@ -70,7 +70,7 @@
 
         " CTRL-l like in shell for top of the screen
         noremap <C-l> zt<Esc>:redraw!<CR>
-        inoremap <C-l> <Esc>zt:redraw!<CR>i
+        inoremap <C-l> <Esc>zt:redraw!<CR>a
 
         " type ! in normal mode to run a command with the current
         noremap ! :!
