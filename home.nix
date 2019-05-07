@@ -422,6 +422,9 @@ in {
       "python" = {
         indent = { useTabs = true; };
       };
+      "yaml" = {
+        indent = { size = 2; useTabs = false; };
+      };
     };
 
     getOrDefault = key: attrset: defaultValue:
