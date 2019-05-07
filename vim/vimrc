@@ -87,9 +87,10 @@
         vnoremap <Leader>y "+y
         noremap <Leader>p :set paste<CR>"+p:set nopaste<CR>
         noremap <Leader>P :set paste<CR>"+P:set nopaste<CR>
-        vnoremap <Leader>p "+p
+        vnoremap <Leader>p <ESC>:set paste<CR>gv"+p:set nopaste<CR>
 
       " }}}
+
 
       " FINDING FILES WITH STANDARD VIM BEHAVIOUR {{{
         " ignore these files
