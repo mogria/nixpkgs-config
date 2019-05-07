@@ -59,6 +59,10 @@
             execute "set <xLeft>=\e[1;*D"
         endif
 
+        " allow saving with CTRL-S ($ stty -ixon # required)
+        noremap <C-S> :w<CR>
+        inoremap <C-S> <Esc>:w<CR>a
+
         " reload .vimrc and install plugins
         noremap <Leader>r :source ~/.vimrc<CR>
         noremap <Leader>R :source ~/.vimrc<CR>:PluginInstall<CR>
