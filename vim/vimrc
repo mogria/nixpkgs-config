@@ -362,8 +362,18 @@
       "  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
       " }}}
 
-      " HTML integration {{{
-        Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+      " HTML / XML integration {{{
+        " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+        Plugin 'alvan/vim-closetag'
+        let g:closetag_filenames = '*.html,*.htm,*.xhtml,*.phtml,*.xml,*.xsd,*.xsl'
+        let g:closetag_xhtml_filenames = '*.xhtml,*.xml,*.xsd,*,xsl'
+        let g:closetag_filetypes = 'html,xhtml,phtml'
+        let g:closetag_xhtml_filetypes = 'xhtml,jsx,xml,xsd,xsl'
+        let g:closetag_close_shortcut = '\>'
+
+        au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+        " au FileType xml setlocal compiler=xmllint
+        au FileType xml setlocal makeprg=xmllint\ --noout
       "}}}
 
       " GLSL support {{{

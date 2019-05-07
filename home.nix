@@ -64,7 +64,7 @@ in {
     pkgs.dropbox
     pkgs.clementine
     pkgs.firefox
-    pkgs.chromium  # 2nd browser for specific stuff # uncommented because of build from source.
+    pkgs.chromium  # 2nd browser for specific stuff
     pkgs.thunderbird
     pkgs.okular
     pkgs.audacity
