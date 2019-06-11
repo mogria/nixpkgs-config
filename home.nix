@@ -64,7 +64,7 @@ in {
     pkgs.dropbox
     pkgs.clementine
     pkgs.firefox
-    pkgs.chromium  # 2nd browser for specific stuff # uncommented because of build from source.
+    pkgs.chromium  # 2nd browser for specific stuff
     pkgs.thunderbird
     pkgs.okular
     pkgs.audacity
@@ -416,8 +416,14 @@ in {
         ];
         fileSearchPath = [ "/etc/nixos" "~/.config/nixpkgs" ];
       };
+      "ruby" = {
+        indent = { size = 2; useTabls = false; };
+      };
       "python" = {
         indent = { useTabs = true; };
+      };
+      "yaml" = {
+        indent = { size = 2; useTabs = false; };
       };
     };
 
@@ -443,8 +449,8 @@ in {
               then "cindent"
               else "smartindent";
         in ''
-          " autocmd FileType ${lang} * set expandtab tabstop=${indent} softtabstop=${indent} shiftwidth=${indent} ${cIndent}
-          ${if tabsOption then "\"autocmd FileType ${lang} * set noexpandtab" else ""
+          autocmd FileType ${lang} set expandtab tabstop=${indent} softtabstop=${indent} shiftwidth=${indent} ${cIndent}
+          ${if tabsOption then "autocmd FileType ${lang} set noexpandtab" else ""
           }'';
       in generateAllVimConfigLanguageOptions "indent" vimConfigFunc;
 

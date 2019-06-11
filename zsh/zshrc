@@ -64,14 +64,19 @@ bindkey '^F' fzf-search-files
 bindkey '^[[Z' reverse-menu-complete
 
 # make sure the FZF keybindings work
-bindkey '^N' fzf-completion
-bindkey '^P' fzf-file-widget
+bindkey '^I' fzf-completion
+bindkey '\ef' fzf-file-widget
 bindkey '\ec' fzf-cd-widget
 bindkey '^R' fzf-history-widget
 
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+bindkey '^X^E' edit-command-line
+
 # make most keybindings also work in vim normal mode
-bindkey -M vicmd '^N' fzf-completion
-bindkey -M vicmd '^P' fzf-file-widget
+bindkey -M vicmd '^I' fzf-completion
+bindkey -M vicmd '\ef' fzf-file-widget
 bindkey -M vicmd '\ec' fzf-cd-widget
 bindkey -M vicmd '^R' fzf-history-widget
 
