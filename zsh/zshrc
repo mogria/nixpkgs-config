@@ -34,7 +34,16 @@ export PROMPT_EOL_MARK=%B%S%#%s%b
 
 # Make directory listing when chaging directory {{{
 function chpwd() {
-    exa -l --sort=modified -r --git --git-ignore --color=always | head -n23 | sed '23s/^.*$/  (there are more files in this folder)/g'
+    if [ ! -t 1 ]; then
+        # don't generate output when changing directory in a script
+        return
+    fi
+    local listing="$(exa -l --sort=modified -r --git --color=always)"
+    local numdisplayfiles=22
+    local numfiles="$(echo "$listing" | wc -l)"
+    echo "$listing" | head -n"$numdisplayfiles"
+    [ "$numfiles" -gt "$numdisplayfiles" ] \
+        && echo -e "\e[3m  (there are $((numfiles - numdisplayfiles)) more files in this folder)\e[23m"
 }
 # }}}
 #
