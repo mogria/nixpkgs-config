@@ -1,0 +1,20 @@
+$include /etc/inputrc
+
+"\C-x\C-q": quoted-insert
+"\C-x\C-e": edit-and-execute-command
+# "\C-a": beginning-of-line
+# "\C-e": end-of-line
+# "\C-f": forward-char
+# "\C-b": backward-char
+# "\C-u": kill-line
+# "\C-w": kill-word
+
+set colored-stats On
+set completion-ignore-case Off
+set completion-prefix-display-length 2
+set mark-symlinked-directories On
+set show-all-if-ambiguous On
+set show-all-if-unmodified On
+set skip-completed-text On
+set visible-stats On
+set blink-matching-paren On
