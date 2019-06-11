@@ -107,7 +107,8 @@
           inoremap <C-f> <Right>
           " overrides repeat last insert, to start of the line, use CTRL-Space instead
           inoremap <C-Space> <C-a>
-          imap <C-a> <Esc>^i " beginning of indented line"
+          " beginning of indented line"
+          imap <C-a> <Esc>^i
           inoremap <C-e> <End>
           " overrides digraphs functionality
           imap <C-k> <Esc>d$A
