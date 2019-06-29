@@ -505,6 +505,9 @@ in {
       ${addKeywordCharsVimConfig}
 
       let g:livepreview_previewer = '${pkgs.evince}'
+
+      " set equalprg for sql files to format sql
+      autocmd FileType sql setlocal equalprg=${pkgs.python37Packages.sqlparse}/bin/sqlformat\ --reindent\ --keywords\ upper\ --identifiers\ lower\ -
     '';
   };
 
