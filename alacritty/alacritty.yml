@@ -61,24 +61,25 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Source Code Pro For Powerline # should be "Menlo" or something on macOS.
+    # family: Source Code Pro For Powerline # should be "Menlo" or something on macOS.
+    family: Monoid HalfTight # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     style: Regular
 
   # The bold font face
   bold:
-    family: Source Code Pro For Powerline # should be "Menlo" or something on macOS.
+    family: Monoid HalfTight # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     style: Bold
 
   # The italic font face
   italic:
-    family: Source Code Pro For Powerline # should be "Menlo" or something on macOS.
+    family: Monoid HalfTight # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     style: Italic
 
   # Point size of the font
-  size: 8.5
+  size: 9.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
