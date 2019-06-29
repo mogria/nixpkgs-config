@@ -323,10 +323,11 @@ in {
 
 
       # split panes using | and - and keep the current directory
+      # also put the new split at top or right of current pane, like in vim (-b)
       unbind '%'
       unbind '"'
-      bind | split-window -h -c "#{pane_current_path}"
-      bind - split-window -v -c "#{pane_current_path}"
+      bind | split-window -b -h -c "#{pane_current_path}"
+      bind - split-window -b -v -c "#{pane_current_path}"
 
 
       # reload config file
