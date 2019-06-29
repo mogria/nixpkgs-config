@@ -406,6 +406,10 @@ in {
   };
 
   home.file.".vimrc" = let
+    cssConf = {
+      indent = { size = 4; useTabs = false; };
+      addKeywordChars = "-";
+    };
     languages = {
       "nix" = {
         indent = { size = 2; useTabs = false; cIndent = true; };
@@ -424,6 +428,12 @@ in {
       };
       "yaml" = {
         indent = { size = 2; useTabs = false; };
+      };
+      "css" = cssConf;
+      "scss" = cssConf;
+      "markdown" = {
+        indent = { size = 2; useTabs = false; };
+        addKeywordChars = "-";
       };
     };
 
@@ -462,11 +472,17 @@ in {
         in builtins.concatStringsSep "\n" (map makeCommand makeCommandsOption);
       in generateAllVimConfigLanguageOptions "makeCommands" vimConfigFunc;
 
+    addKeywordCharsVimConfig = let
+        vimConfigFunc = lang: addKeywordCharsOption: ''autocmd FileType ${lang} set iskeyword+=${addKeywordCharsOption}'';
+      in generateAllVimConfigLanguageOptions "addKeywordChars" vimConfigFunc;
+
     fileSearchPathVimConfig = let
         vimConfigFunc = lang: fileSearchPathOption:
           let path = builtins.concatStringsSep "," fileSearchPathOption;
-          in ''"autocmd FileType ${lang} * set path+=${path}'';
+          in ''autocmd FileType ${lang} set path+=${path}'';
       in generateAllVimConfigLanguageOptions "fileSearchPath" vimConfigFunc;
+
+
 
   in {
     text = ''
@@ -480,6 +496,9 @@ in {
 
       " nix generated, language specific indentation configuration
       ${indentVimConfig}
+
+      " nix generated, language specific keyword character definition
+      ${addKeywordCharsVimConfig}
 
       let g:livepreview_previewer = '${pkgs.evince}'
     '';
