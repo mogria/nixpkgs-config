@@ -133,9 +133,10 @@ in {
 
   programs.rofi = {
     enable = true;
+    font = "Monoid HalfTight Bold 9";
     borderWidth = 1;
-    lines = 50;
-    width = 30;
+    lines = 53;
+    width = 25;
     padding = 1;
     rowHeight = 1;
     separator = "solid";
