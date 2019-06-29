@@ -342,6 +342,8 @@ in {
       set -g base-index 1
       set -g pane-base-index 1
 
+      # increase scrollback
+      set-option -g history-limit 10000
 
       # vi style pane selection
       bind -r h select-pane -L
