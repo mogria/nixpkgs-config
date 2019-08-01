@@ -157,7 +157,10 @@
         set spell
         set spelllang=en,de,en,de
         set spellsuggest=best
-      " }}}
+
+        nnoremap <Leader>U gUiw
+        nnoremap <Leader>u viwbUl
+     " }}}
 
       " MAKE COMMANDS & QUICKFIX {{{
         " Note: there will be language specific search paths generated
