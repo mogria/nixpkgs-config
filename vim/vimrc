@@ -155,7 +155,7 @@
 
       " SPELLING OPTINOS {{{
         set spell
-        set spelllang=en
+        set spelllang=en,de,en,de
         set spellsuggest=best
       " }}}
 
