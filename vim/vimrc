@@ -77,6 +77,9 @@
         " type ! in normal mode to run a command with the current
         noremap ! :!
 
+        " i use <--> in templates and snippets to easily fill out stuff
+        noremap <Leader><Space> /<--><CR>cf>
+
         " SHIFT-! in normal mode, runs current line as bash command
         noremap <C-S-1> "lyy:!<C-R>l
 
@@ -236,7 +239,6 @@
         noremap <Leader>/  <ESC>:History/<CR>n " search history
         noremap <Leader>:  <ESC>:History\:<CR> " command mode history
         noremap <Leader><Enter> <ESC>:History<CR> " open recent file
-        noremap <Leader><Space> <ESC>:BTags<CR> " search tags in current file
       " }}}
 
       " BASIC UNIX COMMANDS AS EX COMMANDS {{{
