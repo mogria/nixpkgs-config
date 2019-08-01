@@ -85,7 +85,7 @@ bindkey -M viins '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
 bindkey -M viins '^F' forward-char
 bindkey -M viins '^B' backward-char
-bindkey -M viins '^W' kill-word
+bindkey -M viins '^W' backward-delete-word
 bindkey -M viins '^K' kill-line
 bindkey -M viins '^T' transpose-chars
 bindkey -M viins '^[f' forward-word
