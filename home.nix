@@ -175,15 +175,20 @@ in {
     aliases = {
       "s" = "status";
       "a" = "add";
+      "u" = "reset HEAD";
+      "unstage" = "reset HEAD";
       "c" = "commit";
       "b" = "branch";
-      "d" = "difftool";
+      "d" = "diff";
+      "dt" = "difftool";
+      "l" = "log";
       "co" = "checkout";
-      "gd" = "diff";
-      "gp" = "push";
-      "gl" = "pull";
-      "prune" = "fetch --prune";
-      "undo" = "reset --soft HEAD^";
+      "k" = "checkout";
+      "p" = "push";
+      "pl" = "pull";
+      "f" = "fetch --prune";
+      "undo-commit" = "reset --soft HEAD^";
+      "fwd" = "forward";
       "forward" = "merge --ff-only";
     };
     ignores = [
@@ -248,13 +253,22 @@ in {
       "ls" = "exa --git";
       "ll" = "exa -l -a --sort=modified --git";
       "gs" = "git status";
+      # git aliases, they should be mostly consitent with
+      # git configured git aliases
       "ga" = "git add";
+      "gu" = "git unstage";
       "gc" = "git commit";
+      "gx" = "git undo-commit";
       "gb" = "git branch";
-      "gco" = "git checkout";
       "gd" = "git diff";
+      "gdt" = "git difftool";
+      "gl" = "git log";
+      "gco" = "git checkout";
+      "gk" = "git checkout";
       "gp" = "git push";
-      "gl" = "git pull";
+      "gpl" = "git pull";
+      "gf" = "git fetch";
+      "gfwd" = "git forward";
       # make alias expansion work with the following commands as prefix
       "xargs" = "xargs ";
       "sudo" = "sudo ";

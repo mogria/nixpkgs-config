@@ -309,20 +309,28 @@
 
 
         " use fzf for searching git files
-        noremap <Leader>gf <ESC>:GFiles<CR>
-        noremap <Leader>gs <ESC>:GFiles?<CR>
+        noremap <Leader>sgf <ESC>:GFiles<CR>
 
-        " bind fugitive functions to <Leader>g*
-        noremap <Leader>gw <ESC>v:Gbrowse<CR>
-        vnoremap <Leader>gw <ESC>:Gbrowse<CR>
-        noremap <Leader>gb <ESC>:Gblame<CR>
+        " bind fugitive functions to <Leader>g* the same way as
+        " the shell and git aliases (see home.nix)
+        noremap <Leader>gs <ESC>:Gstatus<CR>
+        noremap <Leader>ga <ESC>:Git add --patch -- %<CR>
+        noremap <Leader>gu <ESC>:Git unstage --patch -- %<CR>
+        noremap <Leader>gc <ESC>:Gcommit<CR>
+        noremap <Leader>gx <ESC>:Git undo-commit<CR>
+        noremap <Leader>gd <ESC>:Gdiff<CR>
         noremap <Leader>gl <ESC>:Glog<CR>
         noremap <Leader>gL <ESC>:Gllog<CR>
-        noremap <Leader>gd <ESC>:Gdiff<CR>
-        noremap <Leader>gc <ESC>:Gcommit<CR>
-        noremap <Leader>ga <ESC>:!git add -p -- %<CR>
-        " u stands for unstage or undo
-        noremap <Leader>gu <ESC>:!git reset HEAD -p -- %<CR>
+        noremap <Leader>gk <ESC>:Git checkout -p  -- %<CR>
+        noremap <Leader>gp <ESC>:Gpush<CR>
+        noremap <Leader>gP <ESC>:Gpull<CR>
+        noremap <Leader>gf <ESC>:Gfetch<CR>:Git forward
+
+        " inconsistent, gb changes branch in zsh
+        noremap <Leader>gb <ESC>:Gblame<CR>
+        " additional goodies
+        noremap <Leader>gw <ESC>v:Gbrowse<CR>
+        vnoremap <Leader>gw <ESC>:Gbrowse<CR>
       " }}}
 
       " VIM SURROUND {{{
