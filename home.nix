@@ -186,7 +186,13 @@ in {
       "undo" = "reset --soft HEAD^";
       "forward" = "merge --ff-only";
     };
-    ignores = [ "*~"  ".*.sw?" ".env" ];
+    ignores = [
+      "*~" "*.bak*" # backup files
+      ".*.sw?" "tags" # vim swap and tag files
+      ".env"  ".direnv/" # directory environment configuration files
+      ".DS_Store" # get rid of the mac shit
+      "*.log" # you probably never want to commit a log file
+    ];
     extraConfig = {
       merge = {
         conflictStyle = "diff3";
