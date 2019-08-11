@@ -1,0 +1,6 @@
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p discount
+
+f="`mktemp`.html"
+markdown -o "$f" "$1"
+xdg-open "$f"
