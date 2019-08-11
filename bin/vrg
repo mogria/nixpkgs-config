@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This small little scripts is one of my most used ones:
+# This script passes all arguments directly to rg (ripgrep)
+# and opens all the results up in vim in the quickfix list.
+vim -q <(rg --vimgrep "$@") -c "copen"
