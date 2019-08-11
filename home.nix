@@ -468,7 +468,7 @@ in {
         fileSearchPath = [ "/etc/nixos" "~/.config/nixpkgs" ];
       };
       "ruby" = {
-        indent = { size = 2; useTabs = false; };
+        indent = smallIndent;
         makeCommands = [
           { filePattern = "*"; makeprg = "rubocop"; }
         ];
@@ -482,7 +482,7 @@ in {
       "css" = cssConf;
       "scss" = cssConf;
       "markdown" = {
-        indent = { size = 2; useTabs = false; };
+        indent = smallIndent;
         addKeywordChars = "-";
         makeCommands = [ { filePattern = "*"; makeprg = "~/bin/make-markdown"; } ];
       };
