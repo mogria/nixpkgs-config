@@ -180,6 +180,7 @@ in {
       "c" = "commit";
       "b" = "branch";
       "d" = "diff";
+      "dc" = "diff --cached";
       "dt" = "difftool";
       "l" = "log";
       "co" = "checkout";
@@ -261,6 +262,7 @@ in {
       "gx" = "git undo-commit";
       "gb" = "git branch";
       "gd" = "git diff";
+      "gdc" = "git diff --cached";
       "gdt" = "git difftool";
       "gl" = "git log";
       "gco" = "git checkout";
