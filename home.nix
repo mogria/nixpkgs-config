@@ -439,9 +439,9 @@ in {
     '';
   };
 
-  home.file."bin/make-markdown" = {
+  home.file."bin/" = {
     executable = true;
-    text = builtins.readFile ./bin/make-markdown;
+    source = ./bin;
   };
 
   home.file.".vimrc" = let
