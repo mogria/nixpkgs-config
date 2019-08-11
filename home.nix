@@ -190,6 +190,7 @@ in {
       "*~" "*.bak*" # backup files
       ".*.sw?" "tags" # vim swap and tag files
       ".env"  ".direnv/" # directory environment configuration files
+      "vendor/" "node_modules/" # package manager directories
       ".DS_Store" # get rid of the mac shit
       "*.log" # you probably never want to commit a log file
     ];
