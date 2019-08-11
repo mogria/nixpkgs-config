@@ -406,6 +406,13 @@ in {
 
       # bell
       set-window-option -g window-status-bell-style fg=black,bg=red #base02, red
+
+      # direnv compability (e.g. fixes issues when having direnv loaded and starting tmux afterwards)
+      set-option -g update-environment "DIRENV_DIFF DIRENV_DIR DIRENV_WATCHES"
+      set-environment -gu DIRENV_DIFF
+      set-environment -gu DIRENV_DIR
+      set-environment -gu DIRENV_WATCHES
+      set-environment -gu DIRENV_LAYOUT
     '';
   };
 
