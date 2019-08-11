@@ -84,7 +84,7 @@
         noremap <C-S-1> "lyy:!<C-R>l
 
         " SHIFT-ENTER builds not used and doesnt work
-        noremap <Leader>b :make %<CR>
+        noremap <Leader>b :make %:p<CR>
 
         " copy all into system clipboard
         noremap <Leader>ya ggvG$"+y<C-O><C-O>

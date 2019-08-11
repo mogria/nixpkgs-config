@@ -439,35 +439,59 @@ in {
     '';
   };
 
+  home.file."bin/make-markdown" = {
+    executable = true;
+    text = builtins.readFile ./bin/make-markdown;
+  };
+
   home.file.".vimrc" = let
+    smallIndent = { size = 2; useTabs = false; };
     cssConf = {
       indent = { size = 4; useTabs = false; };
       addKeywordChars = "-";
     };
+    shellConf = {
+      makeCommands = [
+        { filePattern = "*"; makeprg = "${pkgs.shellcheck}/bin/shellcheck\\ --check-sourced\\ --external-sources\\ --format=gcc"; }
+      ];
+    };
     languages = {
       "nix" = {
-        indent = { size = 2; useTabs = false; cIndent = true; };
+        indent = smallIndent;
         makeCommands = [
-          { filePattern = "**/.config/nixpkgs,*.nix"; makeprg = "home-manager\\ switch"; }
-          { filePattern = "**/nixos,*.nix"; makeprg = "nixos-rebuild\\ switch"; }
+          { filePattern = "*/.config/nixpkgs/*"; makeprg = "home-manager\\ switch"; }
+          { filePattern = "/etc/nixos/*"; makeprg = "nixos-rebuild\\ switch"; }
           { filePattern = "*"; makeprg = "nix-repl"; }
         ];
         fileSearchPath = [ "/etc/nixos" "~/.config/nixpkgs" ];
       };
       "ruby" = {
-        indent = { size = 2; useTabls = false; };
+        indent = { size = 2; useTabs = false; };
+        makeCommands = [
+          { filePattern = "*"; makeprg = "rubocop"; }
+        ];
       };
       "python" = {
         indent = { useTabs = true; };
       };
       "yaml" = {
-        indent = { size = 2; useTabs = false; };
+        indent = smallIndent;
       };
       "css" = cssConf;
       "scss" = cssConf;
       "markdown" = {
         indent = { size = 2; useTabs = false; };
         addKeywordChars = "-";
+        makeCommands = [ { filePattern = "*"; makeprg = "~/bin/make-markdown"; } ];
+      };
+      "sh" = shellConf;
+      "bash" = shellConf;
+      "zsh" = shellConf;
+      "vim" = {
+        indent = smallIndent;
+        makeCommands = [
+          { filePattern = "*/.config/nixpkgs/vim/*"; makeprg = "home-manager\\ switch"; }
+        ];
       };
     };
 
@@ -502,8 +526,18 @@ in {
         vimConfigFunc = lang: makeCommandsOption: let
           makeCommand = makeCommandOption: let
             pattern = getOrDefault "filePattern" makeCommandOption "*";
-          in ''" autocmd FileType ${lang} ${pattern} set makeprg=${makeCommandOption.makeprg}'';
-        in builtins.concatStringsSep "\n" (map makeCommand makeCommandsOption);
+          in ''
+            if a:currentfile =~ glob2regpat('${pattern}')
+              setlocal makeprg=${makeCommandOption.makeprg}
+              return
+            endif
+          '';
+        in ''
+          function! Filetype_${lang}_set_makeprg(currentfile)
+          ${builtins.concatStringsSep "\n" (map makeCommand makeCommandsOption)}
+          endfunction
+          autocmd FileType ${lang} call Filetype_${lang}_set_makeprg(expand(expand("<afile>:p")))
+        '';
       in generateAllVimConfigLanguageOptions "makeCommands" vimConfigFunc;
 
     addKeywordCharsVimConfig = let
