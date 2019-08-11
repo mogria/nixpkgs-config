@@ -327,6 +327,10 @@
 
       " VIM SURROUND {{{
         Plugin 'tpope/vim-surround'
+        nnoremap <Leader>sw ysiw
+        nnoremap <Leader>sw ysiw
+        nnoremap <Leader>sb ysib
+        nnoremap <Leader>sb ysib
       " }}}
 
       " FOLDING {{{
