@@ -210,6 +210,8 @@ in {
 
       "receive.fsck".zeroPaddedFilemode = "warn";
       "fetch.fsck".zeroPaddedFilemode = "warn";
+      "receive.fsck".badTimezone = "warn";
+      "fetch.fsck".badTimezone = "warn";
 
       diff = {
         tool = "vimdiff";
