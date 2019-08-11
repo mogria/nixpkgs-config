@@ -249,6 +249,7 @@
         " this also as the useful, :SudoWrite & s:SudoEdit
         " have ranger mappings
         noremap <F2> :Move <C-R>%
+        noremap <F5> :e<CR>
         noremap <F7> :Mkdir 
         noremap <F8> :Unlink<C-R>
       " }}}
