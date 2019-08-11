@@ -429,6 +429,22 @@
         let g:livepreview_previewer = 'evince'
       " }}}
 
+
+      " FILE MANAGER (NETRW + VINEGAR + SYNC) {{{
+        let g:netrw_banner = 0
+        let g:netrw_liststyle = 3
+        let g:netrw_fastbrowse = 1
+        let g:netrw_list_hide = netrw_gitignore#Hide().'.*\.sw.$'
+        let g:netrw_localmkdiropt = '-p'
+
+        Plugin 'tpope/vim-vinegar'
+
+        Plugin 'cosminadrianpopescu/filesync'
+        noremap <Leader>ua :FileSyncNetrw `pwd` scp://
+        noremap <Leader>ul :FileSyncList<CR>
+      " }}}
+
+
       Plugin 'tomtom/tcomment_vim'
 
       " All of your Plugins must be added before the following line
@@ -441,19 +457,6 @@
         set background=dark
         let g:solarized_termcolors=256
         colorscheme solarized
-      " }}}
-
-      " NETRW FILE MANAGER {{{
-        let g:netrw_banner = 0
-        let g:netrw_liststyle = 3
-        let g:netrw_fastbrowse = 1
-        let g:netrw_list_hide = netrw_gitignore#Hide().'.*\.sw.$'
-        let g:netrw_localmkdiropt = '-p'
-
-
-        Plugin 'cosminadrianpopescu/filesync'
-        noremap <Leader>ua :FileSyncNetrw `pwd` scp://
-        noremap <Leader>ul :FileSyncList<CR>
       " }}}
 
       " VDEBUG OPTIONS {{{
