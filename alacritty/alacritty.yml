@@ -15,25 +15,68 @@ env:
   TERM: xterm-256color
 
 window:
-  # Window dimensions in character columns and lines
-  # Falls back to size specified by window manager if set to 0x0.
-  # (changes require restart)
+  # Window dimensions (changes require restart)
+  #
+  # Specified in number of columns/lines, not pixels.
+  # If both are `0`, this setting is ignored.
   dimensions:
     columns: 80
     lines: 24
 
-  # Adds this many blank pixels of padding around the window
-  # Units are physical pixels; this is not DPI aware.
-  # (change requires restart)
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
   padding:
     x: 2
     y: 2
 
   # Window decorations
-  # Setting this to false will result in window without borders and title bar.
+  #
+  # Available values:
+  # - `full`: Window with title bar and title bar buttons
+  # - `none`: Window without title bar, rounded corners, or drop shadow
+  # - `transparent`: Window with title bar with transparent background and title
+  #   bar buttons
+  # - `buttonless`: Window with title bar with transparent background and no
+  #   title bar buttons
+  # Window decorations
+  #
+  # Values for `decorations`:
+  #     - full: Borders and title bar
+  #     - none: Neither borders nor title bar
+  #     - buttonless: Title bar, transparent background and title bar buttons
+  #     - transparent: Title bar, transparent background, but no title bar buttons
   decorations: full
 
-# Display tabs using this many cells (changes require restart)
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 0
+
+  # Number of lines the viewport will move for every line scrolled when
+  # scrollback is enabled (history > 0).
+  multiplier: 1
+
+  # Faux Scrolling
+  #
+  # The `faux_multiplier` setting controls the number of lines the terminal
+  # should scroll when the alternate screen buffer is active. This is used
+  # to allow mouse scrolling for applications like `man`.
+  #
+  # Specifying `0` will disable faux scrolling.
+  faux_multiplier: 3
+
+  # Scroll to the bottom when new text is written to the terminal.
+  auto_scroll: false
+
+# Spaces per Tab (changes require restart)
+#
+# This setting defines the width of a tab in cells.
+#
+# Some applications, like Emacs, rely on knowing about the width of a tab.
+# To prevent unexpected behavior in these applications, it's also required to
+# change the `it` value in terminfo when altering this setting.
 tabspaces: 8
 
 # When true, bold text is drawn using the bright variant of colors.
@@ -62,34 +105,34 @@ font:
   # The normal (roman) font face to use.
   normal:
     # family: Source Code Pro For Powerline # should be "Menlo" or something on macOS.
-    family: Monoid HalfTight # should be "Menlo" or something on macOS.
+    family: Monoid # HalfTight # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     style: Regular
 
   # The bold font face
   bold:
-    family: Monoid HalfTight # should be "Menlo" or something on macOS.
-    # Style can be specified to pick a specific face.
+    family: Monoid # HalfTight
+    # The `style` can be specified to pick a specific face.
     style: Bold
 
   # The italic font face
   italic:
-    family: Monoid HalfTight # should be "Menlo" or something on macOS.
-    # Style can be specified to pick a specific face.
+    family: Monoid # HalfTight
+    # The `style` can be specified to pick a specific face.
     style: Italic
 
-  # Point size of the font
-  size: 9.0
+  # Point size
+  size: 11.0
 
-  # Offset is the extra space around each character. offset.y can be thought of
-  # as modifying the linespacing, and offset.x as modifying the letter spacing.
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
     x: 0
     y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increase the x offset to move the glyph to
-  # the right, increase the y offset to move the glyph upward.
+  # the default being at the bottom. Increasing `x` moves the glyph to the right,
+  # increasing `y` moves the glyph upwards.
   glyph_offset:
     x: 0
     y: 0
@@ -199,15 +242,20 @@ colors:
 #
 visual_bell:
   animation: EaseOutExpo
-  duration: 5
+  duration: 0
 
 # Background opacity
-background_opacity: 1.0
+#
+# Window opacity as a floating point number from `0.0` to `1.0`.
+# The value `0.0` is completely transparent and `1.0` is opaque.
+background_opacity: 0.95
 
 # Mouse bindings
 #
-# Currently doesn't support modifiers. Both the `mouse` and `action` fields must
-# be specified.
+# Available fields:
+# - mouse
+# - action
+# - mods (optional)
 #
 # Values for `mouse`:
 # - Middle
@@ -215,12 +263,11 @@ background_opacity: 1.0
 # - Right
 # - Numeric identifier such as `5`
 #
-# Values for `action`:
-# - Paste
-# - PasteSelection
-# - Copy (TODO)
+# All available `mods` and `action` values are documented in the key binding
+# section.
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
+  - { mouse: Right, action: PasteSelection }
 
 mouse:
   # Click settings
@@ -231,16 +278,21 @@ mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
 
-  # Faux Scrollack
-  #
-  # The `faux_scrollback_lines` setting controls the number
-  # of lines the terminal should scroll when the alternate
-  # screen buffer is active. This is used to allow mouse
-  # scrolling for applications like `man`.
-  #
-  # To disable this completely, set `faux_scrollback_lines` to 0.
-  # Note: has been replaced by faux_scrolling lines
-  faux_scrolling_lines: 1
+  # If this is `true`, the cursor is temporarily hidden when typing.
+  hide_when_typing: false
+
+  url:
+    # URL launcher
+    #
+    # This program is executed when clicking on a text which is recognized as a URL.
+    # The URL is always added to the command as the last parameter.
+    launcher: open
+
+    # URL modifiers
+    #
+    # These are the modifiers that need to be held down for opening URLs when clicking
+    # on them. The available modifiers are documented in the key binding section.
+    #modifiers: Control|Shift
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
@@ -248,18 +300,17 @@ selection:
 dynamic_title: true
 
 cursor:
-    # Style of the cursor
-    #
-    # Values for 'cursor_style':
-    # - Block
-    # - Underline
-    # - Beam
-    cursor_style: Beam
+  # Cursor style
+  #
+  # Values for 'style':
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Block
 
-    hide_when_typing: false
-
-    # Whether the cursor should be a hollow block on window focus loss
-    unfocused_hollow: true
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  unfocused_hollow: true
 
 # Live config reload (changes require restart)
 live_config_reload: true
