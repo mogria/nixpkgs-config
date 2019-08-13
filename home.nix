@@ -308,7 +308,7 @@ in {
       '';
   };
 
-  xdg.configFile."alacritty/alacritty.yml".source = ./alacritty/alacritty.yml;
+  xdg.configFile."alacritty/alacritty.yml".text = builtins.readFile ./alacritty/alacritty.yml;
 
   home.file.".tmux.conf" = {
   text = let
