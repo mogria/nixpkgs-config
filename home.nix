@@ -448,13 +448,17 @@ in {
 
   home.file.".vimrc" = let
     smallIndent = { size = 2; useTabs = false; };
+    fourIndent = { size = 4; useTabs = false; };
     cssConf = {
-      indent = { size = 4; useTabs = false; };
+      indent = fourIndent;
       addKeywordChars = "-";
     };
     shellConf = {
-      makeCommands = [
-        { filePattern = "*"; makeprg = "${pkgs.shellcheck}/bin/shellcheck\\ --check-sourced\\ --external-sources\\ --format=gcc"; }
+      indent = fourIndent;
+      makeCommands = [{
+          filePattern = "*";
+          makeprg = "${pkgs.shellcheck}/bin/shellcheck\\ --check-sourced\\ --external-sources\\ --format=gcc";
+        }
       ];
     };
     languages = {
