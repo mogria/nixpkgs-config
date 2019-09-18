@@ -265,6 +265,7 @@ syntax enable
 " TAGS GENERAL {{{
   set cpoptions+=d " set tags+=./,, is relative to the current directory, not the current file
   set tags +=./,,vimtags,~/tags
+  set tagcase=followscs
   " show more information about a tag when completing
   set showfulltag
 " }}}
