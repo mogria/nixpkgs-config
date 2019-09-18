@@ -1,7 +1,15 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 if [ -z "$EDITOR" ]; then
     echo "Please set the EDITOR environment variable."
     exit 1
 fi
-"$EDITOR" -o "`fd "$@" | fzf`"
+
+declare -a flags=()
+
+case "$EDITOR" in
+    vi*)
+        flags+=( "-o" )
+esac
+
+xargs -0 --arg-file <( fd --type f "$@" --print0 | fzf --read0 --multi --print0 ) -- "$EDITOR" "${flags[@]}"
