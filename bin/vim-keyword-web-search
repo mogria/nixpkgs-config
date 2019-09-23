@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -u
+set -e
+
+if [[ "$#" -lt 3 ]]; then
+    echo "Usage: $0 searchurltemplate searchterm"
+    echo ""
+    echo "  searchurltemplate should contain %s and is passed to printf"
+    echo "  searchterm is inserted into searchurltemplate at this place"
+    echo ""
+    exit 1
+fi
+
+searchurltemplate="$1"
+shift
+searchfileorigin="$1"
+shift
+searchterm="$(printf "%s " "$@")"
+
+url="$(printf "$searchurltemplate" "$searchterm")"
+printf "opening URL %s..." "$url"
+
+open "$url"

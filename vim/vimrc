@@ -397,6 +397,7 @@ syntax enable
 "  Plugin 'shawncplus/phpcomplete.vim'
 "  let g:PHP_removeCRwhenUnix=1
 "  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+  autocmd FileType php set keywordprg=~/bin/vim-keyword-web-search\ 'https://www.php.net/%s'
 " }}}
 
 " HTML / XML integration {{{
