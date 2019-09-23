@@ -3,7 +3,7 @@
 set -u
 set -e
 
-if [[ "$#" -lt 3 ]]; then
+if [[ "$#" -lt 2 ]]; then
     echo "Usage: $0 searchurltemplate searchterm"
     echo ""
     echo "  searchurltemplate should contain %s and is passed to printf"
@@ -13,8 +13,6 @@ if [[ "$#" -lt 3 ]]; then
 fi
 
 searchurltemplate="$1"
-shift
-searchfileorigin="$1"
 shift
 searchterm="$(printf "%s " "$@")"
 
