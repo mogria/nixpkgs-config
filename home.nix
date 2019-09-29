@@ -397,6 +397,12 @@ in {
       bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection-and-cancel
       bind-key -T copy-mode-vi Escape send-keys -X cancel
 
+      # set terminal window title
+      set-option -g set-titles on
+      set-option -g set-titles-string "#W:#{pane_current_command} - Alacritty #S"
+      # set pane title
+      set-option -g pane-border-format "#P: #{pane_current_command}"
+
 
       #### COLOUR THEME (Solarized dark)
       # default statusbar colors
