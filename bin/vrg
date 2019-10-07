@@ -2,4 +2,14 @@
 # This small little scripts is one of my most used ones:
 # This script passes all arguments directly to rg (ripgrep)
 # and opens all the results up in vim in the quickfix list.
-vim -q <(rg --vimgrep "$@") -c "copen"
+
+set +x
+
+f="$(mktemp)"
+trap "rm '$f'" EXIT SIGTERM SIGKILL
+
+if [ "$#" -gt 0 ]; then
+    rg --vimgrep "$@" > "$f" && vim -q "$f" -c "copen"
+else
+    rg --help
+fi

@@ -250,6 +250,7 @@ in {
     enableCompletion = true;
     enableAutosuggestions = true;
     shellAliases = {
+      "c" = "fzf-cd-widget";
       "vi" = "vim";
       "ls" = "exa --git";
       "ll" = "exa -l -a --sort=modified --git";
