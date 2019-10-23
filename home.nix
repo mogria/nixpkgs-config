@@ -45,10 +45,11 @@ let
     '';
   };
 in {
-  programs.home-manager.enable = true;
-  programs.home-manager.path = if config.homemanager.development
-      then "${config.getDirectory "code"}/home-manager"
-      else config.homemanager.repo "http";
+  programs.home-manager = {
+    enable = true;
+  } // (if config.homemanager.development then {
+    path = "${config.getDirectory "code"}/home-manager";
+  } else {});
 
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
   home.packages = [
