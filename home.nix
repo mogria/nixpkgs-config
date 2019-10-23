@@ -466,15 +466,14 @@ in {
       makeCommands = [{
           filePattern = "*";
           makeprg = "${pkgs.shellcheck}/bin/shellcheck\\ --check-sourced\\ --external-sources\\ --format=gcc";
-        }
-      ];
+      }];
     };
     languages = {
       "nix" = {
         indent = smallIndent;
         makeCommands = [
-          { filePattern = "*/.config/nixpkgs/*"; makeprg = "home-manager\\ switch"; }
-          { filePattern = "/etc/nixos/*"; makeprg = "nixos-rebuild\\ switch"; }
+          { filePattern = "*/.config/nixpkgs/*"; makeprg = "home-manager\\ switch;echo"; }
+          { filePattern = "/etc/nixos/*"; makeprg = "nixos-rebuild\\ switch;echo"; }
           { filePattern = "*"; makeprg = "nix-repl"; }
         ];
         fileSearchPath = [ "/etc/nixos" "~/.config/nixpkgs" ];
