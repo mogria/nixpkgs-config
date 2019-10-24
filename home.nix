@@ -87,13 +87,6 @@ in {
     pkgs.xsel # required by tmux for copy paste into X clipboard
 
     /* zsh, direnv is already included */
-    /* there is also still a vim in the nixos configuration :/ share it with root??? */
-
-    (pkgs.vim_configurable.override {
-      pythonSupport = true; # needed for YouCompleteMe Plugin
-      python = pkgs.python3; # needed for YouCompleteMe Plugin
-      cscopeSupport = true; # gutentags plugin uses cscope
-    })
     pkgs.universal-ctags
     pkgs.cscope
     pkgs.global
@@ -254,7 +247,6 @@ in {
     enableAutosuggestions = true;
     shellAliases = {
       "c" = "fzf-cd-widget";
-      "vi" = "vim";
       "ls" = "exa --git";
       "ll" = "exa -l -a --sort=modified --git";
       "gs" = "git status";

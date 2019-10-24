@@ -10,6 +10,26 @@ in {
     '';
   */
 
+  home.packages = [
+    /* there is also still a vim in the nixos configuration :/ share it with root??? */
+
+    (pkgs.vim_configurable.override {
+      pythonSupport = true; # needed for YouCompleteMe Plugin
+      python = pkgs.python3; # needed for YouCompleteMe Plugin
+      cscopeSupport = true; # gutentags plugin uses cscope
+    })
+  ];
+
+  programs.zsh = {
+      shellAliases = {
+          "vi" = "vim";
+      };
+      sessionVariables = {
+        EDITOR = "vim";
+        VISUAL = "vim";
+      };
+  };
+
   home.file.".vimrc" = let
     smallIndent = { size = 2; useTabs = false; };
     fourIndent = { size = 4; useTabs = false; };
