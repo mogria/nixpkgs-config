@@ -28,6 +28,10 @@
       vim-surround
       vim-nix # nix language support
 
+      # Git Integration
+      vim-fugitive
+      vim-rhubarb # Github Integration, e.g. :Gbrowse
+
     ];
     extraConfig = import ./config.nix {
       inherit pkgs;
