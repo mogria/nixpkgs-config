@@ -191,10 +191,6 @@ syntax enable
   " Plugin 'godlygeek/tabular'
 " }}}
 
-" NIX LANGUAGE SUPPORT {{{
-  Plugin 'LnL7/vim-nix'
-" }}}
-
 " INDENTING / TABS & SPACING {{{
   set autoindent
   set smartindent " almost like cindent, but works better for most languages

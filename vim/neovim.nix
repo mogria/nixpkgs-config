@@ -26,6 +26,8 @@
     ]);
     plugins = with pkgs.vimPlugins; [
       vim-surround
+      vim-nix # nix language support
+
     ];
     extraConfig = import ./config.nix {
       inherit pkgs;
