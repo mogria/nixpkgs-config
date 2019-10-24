@@ -48,10 +48,11 @@ in {
   imports = [
     ./vim/neovim.nix
   ];
-  programs.home-manager.enable = true;
-  programs.home-manager.path = if config.homemanager.development
-      then "${config.getDirectory "code"}/home-manager"
-      else config.homemanager.repo "http";
+  programs.home-manager = {
+    enable = true;
+  } // (if config.homemanager.development then {
+    path = "${config.getDirectory "code"}/home-manager";
+  } else {});
 
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
   home.packages = [
@@ -305,6 +306,7 @@ in {
   };
 
   xdg.configFile."alacritty/alacritty.yml".text = builtins.readFile ./alacritty/alacritty.yml;
+  xdg.configFile."direnv/direnvrc".text = builtins.readFile ./direnv/direnvrc;
 
   home.file.".tmux.conf" = {
   text = let
