@@ -283,19 +283,6 @@ syntax enable
 " }}}
 
 
-" TAGS EASYTAGS (old){{{
-"   Plugin 'xolox/vim-misc'
-"   Plugin 'xolox/vim-easytags'
-"   let g:easytags_always_enabled = 1
-"   let g:easytags_async=1
-"   let g:easytags_syntax_keyword = 'always'
-"   let g:easytags_include_members = 1
-"   " tags file per working directory
-"   " set tags=./.vimtags
-"   " let g:easytags_dynamic_files = 1 doesnt work?
-"   let g:easytags_auto_highlight = 0 " doesnt work either...
-" }}}
-
 " POSTGRESQL SUPPORT {{{
   Plugin 'lifepillar/pgsql.vim'
   " treat .sql files as pgsql
