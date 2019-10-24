@@ -311,6 +311,7 @@ in {
   };
 
   xdg.configFile."alacritty/alacritty.yml".text = builtins.readFile ./alacritty/alacritty.yml;
+  xdg.configFile."direnv/direnvrc".text = builtins.readFile ./direnv/direnvrc;
 
   home.file.".tmux.conf" = {
   text = let
@@ -486,6 +487,9 @@ in {
       };
       "python" = {
         indent = { useTabs = true; };
+        makeCommands = [
+          { filePattern = "*"; makeprg = "${pkgs.python37Packages.pylint}/bin/pylint"; }
+        ];
       };
       "yaml" = {
         indent = smallIndent;
