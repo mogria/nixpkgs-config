@@ -341,14 +341,6 @@ syntax enable
   vnoremap <Leader>gw <ESC>:Gbrowse<CR>
 " }}}
 
-" VIM SURROUND {{{
-  Plugin 'tpope/vim-surround'
-  nnoremap <Leader>sw ysiw
-  nnoremap <Leader>sw ysiw
-  nnoremap <Leader>sb ysib
-  nnoremap <Leader>sb ysib
-" }}}
-
 " FOLDING {{{
   set foldmethod=marker
   set foldnestmax=2 " at most 2 folds in each other, or it gets annoying

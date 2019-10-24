@@ -25,6 +25,7 @@
       sqlparse # for sqlformat, used as equalprg in vim
     ]);
     plugins = with pkgs.vimPlugins; [
+      vim-surround
     ];
     extraConfig = import ./config.nix {
       inherit pkgs;
