@@ -66,10 +66,6 @@ syntax enable
   noremap <C-S> :w<CR>
   inoremap <C-S> <Esc>:w<CR>a
 
-  " reload .vimrc and install plugins
-  noremap <Leader>r :source ~/.vimrc<CR>
-  noremap <Leader>R :source ~/.vimrc<CR>:PluginInstall<CR>
-
   " CTRL-l like in shell for top of the screen
   noremap <C-l> zt<Esc>:redraw!<CR>
   inoremap <C-l> <Esc>zt:redraw!<CR>a
