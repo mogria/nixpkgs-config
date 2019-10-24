@@ -78,7 +78,7 @@ syntax enable
   noremap ! :!
 
   " i use <--> in templates and snippets to easily fill out stuff
-  noremap <Leader><Space> /<--><CR>cf>
+  noremap <Leader><Space> /<++><CR>cf>
 
   " SHIFT-! in normal mode, runs current line as bash command
   noremap <C-S-1> "lyy:!<C-R>l
