@@ -383,11 +383,6 @@ syntax enable
   au FileType xml setlocal makeprg=xmllint\ --noout
 " }}}
 
-" GLSL support {{{
-  Plugin 'tikhomirov/vim-glsl'
-" }}}
-
-
 " LARGE FILE SUPPORT {{{
   Plugin 'vim-scripts/LargeFile'
   let g:LargeFile = 500 " > 500 megabytes is a large file
