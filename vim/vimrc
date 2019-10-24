@@ -94,6 +94,8 @@ syntax enable
   noremap <Leader>P :set paste<CR>"+P:set nopaste<CR>
   vnoremap <Leader>p <ESC>:set paste<CR>gv"+p:set nopaste<CR>
 
+  noremap <Leader>we :%s/\s\+$//g<CR>
+  vnoremap <Leader>we :s/\s\+$//g<CR>
 " }}}
 
 
