@@ -486,7 +486,7 @@ in {
         ];
       };
       "python" = {
-        indent = { useTabs = true; };
+        indent = fourIndent;
         makeCommands = [
           { filePattern = "*"; makeprg = "${pkgs.python37Packages.pylint}/bin/pylint"; }
         ];
