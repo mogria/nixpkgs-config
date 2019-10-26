@@ -1,8 +1,6 @@
 { pkgs, ...}:
 
 {
-
-
   programs.zsh = {
       sessionVariables = {
         EDITOR = "vim";
@@ -32,6 +30,9 @@
       vim-fugitive
       vim-rhubarb # Github Integration, e.g. :Gbrowse
 
+      LanguageClient-neovim
+
+      syntastic
     ];
     extraConfig = import ./config.nix {
       inherit pkgs;
