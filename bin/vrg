@@ -9,7 +9,7 @@ f="$(mktemp)"
 trap "rm '$f'" EXIT SIGTERM SIGKILL
 
 if [ "$#" -gt 0 ]; then
-    rg --vimgrep "$@" > "$f" && vim -q "$f" -c "copen"
+    rg --vimgrep "$@" > "$f" && "$EDITOR" -q "$f" -c "copen"
 else
     rg --help
 fi
