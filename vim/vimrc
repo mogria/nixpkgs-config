@@ -66,10 +66,6 @@ syntax enable
   noremap <C-S> :w<CR>
   inoremap <C-S> <Esc>:w<CR>a
 
-  " reload .vimrc and install plugins
-  noremap <Leader>r :source ~/.vimrc<CR>
-  noremap <Leader>R :source ~/.vimrc<CR>:PluginInstall<CR>
-
   " CTRL-l like in shell for top of the screen
   noremap <C-l> zt<Esc>:redraw!<CR>
   inoremap <C-l> <Esc>zt:redraw!<CR>a
@@ -78,7 +74,7 @@ syntax enable
   noremap ! :!
 
   " i use <--> in templates and snippets to easily fill out stuff
-  noremap <Leader><Space> /<--><CR>cf>
+  noremap <Leader><Space> /<++><CR>cf>
 
   " SHIFT-! in normal mode, runs current line as bash command
   noremap <C-S-1> "lyy:!<C-R>l
@@ -94,6 +90,8 @@ syntax enable
   noremap <Leader>P :set paste<CR>"+P:set nopaste<CR>
   vnoremap <Leader>p <ESC>:set paste<CR>gv"+p:set nopaste<CR>
 
+  noremap <Leader>we :%s/\s\+$//g<CR>
+  vnoremap <Leader>we :s/\s\+$//g<CR>
 " }}}
 
 
@@ -193,10 +191,6 @@ syntax enable
   " Plugin 'godlygeek/tabular'
 " }}}
 
-" NIX LANGUAGE SUPPORT {{{
-  Plugin 'LnL7/vim-nix'
-" }}}
-
 " INDENTING / TABS & SPACING {{{
   set autoindent
   set smartindent " almost like cindent, but works better for most languages
@@ -289,19 +283,6 @@ syntax enable
 " }}}
 
 
-" TAGS EASYTAGS (old){{{
-"   Plugin 'xolox/vim-misc'
-"   Plugin 'xolox/vim-easytags'
-"   let g:easytags_always_enabled = 1
-"   let g:easytags_async=1
-"   let g:easytags_syntax_keyword = 'always'
-"   let g:easytags_include_members = 1
-"   " tags file per working directory
-"   " set tags=./.vimtags
-"   " let g:easytags_dynamic_files = 1 doesnt work?
-"   let g:easytags_auto_highlight = 0 " doesnt work either...
-" }}}
-
 " POSTGRESQL SUPPORT {{{
   Plugin 'lifepillar/pgsql.vim'
   " treat .sql files as pgsql
@@ -310,10 +291,6 @@ syntax enable
 
 
 " GIT INTEGRATION {{{
-  Plugin 'tpope/vim-fugitive'
-  " GitHub integration for vim-fugitive
-  " for example for :Gbrowse to work
-  Plugin 'tpope/vim-rhubarb'
   " setup statusline
   set statusline="f %{FugitiveStatusLine()}"
 
@@ -343,14 +320,6 @@ syntax enable
   vnoremap <Leader>gw <ESC>:Gbrowse<CR>
 " }}}
 
-" VIM SURROUND {{{
-  Plugin 'tpope/vim-surround'
-  nnoremap <Leader>sw ysiw
-  nnoremap <Leader>sw ysiw
-  nnoremap <Leader>sb ysib
-  nnoremap <Leader>sb ysib
-" }}}
-
 " FOLDING {{{
   set foldmethod=marker
   set foldnestmax=2 " at most 2 folds in each other, or it gets annoying
@@ -363,23 +332,23 @@ syntax enable
 " }}}
 
 " AUTOCOMPLETION {{{
-  " press <TAB>, when
-  " Plugin 'Valloric/YouCompleteMe'
- "let g:ycm_semantic_triggers =  {
- "  \   'c' : ['->', '.'],
- "  \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
- "  \             're!\[.*\]\s'],
- "  \   'ocaml' : ['.', '#'],
- "  \   'cpp,cuda,objcpp' : ['->', '.', '::'],
- "  \   'perl' : ['->'],
- "  \   'php' : ['->', '::'],
- "  \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
- "  \   'ruby' : ['.', '::'],
- "  \   'lua' : ['.', ':'],
- "  \   'erlang' : [':'],
- "  \   'tpl': ['{', '$', '.'],
- "  \ }
-  " complete brackets etc.
+  " Required for operations modifying multiple buffers like rename.
+  set hidden
+
+  let g:LanguageClient_serverCommands = {
+      \ 'python': ['/usr/local/bin/pyls'],
+      \ }
+      " \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+      "\ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+      " \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+      " \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+
+  nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+  " Or map each action separately
+  nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <silent> <Leader>r :call LanguageClient#textDocument_rename()<CR>
+
 
   " add the closing bracket when breaking the line
   " inoremap {<CR> {<CR>}<C-O>O
@@ -413,11 +382,6 @@ syntax enable
   " au FileType xml setlocal compiler=xmllint
   au FileType xml setlocal makeprg=xmllint\ --noout
 " }}}
-
-" GLSL support {{{
-  Plugin 'tikhomirov/vim-glsl'
-" }}}
-
 
 " LARGE FILE SUPPORT {{{
   Plugin 'vim-scripts/LargeFile'
