@@ -9,48 +9,60 @@
 
   home.file.".tmux.conf" = {
   text = let
-      loadPlugin = plugin: "run-shell ${plugin}/${plugin.name}\n";
-      yankPlugin = pkgs.fetchFromGitHub {
-          name = "yank.tmux";
+      loadPlugin = plugin: "run-shell ${plugin.src}/${plugin.name}\n";
+      yankPlugin = {
+        name = "yank.tmux";
+        src = pkgs.fetchFromGitHub {
           owner = "tmux-plugins";
           repo = "tmux-yank";
-          rev = "c6a73eba6bfcde51edf57e1cc5fa12c4c7bd98d9";
-          sha256 = "04cnr9chq6lwg6zlqvp0zrbn7mzn8w862r1g5b3hmp8ammdvp07x";
+          rev = "v2.3.0";
+          sha256 = "0yqar2y58p4h9k8jzkb8i8ph0mdmha0909cpgb0qyfpi26q0410d";
+        };
       };
-      copycatPlugin = pkgs.fetchFromGitHub {
-          name = "copycat.tmux";
+      copycatPlugin = {
+        name = "copycat.tmux";
+        src = pkgs.fetchFromGitHub {
           owner = "tmux-plugins";
           repo = "tmux-copycat";
-          rev = "c6a73eba6bfcde51edf57e1cc5fa12c4c7bd98d9";
-          sha256 = "04cnr9chq6lwg6zlqvp0zrbn7mzn8w862r1g5b3hmp8ammdvp07x";
+          rev = "v3.0.0";
+          sha256 = "0f1c6cbi5kr7n9r5ldhiz7mcb910ikp87ikga9yjz211w8g02987";
+        };
       };
-      openPlugin = pkgs.fetchFromGitHub {
-          name = "open.tmux";
+      openPlugin = {
+        name = "open.tmux";
+        src = pkgs.fetchFromGitHub {
           owner = "tmux-plugins";
           repo = "tmux-open";
-          rev = "c6a73eba6bfcde51edf57e1cc5fa12c4c7bd98d9";
-          sha256 = "04cnr9chq6lwg6zlqvp0zrbn7mzn8w862r1g5b3hmp8ammdvp07x";
+          rev = "v3.0.0";
+          sha256 = "13q3zd5jv7akkjjwhgimmfylrvalxdn54fnpfb14g6xam6h8808m";
+        };
       };
-      betterMouseModePlugin = pkgs.fetchFromGitHub {
-          name = "scroll_copy_mode.tmux";
+      betterMouseModePlugin = {
+        name = "scroll_copy_mode.tmux";
+        src = pkgs.fetchFromGitHub {
           owner = "nhdaly";
           repo = "tmux-better-mouse-mode";
           rev = "c6a73eba6bfcde51edf57e1cc5fa12c4c7bd98d9";
           sha256 = "04cnr9chq6lwg6zlqvp0zrbn7mzn8w862r1g5b3hmp8ammdvp07x";
+        };
       };
-      resurrectPlugin = pkgs.fetchFromGitHub {
-          name = "resurrect.tmux";
+      resurrectPlugin = {
+        name = "resurrect.tmux";
+        src = pkgs.fetchFromGitHub {
           owner = "tmux-plugins";
           repo = "tmux-resurrect";
-          rev = "c6a73eba6bfcde51edf57e1cc5fa12c4c7bd98d9";
-          sha256 = "04cnr9chq6lwg6zlqvp0zrbn7mzn8w862r1g5b3hmp8ammdvp07x";
+          rev = "v2.4.0";
+          sha256 = "08nmf3d8klyysl9d2kjrdmsvkwfp3lxsgc74cn02x2haqidsd4cq";
+        };
       };
-      continuumPlugin = pkgs.fetchFromGitHub {
-          name = "continuum.tmux";
+      continuumPlugin = {
+        name = "continuum.tmux";
+        src = pkgs.fetchFromGitHub {
           owner = "tmux-plugins";
           repo = "tmux-continuum";
-          rev = "c6a73eba6bfcde51edf57e1cc5fa12c4c7bd98d9";
-          sha256 = "04cnr9chq6lwg6zlqvp0zrbn7mzn8w862r1g5b3hmp8ammdvp07x";
+          rev = "v3.1.0";
+          sha256 = "1canvdva14sd8czjv6kq2wmd6lzqn23zxm0spazavxfi2ar9qkbv";
+        };
       };
   in ''
       ${builtins.readFile ./tmux.conf}
