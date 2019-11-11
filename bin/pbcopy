@@ -1,0 +1,2 @@
+#!/bin/sh
+[ -x /usr/bin/pbcopy ] && exec pbcopy || exec xsel -i --clipboard
