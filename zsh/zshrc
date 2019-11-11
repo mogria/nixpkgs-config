@@ -66,7 +66,7 @@ bindkey '^F' fzf-search-files
 bindkey '^[[Z' reverse-menu-complete
 
 # make sure the FZF keybindings work
-bindkey '^I' fzf-completion
+# bindkey '^I' fzf-completion #, disabled as it breaks on NixOS
 bindkey '\ef' fzf-file-widget
 bindkey '\ec' fzf-cd-widget
 bindkey '^R' fzf-history-widget
