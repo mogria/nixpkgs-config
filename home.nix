@@ -48,6 +48,7 @@ in {
   imports = [
     ./vim/neovim.nix
     ./services/dropbox.nix
+    ./graphical/packages.nix
   ];
   programs.home-manager = {
     enable = true;
@@ -57,29 +58,12 @@ in {
 
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
   home.packages = [
-    /* basic graphical programs */
-    pkgs.feh
-    (pkgs.keepass.override { xdotool = pkgs.xdotool; })
-    pkgs.meld
-    pkgs.qutebrowser # maybe use this instead of firefox in the furture
-    pkgs.pavucontrol
-    pkgs.xdg-user-dirs
-
-    /* heavier graphical programs */
-    pkgs.clementine
-    pkgs.firefox
-    pkgs.chromium  # 2nd browser for specific stuff
-    pkgs.thunderbird
-    pkgs.okular
-    pkgs.audacity
-
     /* theming stuff */
     pkgs.gnome-themes-standard
     faience-ng-icon-theme
     griffin-ghost-icon-theme
 
     /* shell environment programs */
-    pkgs.alacritty
     pkgs.w3m
     /* pkgs.postgresql
        pkgs.pspg */
@@ -120,50 +104,9 @@ in {
     pkgs.cmake
 
     /* LaTeX */
-    pkgs.evince # used  by vim for tex preview as well
+    pkgs.evince # used by vim for tex preview as well
     pkgs.texlive.combined.scheme-full
-
-    /* onedrive */
-    # pkgs.onedrive
-
   ];
-
-  programs.rofi = {
-    enable = true;
-    font = "Monoid HalfTight Bold 9";
-    borderWidth = 1;
-    lines = 53;
-    width = 25;
-    padding = 1;
-    rowHeight = 1;
-    separator = "solid";
-    scrollbar = false;
-    location = "top-right";
-    xoffset = 0; # 150; # right beside the xfce panel
-    yoffset = 0;
-    colors = let
-      red = "argb:90e01010";
-      white = "#a0a0a0";
-    in {
-      window = {
-        background = "argb:e0101010";
-        border = red;
-        separator = red;
-      };
-
-      rows = {
-        normal = {
-          foreground = white;
-          background = "argb:00000000";
-          backgroundAlt = "argb:90101010";
-          highlight = {
-            background = red;
-            foreground = white;
-          };
-        };
-      };
-    };
-  };
 
   programs.git = {
     enable = true;
@@ -225,6 +168,7 @@ in {
     };
   };
 
+  xdg.configFile."direnv/direnvrc".text = builtins.readFile ./direnv/direnvrc;
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
@@ -304,9 +248,6 @@ in {
         ${builtins.readFile ./zsh/zshrc}
       '';
   };
-
-  xdg.configFile."alacritty/alacritty.yml".text = builtins.readFile ./alacritty/alacritty.yml;
-  xdg.configFile."direnv/direnvrc".text = builtins.readFile ./direnv/direnvrc;
 
   home.file.".tmux.conf" = {
   text = let
