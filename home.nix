@@ -6,6 +6,7 @@ in {
   imports = [
     ./packages.nix
     ./services/dropbox.nix
+    ./graphical/packages.nix
   ];
   programs.home-manager = {
     enable = true;
