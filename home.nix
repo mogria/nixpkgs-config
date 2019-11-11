@@ -2,11 +2,10 @@
 
 let
   config = import ./user-config.nix;
-  stdenv = pkgs.stdenv;
-  fetchgit = pkgs.fetchgit;
 in {
   imports = [
     ./packages.nix
+    ./services/dropbox.nix
   ];
   programs.home-manager = {
     enable = true;
