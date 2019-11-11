@@ -60,7 +60,7 @@
         XDG_CONFIG_HOME = "$HOME/.config";
       };
       initExtra = ''
-        ${builtins.readFile ./zsh/zshrc}
+        ${builtins.readFile ./zshrc}
       '';
   };
 }
