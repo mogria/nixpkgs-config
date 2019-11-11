@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+data="$d/emoji-data.txt"
+
+egrep -v '^#|^$' "$data" | sed -e 's/\s\+;.*# /;/g' -e ' s/ \([-a-zA-Z_ ,:"\.’“”*()0-9&#é]\+\)$/;\1/g' | fzf --delimiter=';' | cut -d';' -f2 | tr -d '[[:space:]]' | pbcopy
