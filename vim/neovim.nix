@@ -32,6 +32,8 @@
 
       LanguageClient-neovim
 
+      base16-vim
+
       syntastic
     ];
     extraConfig = import ./config.nix {
