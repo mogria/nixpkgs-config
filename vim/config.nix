@@ -130,8 +130,6 @@ in ''
   " nix generated, language specific keyword character definition
   ${addKeywordCharsVimConfig}
 
-  let g:livepreview_previewer = '${pkgs.evince}'
-
   " set equalprg for sql files to format sql
   autocmd FileType sql setlocal equalprg=sqlformat\ --reindent\ --keywords\ upper\ --identifiers\ lower\ -
 ''

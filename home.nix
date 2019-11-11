@@ -57,10 +57,6 @@ in {
     pkgs.gcc
     pkgs.gnumake
     pkgs.cmake
-
-    /* LaTeX */
-    pkgs.evince # used by vim for tex preview as well
-    pkgs.texlive.combined.scheme-full
   ];
 
   home.file."bin/" = {
