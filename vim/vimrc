@@ -188,7 +188,20 @@ syntax enable
 
 " BASE16 VIM THEME PLUGIN CONFIGURATIOJN {{{
   let base16colorspace=256
+  set background=dark
+
+  " but base16colorspace needs to be set first!
   colorscheme base16-horizon-dark
+
+  hi clear SpellBad
+  hi SpellBad cterm=underline
+  " Set style for gVim
+  hi SpellBad gui=undercurl
+
+  " Comments in italics
+  hi Comment cterm=italic
+  hi Comment gui=undercurl
+
 " }}}
 
 " INDENTING / TABS & SPACING {{{
