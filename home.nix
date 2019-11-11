@@ -4,46 +4,6 @@ let
   config = import ./user-config.nix;
   stdenv = pkgs.stdenv;
   fetchgit = pkgs.fetchgit;
-  faience-ng-icon-theme = stdenv.mkDerivation rec {
-    name = "${pname}-${version}";
-    pname = "faience-ng-icon-theme";
-    version = "v${releasedate}";
-    releasedate = "20180126";
-    src =  pkgs.fetchurl {
-      url = "https://github.com/faience/${pname}/releases/download/${version}/${pname}-${releasedate}.tar.gz";
-      sha256 = "0szpzclsanfjqqaza45am4qfykfprxz4fs5q8hw159xflk91fqv4";
-    };
-    sourceRoot = ".";
-    postUnpack = ''
-      mkdir theme
-      mv Faience* theme/
-    '';
-    installPhase = ''
-      mkdir -p $out/share/icons
-      find theme -mindepth 1 -maxdepth 1 -type d -iname 'Faience-ng*' | while IFS= read dir
-      do
-        cp -R "$dir" $out/share/icons
-        # ${pkgs.gtk2}/bin/gtk-update-icon-cache "$out/share/icons/$dir" 
-      done
-    '';
-  };
-
-  griffin-ghost-icon-theme= stdenv.mkDerivation rec {
-    name = "${pname}-${version}";
-    pname = "griffin-ghost-icon-theme";
-    version = "v${releasedate}";
-    releasedate = "20180126";
-    src =  pkgs.fetchFromGitHub {
-      owner = "LordShenron";
-      repo = "Griffin-Icons";
-      rev = "4edbd4cb24eb28d38b3c458ff07f6aba2b6c2712";
-      sha256 = "05i37bv3fw3dsw9323cq4pnbrd03p364f67iif2yg775n3ixrzzg";
-    };
-    installPhase = ''
-      mkdir -p $out/share/icons/Griffin-Ghost
-      cp -R ./* $out/share/icons/Griffin-Ghost
-    '';
-  };
 in {
   imports = [
     ./vim/neovim.nix
@@ -61,11 +21,6 @@ in {
 
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
   home.packages = [
-    /* theming stuff */
-    pkgs.gnome-themes-standard
-    faience-ng-icon-theme
-    griffin-ghost-icon-theme
-
     /* shell environment programs */
     pkgs.w3m
     /* pkgs.postgresql

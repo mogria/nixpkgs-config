@@ -22,6 +22,11 @@
     pkgs.thunderbird
     pkgs.okular
     pkgs.audacity
+
+    /* icon themes */
+    pkgs.gnome-themes-standard
+    pkgs.faience-ng-icon-theme
+    pkgs.griffin-ghost-icon-theme
   ];
 }
 
