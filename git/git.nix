@@ -1,6 +1,8 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 
-{
+let
+  config = import ../user-config.nix;
+in {
   programs.git = {
     enable = true;
     userName = config.name;
