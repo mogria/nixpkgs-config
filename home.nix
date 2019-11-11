@@ -7,6 +7,7 @@ let
 in {
   imports = [
     ./vim/neovim.nix
+    ./direnv/direnv.nix
     ./git/git.nix
     ./zsh/zsh.nix
     ./fzf/fzf.nix
@@ -65,12 +66,6 @@ in {
     pkgs.evince # used by vim for tex preview as well
     pkgs.texlive.combined.scheme-full
   ];
-
-  xdg.configFile."direnv/direnvrc".text = builtins.readFile ./direnv/direnvrc;
-  programs.direnv = {
-    enable = true;
-    enableZshIntegration = true;
-  };
 
   home.file.".tmux.conf" = {
   text = let
