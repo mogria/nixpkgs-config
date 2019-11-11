@@ -47,6 +47,7 @@ let
 in {
   imports = [
     ./vim/neovim.nix
+    ./services/dropbox.nix
   ];
   programs.home-manager = {
     enable = true;
@@ -65,7 +66,6 @@ in {
     pkgs.xdg-user-dirs
 
     /* heavier graphical programs */
-    pkgs.dropbox
     pkgs.clementine
     pkgs.firefox
     pkgs.chromium  # 2nd browser for specific stuff
@@ -452,21 +452,5 @@ in {
 
   programs.command-not-found.enable = true;
 
-  systemd.user.services = {
-    dropbox = {
-      Unit = {
-        Wants = [ "network-online.target" ];
-        After = [ "network-online.target" ];
-      };
-
-      Service = {
-        ExecStart = "${pkgs.dropbox}/bin/dropbox";
-      };
-
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-    };
-  };
-  systemd.user.startServices = true;
+  systemd.user.startServices = pkgs.stdenv.isLinux;
 }
