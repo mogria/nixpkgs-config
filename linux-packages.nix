@@ -17,5 +17,5 @@
     pkgs.xsel # required by tmux for copy paste into X clipboard and for macos compatible pbcopy
   ]);
 
-  systemd.user.startServices = lib.mkIf pkgs.stdenv.isLinux;
+  systemd.user.startServices = pkgs.stdenv.isLinux;
 }
