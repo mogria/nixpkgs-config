@@ -3,4 +3,4 @@
 
 f="`mktemp`.html"
 markdown -o "$f" "$1"
-xdg-open "$f"
+open "$f"

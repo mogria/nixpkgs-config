@@ -459,4 +459,4 @@ filetype plugin indent on    " required
 " let g:vdebug_options.break_on_open = 0
 " }}}
 
-noremap <F12> :color zellner<enter>:set nonumber<enter>:TOhtml<enter>:w<enter>:!xdg-open %<enter>:q<enter>:set number<enter>:set background=dark<enter>:color solarized<enter>
+noremap <F12> :color zellner<enter>:set nonumber<enter>:TOhtml<enter>:w<enter>:!open %<enter>:q<enter>:set number<enter>:set background=dark<enter>:color solarized<enter>

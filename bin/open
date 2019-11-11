@@ -1,0 +1,3 @@
+#!/bin/sh
+# This is for having similar behaviour for open on Linux like on MacOS
+[ -x /usr/bin/open ] && exec /usr/bin/open "$@" || exec xdg-open "$@"
