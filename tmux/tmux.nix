@@ -41,8 +41,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "nhdaly";
           repo = "tmux-better-mouse-mode";
-          rev = "c6a73eba6bfcde51edf57e1cc5fa12c4c7bd98d9";
-          sha256 = "04cnr9chq6lwg6zlqvp0zrbn7mzn8w862r1g5b3hmp8ammdvp07x";
+          rev = "aa59077c635ab21b251bd8cb4dc24c415e64a58e";
+          sha256 = "06346ih3hzwszhkj25g4xv5av7292s6sdbrdpx39p0n3kgf5mwww";
         };
       };
       resurrectPlugin = {
