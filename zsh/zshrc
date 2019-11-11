@@ -10,7 +10,7 @@ if [ -e "$HOME/.zprofile" ]; then
 fi
 
 # Configure powerlevel9k prompt {{{
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(command_execution_time status root_indicator)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(host command_execution_time status root_indicator)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(dir vcs)
 POWERLEVEL9K_STATUS_VERBOSE=true
 # }}}
