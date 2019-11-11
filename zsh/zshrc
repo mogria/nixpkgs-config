@@ -9,8 +9,10 @@ if [ -e "$HOME/.zprofile" ]; then
     source "$HOME/.zprofile"
 fi
 
+# increase function level from default 500 due to heavy use of zsh code
 # Configure powerlevel9k prompt {{{
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(host command_execution_time status root_indicator)
+POWERLEVEL9K_CUSTOM_HOST=hostname
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_host command_execution_time status root_indicator)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(dir vcs)
 POWERLEVEL9K_STATUS_VERBOSE=true
 # }}}
