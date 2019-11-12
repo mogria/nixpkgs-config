@@ -100,6 +100,8 @@ bindkey '^[[1;5D' backward-word # arrow-key left
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 
+export PATH=$HOME/scripts:$PATH
+
 # start tmux automatically
 if command tmux -V 2>&1 >/dev/null; then
   # This Environment variable is checked in order
