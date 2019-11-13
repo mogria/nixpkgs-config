@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+PSPG_OPTS='-s 7 -c 1 -i -g'
+
+# just start pspg when not in tmux
+if [ -z "$TMUX" ]; then
+    if pspg --help > /dev/null 2>&1 ; then
+        exec pspg "$PSPG_OPTS" "$@"
+    else
+        exec $PAGER "$@"
+    fi
+fi
+
+
+file="`mktemp`"
+if [ ! -f "$file" ]; then
+    echo "Couldn't create temp file communicate with tmux pager pane"
+    exit 1
+fi
+
+# read stdin and write it to the fifo
+<&0 cat >> "$file"
+
+exec tmux split -- "less -Sf '$file'; rm '$file'"
