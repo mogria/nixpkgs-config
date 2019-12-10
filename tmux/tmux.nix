@@ -90,8 +90,15 @@
       set -g @emulate-scroll-for-no-mouse-alternate-buffer 'on'
       ${loadPlugin betterMouseModePlugin}
 
-      set -g @continuum-restore 'on'
+      # for restoring vim
+      set -g @resurrect-strategy-vim 'session'
+      # for restoring neovim
+      set -g @resurrect-strategy-nvim 'session'
+      # restore pane contents
+      set -g @resurrect-caoture-pane-contents 'on'
       ${loadPlugin resurrectPlugin}
+
+      set -g @continuum-restore 'on'
       ${loadPlugin continuumPlugin}
     '';
   };

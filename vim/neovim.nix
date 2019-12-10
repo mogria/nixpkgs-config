@@ -35,6 +35,9 @@
       base16-vim
 
       syntastic
+
+      # saving vim sessions
+      vim-obsession
     ];
     extraConfig = import ./config.nix {
       inherit pkgs;
