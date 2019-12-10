@@ -39,6 +39,7 @@
     gnused
     gnupg22
     gnutar
+    less
 
   ];
 
