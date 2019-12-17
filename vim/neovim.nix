@@ -35,6 +35,8 @@
       base16-vim
 
       syntastic
+
+      plantuml-syntax
     ];
     extraConfig = import ./config.nix {
       inherit pkgs;
