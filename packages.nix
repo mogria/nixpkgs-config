@@ -36,6 +36,11 @@
     unrar
     man-pages
     gnumake
+    gnused
+    gnupg22
+    gnutar
+    less
+
   ];
 
   programs.command-not-found.enable = true;

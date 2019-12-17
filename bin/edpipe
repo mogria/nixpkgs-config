@@ -1,0 +1,22 @@
+#!/bin/sh
+# You can use this script to edit the data in a UNIX pipeline, as follows
+#
+# $ program1 | edpipe | program2
+#
+# This will open $EDITOR with the output of `program1`. After editing the
+# output, saving and closing the editor, the edited file will be passed on
+# as input of `program2`.
+#
+# Taken from https://stackoverflow.com/questions/19097629/use-editor-in-the-middle-of-a-series-of-unix-pipe-commands/49289440#49289440
+# 
+# with some modifications regarding the tempfile
+: "${EDITOR:=/usr/bin/vi}"
+
+TMPFILE="$(mktemp)"
+
+trap "trap '' 0 1 2 3 15; rm -f $TMPFILE; exit 0" 0 1 2 3 15
+
+cat > "$TMPFILE"
+$EDITOR ${1:+"$@"} "$TMPFILE" </dev/tty >/dev/tty
+cat "$TMPFILE"
+exit 0

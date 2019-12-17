@@ -56,6 +56,9 @@ let
         { filePattern = "*/.config/nixpkgs/vim/*"; makeprg = "home-manager\\ switch"; }
       ];
     };
+    "js" = {
+      indent = fourIndent;
+    };
   };
 
   getOrDefault = key: attrset: defaultValue:

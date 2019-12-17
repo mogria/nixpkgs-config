@@ -37,6 +37,9 @@
       syntastic
 
       plantuml-syntax
+
+      # saving vim sessions
+      vim-obsession
     ];
     extraConfig = import ./config.nix {
       inherit pkgs;
