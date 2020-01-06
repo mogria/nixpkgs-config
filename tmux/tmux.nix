@@ -14,8 +14,9 @@
         src = pkgs.fetchFromGitHub {
           owner = "tmux-plugins";
           repo = "tmux-yank";
-          rev = "v2.3.0";
-          sha256 = "0yqar2y58p4h9k8jzkb8i8ph0mdmha0909cpgb0qyfpi26q0410d";
+          rev = "648005db64d9bf3c4650eff694ecb6cf3e42b0c8";
+          # latest release 2.3.0 does not include mouse support and does not support tmux 3.0
+          sha256 = "1zg9k8yk1iw01vl8m44w4sv20lln4l0lq9dafc09lxmgxm9dllj4";
         };
       };
       copycatPlugin = {
@@ -69,18 +70,10 @@
       ## Yank into system clipboard
 
       bind-key -r Space copy-mode
-      set -g @yank_selection 'clipboard' # use system clipboard 
+      set -g @yank_selection 'clipboard'
+      set -g @yank_with_mouse 'on'
+      set -g @yank_selection_mouse 'clipboard'
       ${loadPlugin yankPlugin}
-
-      # use v or space to start selecting
-      bind-key -T copy-mode-vi v send-keys -X begin-selection # 
-      # use y or enter to copy the selection
-      bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
-      # use y to yank a line into the clipboard
-      bind-key -T copy-mode-vi Y send-keys -X start-of-line \; send-keys -X start-of-line \; send-keys -X end-of-line \; send-keys -X copy-pipe-and-cancel "pbcopy"
-      # copy selection into clipboard when releasing mouse
-      bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection-and-cancel
-      bind-key -T copy-mode-vi Escape send-keys -X cancel
 
       ${loadPlugin copycatPlugin}
 
