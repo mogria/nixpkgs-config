@@ -17,21 +17,14 @@
     /* shell environment programs */
     w3m
 
-    /* generating tags for vim */
-    universal-ctags
-    cscope
-    global
-
     /* shell utilities */
-    jq
-    ripgrep # used by the vim
     tree
     binutils
     moreutils
     coreutils
-    utillinux
-    fd
-    exa
+    findutils
+    diffutils
+    patchutils
     netcat
     unrar
     man-pages
@@ -40,7 +33,23 @@
     gnupg22
     gnutar
     less
+    jq
+    wget
+    dos2unix
 
+    dnsutils
+
+    git
+    git-hub
+    entr
+    fd
+    exa
+    ripgrep # used by the vim
+
+    /* generating tags for vim */
+    universal-ctags
+    cscope
+    global
   ];
 
   programs.command-not-found.enable = true;
