@@ -38,6 +38,11 @@
 
       plantuml-syntax
 
+      # Snippets
+      UltiSnips
+      vim-snippets
+      neosnippet-snippets
+
       # saving vim sessions
       vim-obsession
     ];

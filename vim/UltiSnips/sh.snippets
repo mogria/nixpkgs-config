@@ -1,0 +1,55 @@
+snippet #!
+#!/usr/bin/env bash
+#
+# $1
+#
+# USAGE: $2
+#
+# PARAMETERS:
+#     $3
+
+# set -x # debug
+set -e
+set -u
+
+d="$(cd "\$(dirname "\${BASH_SOURCE[0]}")/.." && pwd)"
+
+# if [ "\$#" -lt 2 ]; then
+#     echo "Usage: \$0"
+#     exit 1
+# fi
+
+$4
+
+exit 0
+endsnippet
+
+snippet while "Bash while loop"
+while [[ $1 ]]; do
+    $2
+done
+endsnippet
+
+snippet func "Bash function"
+# Usage:
+#   $1
+function $1() {
+    local $2 = $3
+
+    $4
+}
+endsnippet
+
+snippet if "Bash if"
+if [[ $1 ]]; then
+    $2
+else
+    $3
+fi
+endsnippet
+
+
+snippet elif "Bash elif"
+elif [[ $1 ]]; then
+    $2
+endsnippet
