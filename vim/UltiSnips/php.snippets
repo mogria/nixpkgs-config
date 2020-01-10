@@ -1,0 +1,69 @@
+snippet <? "PHP File start"
+<?php
+
+namespace $1;
+
+//use 
+
+/**
+ * $2
+ */
+
+$0
+endsnippet
+
+snippet class "PHP Class"
+class $1 {
+	$2
+
+	public function __construct($3) {
+	}
+}
+endsnippet
+
+snippet func "PHP function"
+/**
+ * $1
+ * 
+ * @return
+ */
+function $2($3) {
+    $4
+
+    return $5;
+}
+endsnippet
+
+snippet if "PHP if"
+if ($1) {
+	$2;
+}
+endsnippet
+
+snippet else "PHP else"
+else {
+	$1;
+}
+endsnippet
+
+snippet while "PHP while"
+while ($1) {
+	$2;
+}
+endsnippet
+
+snippet for "PHP for"
+for(\$$1 = 0; \$$1 < $2; \$$1++) {
+    $3;
+}
+endsnippet
+
+snippet $= "PHP Variable Assignment"
+\$$1 = $2;
+endsnippet
+
+snippet foreach "PHP foreach"
+foreach ($1 as $2) {
+    $3;
+}
+endsnippet
