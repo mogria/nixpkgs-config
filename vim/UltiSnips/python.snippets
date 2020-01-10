@@ -1,0 +1,25 @@
+snippet test
+def test_$1($2):
+    $3
+
+    assert ${$4:False}
+
+endsnippet
+
+snippet func "Python function"
+def $1(${2:self}):
+    """$3"""
+    ${4:pass}
+
+endsnippet
+
+snippet #! "Python Script main function"
+#!/usr/bin/env python3
+"""$1"""
+
+def main():
+    ${2:pass}
+
+if __name__ == '__main__':
+    main()
+endsnippet
