@@ -1,0 +1,31 @@
+snippet "chap?t?e?r?" "Latex chapter" 
+\section{$1}
+\label{sec:$1}
+   $0
+\end{chapter}
+endsnippet
+
+
+snippet "pack?a?g?e?" "Latex usepackage" rb
+\usepackage[$1]{$2}
+endsnippet
+
+
+snippet "list" "Latex list" 
+\begin{itemize}
+   \item $0
+\end{itemize}
+endsnippet
+
+snippet "list" "Latex figure" 
+\begin{figure}[H]
+    \includegraphics[width=1.0\textwidth]{$1}
+    \caption{$2}
+    \label{fig:$3}
+\end{figure}
+endsnippet
+
+snippet ` "Latex inline listing"
+\lstinline|$0|
+endsnippet
+

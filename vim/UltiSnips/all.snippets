@@ -1,0 +1,15 @@
+snippet envrc "Direnv .envrc directory based shell configuration"
+PATH_add bin
+layout $1
+use nix
+
+$2
+endsnippet
+
+snippet date "swiss german date"
+${2:${1:`date +%d`}.`date +%m`}.`date +%Y`
+endsnippet
+
+snippet isodate "iso date format for sorting"
+${2:${1:`date +%Y`}-`date +%m`}-`date +%d`
+endsnippet

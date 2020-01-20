@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+if [ ! -f pdftextcache ]; then
+    find . -name '*.pdf' -exec sh -c 'pdftotext "{}" - | grep -n --with-filename --label="{}" ""' \; > pdftextcache
+fi
+
+grep --color=auto "$@" pdftextcache
+
+files="$(mktemp)"
+grep "$@" pdftextcache | cut -d ":" -f1 | uniq > "$files";
+
+for lastarg; do true; done
+
+while IFS= read -u 5 f; do
+    q="Y"
+    printf "Open file %s (Y/n/q)? " "$f"
+    read q 1<&5
+
+    if [ 'Y' == "$q" ]; then
+        echo evince --find="$lastarg" "$f"
+        evince --find="$lastarg" "$f"
+    elif [ 'q' = "$q" ]; then
+        exit 0
+    fi
+
+done 5< "$files"
