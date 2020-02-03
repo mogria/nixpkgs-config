@@ -10,6 +10,7 @@
 
   home.packages = with pkgs; [
     shellcheck
+    pythonPackages.sqlparse
   ];
 
   programs.neovim = {
@@ -20,7 +21,6 @@
     extraPython3Packages = (ps: with ps; [
       python-language-server
       pylint
-      sqlparse # for sqlformat, used as equalprg in vim
     ]);
     plugins = with pkgs.vimPlugins; [
       vim-surround
