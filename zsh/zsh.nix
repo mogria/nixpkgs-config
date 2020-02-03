@@ -65,6 +65,11 @@
 
       profileExtra = ''
         export PATH=$HOME/scripts:$HOME/bin:/opt/local/bin:/usr/local/bin:$PATH
+
+        # set TERMINFO to the terminfos delivered by the ncurses nix package
+        if [ ! -f /etc/NIXOS ]; then
+          export TERMINFO=$HOME/.nix-profile/share/terminfo
+        fi
       '';
   };
 }

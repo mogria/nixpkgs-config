@@ -3,7 +3,7 @@
 {
   home.packages = [
     pkgs.tmux /* already installed by the nixos module */
-    # pkgs.tmux-256colors-terminfo /* own terminfo for tmux */
+    pkgs.ncurses /* for terminfo database */
   ];
 
   home.file.".tmux.conf" = {
