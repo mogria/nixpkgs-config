@@ -59,5 +59,9 @@
       initExtra = ''
         ${builtins.readFile ./zshrc}
       '';
+
+      profileExtra = ''
+        export PATH=$HOME/scripts:$HOME/bin:/opt/local/bin:/usr/local/bin:$PATH
+      '';
   };
 }
