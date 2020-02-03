@@ -55,7 +55,10 @@
         # into the bash file
         FZF_COMPLETION_TRIGGER = "\\\\";
         XDG_CONFIG_HOME = "$HOME/.config";
+        LANG  = "en_US.UTF-8";
+        LC_TYPE = "en_US.UTF-8";
       };
+
       initExtra = ''
         ${builtins.readFile ./zshrc}
       '';
