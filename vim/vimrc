@@ -79,27 +79,23 @@ syntax enable
   " type ! in normal mode to run a command with the current
   noremap ! :!
 
-  " i use <--> in templates and snippets to easily fill out stuff
+  " i use <++> in templates and snippets to easily fill out stuff
   noremap <Leader><Space> /<++><CR>cf>
-
-  " SHIFT-! in normal mode, runs current line as bash command
-  noremap <C-S-1> "lyy:!<C-R>l
 
   " SHIFT-ENTER builds not used and doesnt work
   noremap <Leader>b :make %:p<CR>
 
-  " copy all into system clipboard
-  noremap <Leader>ya ggvG$"+y<C-O><C-O>
-  noremap <Leader>yy "+yy
-  vnoremap <Leader>y "+y
-  noremap <Leader>p :set paste<CR>"+p:set nopaste<CR>
-  noremap <Leader>P :set paste<CR>"+P:set nopaste<CR>
-  vnoremap <Leader>p <ESC>:set paste<CR>gv"+p:set nopaste<CR>
-
+  " remove whitespace at end of lines
   noremap <Leader>we :%s/\s\+$//g<CR>
   vnoremap <Leader>we :s/\s\+$//g<CR>
 " }}}
 
+" SYSTEM CLIPBOARD CONFIGURATION {{{
+  map <Leader>y "+y
+  noremap <Leader>p :set paste<CR>"+p:set nopaste<CR>
+  noremap <Leader>P :set paste<CR>"+P:set nopaste<CR>
+  vnoremap <Leader>p <ESC>:set paste<CR>gv"+p:set nopaste<CR>
+" }}}
 
 " FINDING FILES WITH STANDARD VIM BEHAVIOUR {{{
   " ignore these files
