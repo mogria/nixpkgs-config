@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   programs.zsh = {
@@ -46,18 +46,7 @@
         theme = "../../../../../../../../../../../${pkgs.zsh-powerlevel9k}/share/zsh-powerlevel9k/powerlevel9k";
       };
 
-      sessionVariables = {
-        EDITOR = "vim";
-        VISUAL = "vim";
-        FZF_TMUX = "1";
-        FZF_TMUX_HEIGHT = "30%";
-        # for times the escape needed, because \ is not escaped! when pasting
-        # into the bash file
-        FZF_COMPLETION_TRIGGER = "\\\\";
-        XDG_CONFIG_HOME = "$HOME/.config";
-        LANG  = "en_US.UTF-8";
-        LC_TYPE = "en_US.UTF-8";
-      };
+      sessionVariables = config.home.sessionVariables;
 
       initExtra = ''
         ${builtins.readFile ./zshrc}
@@ -71,5 +60,14 @@
           export TERMINFO=$HOME/.nix-profile/share/terminfo
         fi
       '';
+  };
+
+
+  home.sessionVariables = {
+    EDITOR = "vim";
+    VISUAL = "vim";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    LANG  = "en_US.UTF-8";
+    LC_TYPE = "en_US.UTF-8";
   };
 }

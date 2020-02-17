@@ -16,4 +16,12 @@
     changeDirWidgetOptions = [ "--preview" "'tree -C {} | head -200'" ];
     historyWidgetOptions = [ "--sort" "--exact" ];
   };
+
+  home.sessionVariables = {
+    FZF_TMUX = "1";
+    FZF_TMUX_HEIGHT = "30%";
+    # for times the escape needed, because \ is not escaped! when pasting
+    # into the bash file
+    FZF_COMPLETION_TRIGGER = "\\\\";
+  };
 }
