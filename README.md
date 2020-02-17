@@ -1,19 +1,24 @@
-# dotfiles
+# Mogria's .dotfiles
 
-These are my [Nix](https://nixos.org/nix/) and
-[Home-Manager](https://github.com/rycee/home-manager/) based configuration for my home directory
-files.
+These are [Home-Manager](https://github.com/rycee/home-manager/) based
+configuration for my home directory files.
 
-These configuration files are in use on 64-bit Linux NixOS machine and on a
-MacOS machine.  Some minor modifications might be needed to make them
-runnable on Linux on aarch64 or with other distributions than NixOS just
-using the Nix package manager.
+Home-Manager allows one to configure his own `$HOME` directory using the
+[nix](https://nixos.org/nix/) language and the
+[nixpkgs](https://nixos.org/nix/) package collection.
 
-# Tools Included
+These configuration files are in use on multiple 64-Linux Linux NixOS machine's
+and on a recent MacBook.  Some minor modifications might be needed to make them
+runnable on other architectures or with other distributions than NixOS
+just using the Nix package manager.
+
+# Environment and Tools Included
 
 ## Programming: NeoVim
 
-These configuration files contain a heavily customized neovim with a lot of plugins for supporting programming. I usallaly start multiple instances of neovim. I do this from within the Alacritty terminal emulator which from within a `tmux` session is launched automatically.
+These configuration files contain a heavily customized neovim with a lot of
+plugins for supporting programming. I usually start multiple instances of
+neovim inside `tmux`. The `.zshrc` automatically starts a new tmux session.
 
 Some of these include:
 
@@ -26,26 +31,60 @@ Some of these include:
 * a lot of tpope's plugins
 * Git integration is provided via fugitive
 
-## Interactive: tmux + zsh
+## Interactive Shell Environment: tmux + zsh
 
-This configuration includes a customized ZSH with powerline with a custom dark theme. It also contains integration with various tools such as
+This configuration includes a customized ZSH with powerline with a custom dark theme. It also contains integration with various tools.
 
-* [direnv](): Set different Environment variables and load different
-   configurations when entering a directory automatically if it contains
-   a .envrc configuration file. I use this in a lot of project's to
-   automatically spawn a [`nix-shell`]() when entering a directory which
-   contains all the development dependencies.
-* [fzf](): fuzzy search for files directory and also your shell history.
+### [direnv](https://github.com/direnv/direnv)
 
-## Graphical
+Allows you to set different environment variables and load different
+configurations when entering a directory automatically if it contains a
+`.envrc` configuration file. I use this in a lot of project root directories to
+automatically spawn a [`nix-shell`]() when entering a directory which contains
+all the development dependencies.
 
-Different graphical tools are included as well. This includes
+### [fzf](https://github.com/junegunn/fzf)
+
+A general fuzzy search program. Is used in diverse places:
+
+* Can be called from vim to fuzzy **s**earch **f**iles using `<Space>sf`
+  while in normal mode
+  * You can then press `CTRL-X` or `CTRL-V` to automatically open a new
+    `:split` or `:vsplit` window respectively.
+  * More vim keybindings can be found in my
+    [vimrc](https://github.com/mogria/nixpkgs-config/blob/8ad8c3ac63112252327f23cdade00b421d05d4ec/vim/vimrc#L253).
+    Feel free to adjust them to your needs.
+* Can be called from zsh to fuzzy search files by typing `\<Tab>`
+* Can be called from zsh to fuzzy search the shell history by pressing
+  `CTRL-R`. This one is very useful and gets more useful the bigger your
+  shell history is. (The size of the history `$HISTSIZE` is configured to be
+    100000).
+
+### [ripgrep](https://github.com/BurntSushi/ripgrep)
+
+A fast recursive grep wit nice colored output. One of my most used shell
+utilities during an interactive shell session. I even have a script
+[`vrg`](https://github.com/mogria/nixpkgs-config/blob/master/bin/vrg) pass to
+start vim and pass the search results into the quickfix list
+automatically.
+
+It can be called from within vim as well to fill the quickfix list using
+`<Space>F` to search for the word below the cursor. `<Space>f` searches for the
+last thing you searched using `/` in vim, so you can expand your file scoped
+search to the while project directory. Alternatively type `:Rg` to search for
+something else. This functionality is provided by the
+[vim-ripgrep](https://github.com/jremmen/vim-ripgrep) plugin.
+
+### Graphical
+
+Different graphical tools are included as well but only on Linux. This includes
 
 * [Rofi](https://github.com/mogria/nixpkgs-config/blob/master/rofi/rofi.nix): A little menu I use to start programs and search for windows of currently opened windows. Only used on Linux in conjuction with the NixOS's XFCE 4.14a (needs to be activated in /etc/nixos/configuration.nix).
+* [Alacritty terminal emulator](https://github.com/alacritty/alacritty): cross-platform GPU-accelerated terminal emulator
 
-# Installation
+## Installation
 
-* Install Nix
+* [Install Nix](https://nixos.org/nix/) or even [NixOS](https://nixos.org/nixos/)
 * Clone this repository into `~/.config/nixpkgs`
 
       git clone https://github.com/mogria/nixpkgs-config.git ~/.config/nixpkgs
