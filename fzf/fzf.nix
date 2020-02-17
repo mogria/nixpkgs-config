@@ -8,11 +8,11 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    defaultCommand = "${pkgs.fd}/bin/fd --type f";
+    defaultCommand = "fd --type f";
     defaultOptions = [ "--height" "40%" "--border" ];
-    fileWidgetCommand = "${pkgs.fd}/bin/fd --type f";
+    fileWidgetCommand = "fd --type f";
     fileWidgetOptions = [ "--preview" "'file {}; head {}'" ];
-    changeDirWidgetCommand = "${pkgs.fd}/bin/fd --type d";
+    changeDirWidgetCommand = "fd --type d";
     changeDirWidgetOptions = [ "--preview" "'tree -C {} | head -200'" ];
     historyWidgetOptions = [ "--sort" "--exact" ];
   };
