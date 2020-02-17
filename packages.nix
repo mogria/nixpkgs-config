@@ -11,6 +11,7 @@
     ./zsh/zsh.nix
     ./fzf/fzf.nix
     ./tmux/tmux.nix
+    ./ripgrep/ripgrep.nix
     ./linux-packages.nix
   ];
 
@@ -45,7 +46,6 @@
     entr
     fd
     exa
-    ripgrep
 
     jrnl
   ];
