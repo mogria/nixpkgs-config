@@ -14,6 +14,12 @@ just using the Nix package manager.
 
 # Environment and Tools Included
 
+This collection of configuration files and script almost gives you a complete
+"IDE"-like environment. At least, I use it as such. This environment is heavily
+tuned toward how my own workflow works (keybindings and programs used and
+such). So feel free to adjust these files to your wishes or take out little
+bits and pieces here and there.
+
 ## Programming: NeoVim
 
 These configuration files contain a heavily customized neovim with a lot of
