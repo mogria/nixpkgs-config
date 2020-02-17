@@ -44,12 +44,7 @@
     entr
     fd
     exa
-    ripgrep # used by the vim
-
-    /* generating tags for vim */
-    universal-ctags
-    cscope
-    global
+    ripgrep
   ];
 
   programs.command-not-found.enable = true;

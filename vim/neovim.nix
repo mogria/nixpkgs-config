@@ -11,6 +11,12 @@
   home.packages = with pkgs; [
     shellcheck
     pythonPackages.sqlparse
+    ripgrep
+
+    /* used for generating tags in vim */
+    universal-ctags
+    cscope
+    global
   ];
 
   programs.neovim = {
