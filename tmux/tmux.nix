@@ -89,7 +89,9 @@
       set -g @resurrect-strategy-nvim 'session'
       # restore pane contents
       set -g @resurrect-caoture-pane-contents 'on'
-      ${loadPlugin resurrectPlugin}
+      # ${loadPlugin resurrectPlugin}
+      # doesn't really work on linux, this breaks starting tmux when a session is saved...
+      # probably needs an update upstream to work with tmux 3.0a
 
       set -g @continuum-restore 'on'
       ${loadPlugin continuumPlugin}
