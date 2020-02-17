@@ -45,6 +45,8 @@
     fd
     exa
     ripgrep
+
+    jrnl
   ];
 
   programs.command-not-found.enable = true;
