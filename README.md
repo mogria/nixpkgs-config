@@ -26,16 +26,19 @@ These configuration files contain a heavily customized neovim with a lot of
 plugins for supporting programming. I usually start multiple instances of
 neovim inside `tmux`. The `.zshrc` automatically starts a new tmux session.
 
-Some of these include:
+Some of the plugins include:
 
-* Synastic
-* UltiSnips + Some of my own snippets
-* Language Specific Plugins for languages such as
+* [Syntastic](https://github.com/vim-syntastic/syntastic)
+* [UltiSnips](https://github.com/sirver/UltiSnips) + Some of my own snippets
+* Language Specific Plugins for languages and configuration for
   * PHP
-  * HTML
+  * Python
+  * PgSQL
+  * LaTeX
+  * HTML, XHTML
   * Nix
-* a lot of tpope's plugins
-* Git integration is provided via fugitive
+* a lot of [tpope](https://github.com/tpope/)'s plugins
+* Git integration is provided via [`vim-fugitive`](https://github.com/tpope/vim-fugitive) plugin.
 
 ## Interactive Shell Environment: tmux + zsh
 
