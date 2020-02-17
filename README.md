@@ -81,6 +81,16 @@ search to the while project directory. Alternatively type `:Rg` to search for
 something else. This functionality is provided by the
 [vim-ripgrep](https://github.com/jremmen/vim-ripgrep) plugin.
 
+### Git Integration
+
+Various tools have been configured to work better with git.
+
+* **zsh**: Various aliases
+ * https://github.com/mogria/nixpkgs-config/blob/8ad8c3ac63112252327f23cdade00b421d05d4ec/git/git.nix#L10-L28
+* **vim**: Almost the same shortcuts prefixed with `<Space>` provided by the [`vim-fugitive`](https://github.com/tpope/vim-fugitive) plugin.
+ * https://github.com/mogria/nixpkgs-config/blob/8ad8c3ac63112252327f23cdade00b421d05d4ec/vim/vimrc#L320-#L330
+ * Vim is used as the difftool as well
+
 ### Graphical
 
 Different graphical tools are included as well but only on Linux. This includes
@@ -95,4 +105,5 @@ Different graphical tools are included as well but only on Linux. This includes
 
       git clone https://github.com/mogria/nixpkgs-config.git ~/.config/nixpkgs
 
+* Configure your git settings and github repositories in [`user-config.nix`](https://github.com/mogria/nixpkgs-config/blob/master/user-config.nix)
 * Install Home-Manager: [https://github.com/rycee/home-manager](https://github.com/rycee/home-manager)
