@@ -5,7 +5,7 @@ let
   colorDirPath = "vifm/colors";
 in {
   home.packages = with pkgs; [
-    vifm-full
+    vifm
   ];
 
   home.sessionVariables = {
