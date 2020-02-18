@@ -28,9 +28,7 @@
     pkgs.faience-ng-icon-theme
     pkgs.griffin-ghost-icon-theme
 
-    /* LaTeX */
     pkgs.evince # used by vim for tex preview as well
-    pkgs.texlive.combined.scheme-full
   ];
 }
 

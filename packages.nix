@@ -48,7 +48,11 @@
     exa
 
     jrnl
+
+    /* LaTeX */
+    pkgs.texlive.combined.scheme-full
+    pandoc
   ];
 
-  programs.command-not-found.enable = true;
+  # programs.command-not-found.enable = true;
 }
