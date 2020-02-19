@@ -59,6 +59,9 @@ let
     "js" = {
       indent = fourIndent;
     };
+    "tex" = {
+      indent = fourIndent;
+    };
   };
 
   getOrDefault = key: attrset: defaultValue:
