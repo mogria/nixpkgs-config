@@ -15,6 +15,13 @@ let
         makeprg = "shellcheck\\ --check-sourced\\ --external-sources\\ --format=gcc";
     }];
   };
+  lispConf = {
+    indent = smallIndent;
+    addKeywordChars = "-";
+    /** TODO: set showmatch
+              set lisp
+        NOTE: vim -l starts it in lisp mode**/
+  };
   languages = {
     "nix" = {
       indent = smallIndent;
@@ -62,6 +69,8 @@ let
     "tex" = {
       indent = fourIndent;
     };
+    "lisp" = lispConf;
+    "scheme" = lispConf;
   };
 
   getOrDefault = key: attrset: defaultValue:
