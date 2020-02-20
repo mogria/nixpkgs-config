@@ -10,6 +10,7 @@ in {
     aliases = {
       "s" = "status";
       "a" = "add";
+      "ap" = "add --patch";
       "u" = "restore --staged";
       "unstage" = "restore --staged";
       "c" = "commit";
@@ -20,12 +21,14 @@ in {
       "l" = "log";
       "co" = "checkout";
       "k" = "checkout";
+      "kp" = "checkout --patch";
       "p" = "push";
       "pl" = "pull --autostash";
       "f" = "fetch --prune --all";
       "undo" = "reset --soft HEAD^";
       "fwd" = "forward";
       "forward" = "merge --ff-only";
+      "m" = "merge";
     };
     ignores = [
       "*~" "*.bak*" # backup files
