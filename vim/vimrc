@@ -225,9 +225,8 @@ syntax enable
 
   " Language specific indents
   Plugin 'junegunn/vim-easy-align'
-  xnoremap <Leader>a <Plug>(EasyAlign)
-  nnoremap <Leader>a <Plug>(EasyAlign)
-  vnoremap <Leader>a <Plug>(EasyAlign)
+  xmap <Leader>a <Plug>(EasyAlign)
+  nmap <Leader>a <Plug>(EasyAlign)
 " }}}
 
 " LINE WRAPPING {{{
