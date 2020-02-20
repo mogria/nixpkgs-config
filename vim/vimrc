@@ -249,19 +249,26 @@ syntax enable
 " FZF FUZZY SEARCH {{{
   Plugin 'junegunn/fzf'
   Plugin 'junegunn/fzf.vim'
-  Plugin 'jremmen/vim-ripgrep'
 
   noremap <Leader>sf <ESC>:Files<CR>
-  noremap <Leader>sl <ESC>:BLines<CR> " search buffer lines
+  " search lines in current buffe
+  noremap <Leader>sl <ESC>:BLines<CR>
   noremap <Leader>t <Esc>:Tags<CR>
   noremap <Leader>T <Esc>:BTags<CR>
+  noremap <Leader>h <ESC>:Helptags<CR>
+  " search history
+  noremap <Leader>/  <ESC>:History/<CR>n
+  " command mode history
+  noremap <Leader>:  <ESC>:History\:<CR>
+  " open recent file
+  noremap <Leader><Enter> <ESC>:History<CR>
+" }}}
+
+" RIPGREP: FULLTEXT RECURSIVE DIRECTORY SEARCH {{{
+  " results will be opened in the quickfix list
+  Plugin 'jremmen/vim-ripgrep'
   noremap <Leader>f <ESC>:Rg <C-R>/
   noremap <Leader>F <ESC>:Rg <C-R><C-W>
-  noremap <Leader>l :Clocate 
-  noremap <Leader>h <ESC>:Helptags<CR>
-  noremap <Leader>/  <ESC>:History/<CR>n " search history
-  noremap <Leader>:  <ESC>:History\:<CR> " command mode history
-  noremap <Leader><Enter> <ESC>:History<CR> " open recent file
 " }}}
 
 " BASIC UNIX COMMANDS AS EX COMMANDS {{{
