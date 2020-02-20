@@ -327,24 +327,36 @@ syntax enable
 
   " bind fugitive functions to <Leader>g* the same way as
   " the shell and git aliases (see home.nix)
+  "
+  " status
   noremap <Leader>gs <ESC>:Gstatus<CR>
-  noremap <Leader>ga <ESC>:Git add --patch -- %<CR>
+
+  " adding files / staging
+  noremap <Leader>ga <ESC>:Git ap -- %<CR>
+  " this is required untracked files
+  noremap <Leader>gA <ESC>:Git add  -- %<CR>
+
+  " unstaging / checkout
   noremap <Leader>gu <ESC>:Git unstage --patch -- %<CR>
+  noremap <Leader>gU <ESC>:Git unstage -- %<CR>
   noremap <Leader>gc <ESC>:Gcommit<CR>
-  noremap <Leader>gx <ESC>:Git undo-commit<CR>
+  noremap <Leader>gx <ESC>:Git undo<CR>
   noremap <Leader>gd <ESC>:Gdiff<CR>
   noremap <Leader>gl <ESC>:Glog<CR>
   noremap <Leader>gL <ESC>:Gllog<CR>
-  noremap <Leader>gk <ESC>:Git checkout -p  -- %<CR>
+  noremap <Leader>gk <ESC>:Git kp -- %<CR>
+  " this is required untracked files
+  noremap <Leader>gK <ESC>:Git k -- %<CR>
   noremap <Leader>gp <ESC>:Gpush<CR>
-  noremap <Leader>gP <ESC>:Gpull<CR>
-  noremap <Leader>gf <ESC>:Gfetch<CR>:Git forward
+  noremap <Leader>gP <ESC>:Gpull --autostash<CR>
+  noremap <Leader>gf <ESC>:Gfetch --prune --all<CR>
+  noremap <Leader>gF <ESC>:Git forward
 
   " inconsistent, gb changes branch in zsh
   noremap <Leader>gb <ESC>:Gblame<CR>
   " additional goodies
   noremap <Leader>gw <ESC>v:Gbrowse<CR>
-  vnoremap <Leader>gw <ESC>:Gbrowse<CR>
+  vnoremap <Leader>gw :Gbrowse<CR>
 " }}}
 
 " FOLDING {{{
