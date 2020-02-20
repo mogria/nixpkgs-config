@@ -49,6 +49,9 @@
       vim-snippets
       neosnippet-snippets
 
+      # LaTeX
+      vimtex
+
       # saving vim sessions
       vim-obsession
     ];
