@@ -15,8 +15,14 @@ set nocompatible
 syntax enable
 
 " GENERAL BEHAVIOUR {{{
+"
   " use space as the mapleader for easy combos to type
-  let mapleader=" "
+  " these bindings can be user-defined
+  let mapleader = " "
+  " and use \ as the maplocalleader (key bindings with <LocalLeader> prefix
+  " this one is global as the mapleader, but bindings from filetype plugins
+  " should use <LocalLeader> instead of <Leader>
+  let maplocalleader = '\'
 
   set autowrite " save the opened file automatically when navigating, even tags
   " set autowriteall " save the opened file automatically even when quitting
