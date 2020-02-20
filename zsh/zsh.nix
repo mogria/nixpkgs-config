@@ -9,25 +9,38 @@
       "c" = "fzf-cd-widget";
       "ls" = "exa --git";
       "ll" = "exa -l -a --sort=modified --git";
+      # git aliases, they should be mostly consistent with
+      # git configured git aliases, and a lot of times even
+      # uses the aliases to provide the correct default options.
       "gs" = "git status";
-      # git aliases, they should be mostly consitent with
-      # git configured git aliases
-      "ga" = "git add";
+      "gS" = "vim -c ':Gstatus' -c 'wincmd w' -c 'close' +/Unstaged";
+      "ga" = "git a";
+      "gap" = "git ap";
       "gu" = "git unstage";
       "gc" = "git commit";
       "gb" = "git branch";
       "gd" = "git diff";
+      "gD" = "nvim -c :Gdiff";
       "gdc" = "git diff --cached";
       "gdt" = "git difftool";
       "gl" = "git log";
-      "gco" = "git checkout";
-      "gk" = "git checkout";
-      "gp" = "git p";
-      "gpl" = "git pl";
-      "gf" = "git f";
-      "gfwd" = "git forward";
-      "gundo" = "git undo";
+      "gL" = let
+          # launches vim and closes the opened dummy split
+          scriptFile = pkgs.writeText "vim-git-log" " gl<C-W><C-W>ZQvis\n";
+        in "vim -s ${scriptFile} .";
+      # checkout / checkout patched
+      "gco" = "git co";
+      "gcop" = "git cop";
+      "gk" = "git k";
+      "gkp" = "git kp";
+      "gp" = "git p"; #push
+      "gpl" = "git pl"; #pull
+      "gf" = "git f"; # fetch
+      "gfwd" = "git forward"; # --ff-only merge
+      "gundo" = "git undo"; #undo last commit
       "gx" = "git undo";
+      "gm" = "git m"; # merge
+      "gmt" = "git mergetool"; # mergetool
       # make alias expansion work with the following commands as prefix
       "xargs" = "xargs ";
       "sudo" = "sudo ";
