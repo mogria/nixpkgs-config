@@ -15,7 +15,6 @@
       "ga" = "git add";
       "gu" = "git unstage";
       "gc" = "git commit";
-      "gx" = "git undo-commit";
       "gb" = "git branch";
       "gd" = "git diff";
       "gdc" = "git diff --cached";
@@ -23,10 +22,12 @@
       "gl" = "git log";
       "gco" = "git checkout";
       "gk" = "git checkout";
-      "gp" = "git push";
-      "gpl" = "git pull";
-      "gf" = "git fetch";
+      "gp" = "git p";
+      "gpl" = "git pl";
+      "gf" = "git f";
       "gfwd" = "git forward";
+      "gundo" = "git undo";
+      "gx" = "git undo";
       # make alias expansion work with the following commands as prefix
       "xargs" = "xargs ";
       "sudo" = "sudo ";

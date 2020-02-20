@@ -10,8 +10,8 @@ in {
     aliases = {
       "s" = "status";
       "a" = "add";
-      "u" = "reset HEAD";
-      "unstage" = "reset HEAD";
+      "u" = "restore --staged";
+      "unstage" = "restore --staged";
       "c" = "commit";
       "b" = "branch";
       "d" = "diff";
@@ -21,9 +21,9 @@ in {
       "co" = "checkout";
       "k" = "checkout";
       "p" = "push";
-      "pl" = "pull";
-      "f" = "fetch --prune";
-      "undo-commit" = "reset --soft HEAD^";
+      "pl" = "pull --autostash";
+      "f" = "fetch --prune --all";
+      "undo" = "reset --soft HEAD^";
       "fwd" = "forward";
       "forward" = "merge --ff-only";
     };
