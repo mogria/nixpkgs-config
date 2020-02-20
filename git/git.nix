@@ -57,11 +57,28 @@ in {
       "receive.fsck".badTimezone = "warn";
       "fetch.fsck".badTimezone = "warn";
 
+      # use nvim -d as difftool
       diff = {
-        tool = "nvim -d";
+        tool = "nvimdiff";
       };
+
       difftool = {
         prompt = false;
+        nvimdiff = {
+          cmd = "nvim -d \"$LOCAL\" \"$REMOTE\"";
+        };
+      };
+
+      # use nvim -d as mergetool
+      merge = {
+        tool = "nvimdiff";
+      };
+
+      mergetool = {
+        promt = false;
+        nvimdiff = {
+          cmd = "nvim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'";
+        };
       };
     };
   };
