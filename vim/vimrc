@@ -398,14 +398,9 @@ syntax enable
   Plugin 'tpope/vim-endwise'
 " }}}
 
-" PHP SUPPORT (unneeded?){{{
-"  Plugin '2072/PHP-Indenting-for-VIm'
-"  " Plugin 'rayburgemeestre/phpfolding.vim'
-"  Plugin 'vim-vdebug/vdebug'
-"  Plugin 'shawncplus/phpcomplete.vim'
-"  let g:PHP_removeCRwhenUnix=1
-"  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+" PHP SUPPORT {{{
   autocmd FileType php set keywordprg=vim-keyword-web-search\ https://www.php.net/\\\%s
+  let g:syntastic_php_checkers = ['php', 'psalm']
 " }}}
 
 " HTML / XML integration {{{
