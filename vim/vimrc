@@ -113,9 +113,6 @@ syntax enable
   set wildmenu
   set wildmode=longest,list,full
 
-  " show partial commands typed below the status line
-  set showcmd
-
 
   " have all files in current directory in file and cd path
   " when using ex commands or gf in normal mode
@@ -125,6 +122,33 @@ syntax enable
   set suffixesadd=.php,.java.,.nix,/default.nix,.tpl,.scss,.css,.js,.jsx
   set cdpath +=.,,
 " }}}
+
+
+" STATUS BAR (vim-airline)
+  " show partial commands typed below the status line
+  set showcmd
+
+  " display all buffers as tab when only one tab is open
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#enabled = 'unique_tail_improved'
+  let g:airline_statusline_ontop = 1
+
+  let g:airline_detect_modified=1
+  let g:airline_detect_paste=1
+  let g:airline_detect_crypt=1
+  let g:airline_detect_spell=1
+
+  let g:airline_detect_spelllang=1
+  let g:airline_detect_iminsert=0
+
+  let g:airline_inactive_collapse=1
+  let g:airline_inactive_alt_sep=0
+  " themes are automatically selected based on the matching colorscheme. this can be overridden by defining a value. >
+  let g:airline_theme='base16'
+
+  let g:airline_powerline_fonts = 1
+<
+"'
 
 " COMMAND MODE EMCAS/SHELL KEYBINDINGS {{{
   " most of them already exist except C-A which autocompletes everything

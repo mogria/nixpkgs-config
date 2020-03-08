@@ -36,6 +36,10 @@
       vim-fugitive
       vim-rhubarb # Github Integration, e.g. :Gbrowse
 
+      # Status bar
+      vim-airline
+      vim-airline-themes
+
       LanguageClient-neovim
 
       base16-vim
