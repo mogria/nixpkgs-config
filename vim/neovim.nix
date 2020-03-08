@@ -32,6 +32,9 @@
       vim-surround
       vim-nix # nix language support
 
+      # Tmux Integration
+      vim-tmux-focus-events
+
       # Git Integration
       vim-fugitive
       vim-rhubarb # Github Integration, e.g. :Gbrowse
