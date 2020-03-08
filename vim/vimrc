@@ -385,8 +385,12 @@ syntax enable
 
 " FOLDING {{{
   set foldmethod=marker
-  set foldnestmax=2 " at most 2 folds in each other, or it gets annoying
-  set foldopen=all " open folds, as soon as interacting with them
+  set foldnestmax=3 " at most 3 folds in each other, or it gets annoying
+
+
+  set foldopen=block,hor,insert,mark,percent,quickfix,search,tag
+  set foldclose=all
+  set foldlevelstart=0
   set foldcolumn=1
   " augroup vimrc
     " au BufReadPre * setlocal foldmethod=syntax
