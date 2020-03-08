@@ -60,6 +60,7 @@ in {
       # use nvim -d as difftool
       diff = {
         tool = "nvimdiff";
+        algorithm = "patience";
       };
 
       difftool = {
@@ -72,6 +73,7 @@ in {
       # use nvim -d as mergetool
       merge = {
         tool = "nvimdiff";
+        ff = true; # prefer fast forward merges
       };
 
       mergetool = {
