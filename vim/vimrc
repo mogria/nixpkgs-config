@@ -441,9 +441,6 @@ syntax enable
 
 
 " SNIPPETS (via ultisnips) {{{
-  " Store Snippets in nixpkgs-config repository
-  let g:UltiSnipsSnippetsDir = "~/.config/nixpkgs/vim/UltiSnips"
-  let g:UltiSnipsSnippetDirectories = [ "~/.config/nixpkgs/vim/UltiSnips" ]
   " Trigger cog:UltiSnipsSnippetDirectoriesg:UltiSnipsSnippetDirectoriesnfiguration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsJumpForwardTrigger="<Leader><tab>"
