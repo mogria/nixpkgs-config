@@ -64,6 +64,15 @@
           sha256 = "1canvdva14sd8czjv6kq2wmd6lzqn23zxm0spazavxfi2ar9qkbv";
         };
       };
+      powerlinePlugin = {
+        name = "tmux-powerline";
+        src = pkgs.fetchFromGitHub {
+          owner = "erikw";
+          repo = "tmux-powerline";
+          rev = "e214721694661448176580433fd563f82542545a";
+          sha256 = "0f9xwlnjwsy7b8w76j5pg9hd0s01vwry574jfg4pi2lc3hbjkab5";
+        };
+      };
   in ''
       ${builtins.readFile ./tmux.conf}
 
@@ -93,6 +102,21 @@
 
       set -g @continuum-restore 'on'
       ${loadPlugin continuumPlugin}
+
+      # tmux-powerline statusbar configuration
+      set-option -g status on
+      set-option -g status-interval 1
+      set-option -g status-justify left
+      set-option -g status-left-length 20
+      set-option -g status-right-length 90
+      set-option -g status-left "#(${powerlinePlugin.src}/powerline.sh left)"
+      set-option -g status-right "#(${powerlinePlugin.src}/powerline.sh right)"
     '';
+
+  };
+
+  home.file.".tmux-powerlinerc" = {
+    source = ./tmux-powerlinerc;
+    target = ".tmux-powerlinerc";
   };
 }
