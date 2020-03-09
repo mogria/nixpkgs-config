@@ -12,13 +12,17 @@ in {
       "a" = "add";
       "ap" = "add --patch";
       "u" = "restore --staged";
+      "up" = "restore --staged --patch";
       "unstage" = "restore --staged";
       "c" = "commit";
+      "ca" = "commit --amend";
+      "cf" = "commit --fixup";
       "b" = "branch";
       "d" = "diff";
       "dc" = "diff --cached";
       "dt" = "difftool";
       "l" = "log";
+      "lp" = "log --patch";
       "co" = "checkout";
       "k" = "checkout";
       "kp" = "checkout --patch";
@@ -29,6 +33,7 @@ in {
       "fwd" = "forward";
       "forward" = "merge --ff-only";
       "m" = "merge";
+      "fx" = "git rebase --autostash --autosquash --interactive";
     };
     ignores = [
       "*~" "*.bak*" # backup files

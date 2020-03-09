@@ -17,13 +17,17 @@
       "ga" = "git a";
       "gap" = "git ap";
       "gu" = "git unstage";
+      "gup" = "git up";
       "gc" = "git commit";
+      "gca" = "git commit --amend";
+      "gcf" = "git commit --fixup=`fzf-commit`";
       "gb" = "git branch";
       "gd" = "git diff";
       "gD" = "nvim -c :Gdiff";
       "gdc" = "git diff --cached";
       "gdt" = "git difftool";
       "gl" = "git log";
+      "glp" = "git log --patch";
       "gL" = let
           # launches vim and closes the opened dummy split
           scriptFile = pkgs.writeText "vim-git-log" " gl<C-W><C-W>ZQvis\n";
@@ -37,6 +41,7 @@
       "gpl" = "git pl"; #pull
       "gf" = "git f"; # fetch
       "gfwd" = "git forward"; # --ff-only merge
+      "gfx" = "git rebase --autostash --autosquash --interactive";
       "gundo" = "git undo"; #undo last commit
       "gx" = "git undo";
       "gm" = "git m"; # merge
