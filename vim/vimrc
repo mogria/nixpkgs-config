@@ -129,13 +129,18 @@ syntax enable
   set showcmd
 
   " display all buffers as tab when only one tab is open
+  let g:airline#extensions#branch#enabled = 0
+
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#enabled = 'unique_tail_improved'
+
+  let g:airline_skip_empty_sections = 1
+
 
   let g:airline_detect_modified=1
   let g:airline_detect_paste=1
   let g:airline_detect_crypt=1
-  let g:airline_detect_spell=1
+  let g:airline_detect_spell=0
 
   let g:airline_detect_spelllang=1
   let g:airline_detect_iminsert=0
@@ -147,6 +152,14 @@ syntax enable
 
   let g:airline_powerline_fonts = 1
 
+  let g:airline_theme_patch_func = 'AirlineThemePatch'
+  function! AirlineThemePatch(palette)
+    if g:airline_theme == 'base16'
+      for colors in values(a:palette.inactive)
+        let colors[3] = 245
+      endfor
+    endif
+  endfunction
 
   " performance
   let g:airline_highlighting_cache = 1
