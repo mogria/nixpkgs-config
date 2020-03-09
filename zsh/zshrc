@@ -11,10 +11,14 @@ fi
 
 # increase function level from default 500 due to heavy use of zsh code
 # Configure powerlevel9k prompt {{{
-POWERLEVEL9K_CUSTOM_HOST=hostname
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_host command_execution_time status root_indicator)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(dir vcs)
-POWERLEVEL9K_STATUS_VERBOSE=true
+# POWERLEVEL9K_CUSTOM_HOST=hostname
+# POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+# POWERLEVEL9K_SHORTEN_DELIMITER='*'
+POWERLEVEL9K_STATUS_OK=false
+POWERLEVEL9K_VI_INSERT_MODE_STRING='>'
+POWERLEVEL9K_VI_COMMAND_MODE_STRING=':'
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh status vi_mode root_indicator)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time)
 # }}}
 
 # Oh My ZSH settings{{{

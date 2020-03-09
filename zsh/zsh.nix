@@ -60,7 +60,7 @@
 
       oh-my-zsh= {
         enable = true;
-        plugins = [ "gitfast" "sudo" "dircycle" "zsh-navigation-tools" ];
+        plugins = [ "dircycle" "zsh-navigation-tools" ];
         /* ugly hack: oh my zsh only wants a relative path, so lets go back to the system root */
         theme = "../../../../../../../../../../../${pkgs.zsh-powerlevel9k}/share/zsh-powerlevel9k/powerlevel9k";
       };
