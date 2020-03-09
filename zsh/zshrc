@@ -81,21 +81,18 @@ bindkey '^Xe' edit-command-line
 bindkey '^X^E' edit-command-line
 
 # make most keybindings also work in vim normal mode
-bindkey -M vicmd '^I' fzf-completion
-bindkey -M vicmd '\ef' fzf-file-widget
-bindkey -M vicmd '\ec' fzf-cd-widget
-bindkey -M vicmd '^R' fzf-history-widget
-
-# common emacs keybindings for insert mode
-bindkey -M viins '^A' beginning-of-line
-bindkey -M viins '^E' end-of-line
-bindkey -M viins '^F' forward-char
-bindkey -M viins '^B' backward-char
-bindkey -M viins '^W' backward-delete-word
-bindkey -M viins '^K' kill-line
-bindkey -M viins '^T' transpose-chars
-bindkey -M viins '^[f' forward-word
-bindkey -M viins '^[b' backward-word
+bindkey -a '^I' fzf-completion
+bindkey -a '\ef' fzf-file-widget
+bindkey -v '^B' backward-char
+bindkey -v '^W' backward-delete-word
+bindkey -v '^K' kill-line
+bindkey -v '^T' transpose-chars
+bindkey -v '^[f' forward-word
+bindkey -v '^[b' backward-word
+bindkey -v '^P' up-line-or-history
+bindkey -v '^N' down-line-or-history
+bindkey -v '^O' vi-cmd-mode
+bindkey -v '^[' vi-cmd-mode
 bindkey '^[[1;5C' forward-word # arrow-key right
 bindkey '^[[1;5D' backward-word # arrow-key left
 
