@@ -27,6 +27,7 @@
     findutils
     diffutils
     patchutils
+    procps # for watch
     netcat
     unrar
     man-pages
