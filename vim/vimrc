@@ -391,7 +391,8 @@ syntax enable
   set foldnestmax=3 " at most 3 folds in each other, or it gets annoying
 
 
-  set foldopen=block,hor,insert,mark,percent,quickfix,search,tag
+  " set foldopen=block,hor,insert,mark,percent,quickfix,search,tag
+  set foldopen=all
   set foldclose=all
   set foldlevelstart=0
   set foldcolumn=1
