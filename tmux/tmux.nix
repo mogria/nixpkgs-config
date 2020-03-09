@@ -7,7 +7,7 @@
   ];
 
   home.file.".tmux.conf" = {
-  text = let
+    text = let
       loadPlugin = plugin: "run-shell ${plugin.src}/${plugin.name}\n";
       yankPlugin = {
         name = "yank.tmux";
