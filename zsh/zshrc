@@ -101,6 +101,12 @@ bindkey '^[[1;5D' backward-word # arrow-key left
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 
+alias -g P=" pbpaste | "
+alias -g Y=" | pbcopy"
+alias -g L=" | less"
+alias -g X=" | xargs"
+alias -g X1=" | xargs -N 1"
+
 # start tmux automatically
 if command tmux -V 2>&1 >/dev/null; then
   # This Environment variable is checked in order
