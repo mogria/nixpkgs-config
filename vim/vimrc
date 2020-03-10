@@ -333,6 +333,9 @@ syntax enable
   Plugin 'lifepillar/pgsql.vim'
   " treat .sql files as pgsql
   let g:sql_type_default = 'pgsql'
+
+  " set equalprg for sql files to format sql
+  autocmd FileType sql setlocal equalprg=sqlformat\ --reindent\ --keywords\ upper\ --identifiers\ lower\ -
 " }}}
 
 

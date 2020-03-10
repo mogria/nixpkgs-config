@@ -144,7 +144,4 @@ in ''
 
   " nix generated, language specific keyword character definition
   ${addKeywordCharsVimConfig}
-
-  " set equalprg for sql files to format sql
-  autocmd FileType sql setlocal equalprg=sqlformat\ --reindent\ --keywords\ upper\ --identifiers\ lower\ -
 ''
