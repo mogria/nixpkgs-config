@@ -6,6 +6,7 @@
   imports = [
     ./vim/neovim.nix
     ./vim/vifm.nix
+    ./vim/vimpager.nix
     ./direnv/direnv.nix
     ./git/git.nix
     ./zsh/zsh.nix
