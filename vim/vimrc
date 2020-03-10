@@ -324,31 +324,13 @@ syntax enable
 
 
 " TAGS GENERAL {{{
-  set cpoptions+=d " set tags+=./,, is relative to the current directory, not the current file
+"" set tags+=./,, is relative to the current directory, not the current file
+  set cpoptions+=d
   set tags +=./,,vimtags,~/tags
   set tagcase=followscs
   " show more information about a tag when completing
   set showfulltag
 " }}}
-
-" TAGS GUTENTAG (VIM 8 only) {{{
-  Plugin 'ludovicchabant/vim-gutentags'
-  Plugin 'skywind3000/gutentags_plus'
-  Plugin 'tranngocthachs/gtags-cscope-vim-plugin'
-
-  " enable gtags module
-  let g:gutentags_modules = ['ctags', 'gtags_cscope']
-
-  " config project root markers. .envrc is from direnv and "shell" project management
-  let g:gutentags_project_root = ['.root', '.envrc', '.git']
-
-  " generate databases in my cache directory, prevent gtags files polluting my project
-  let g:gutentags_cache_dir = expand('~/.cache/tags')
-
-  " allow gutentags adding gtags databases
-  let g:gutentags_auto_add_gtags_cscope = 1
-" }}}
-
 
 " POSTGRESQL SUPPORT {{{
   Plugin 'lifepillar/pgsql.vim'
