@@ -11,6 +11,7 @@
   home.packages = with pkgs; [
     shellcheck
     pythonPackages.sqlparse
+    phpPackages.psalm
     ripgrep
   ];
 

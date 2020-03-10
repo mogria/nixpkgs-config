@@ -403,6 +403,7 @@ syntax enable
 
   let g:LanguageClient_serverCommands = {
       \ 'python': ['/usr/local/bin/pyls'],
+      \ 'php': ['psalm', '--language-server'],
       \ }
       " \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
       "\ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
