@@ -83,7 +83,9 @@ bindkey '^X^E' edit-command-line
 # make most keybindings also work in vim normal mode
 bindkey -a '^I' fzf-completion
 bindkey -a '\ef' fzf-file-widget
+bindkey -v '^A' beginning-of-line
 bindkey -v '^B' backward-char
+bindkey -v '^E' end-of-line
 bindkey -v '^W' backward-delete-word
 bindkey -v '^K' kill-line
 bindkey -v '^T' transpose-chars
@@ -95,6 +97,8 @@ bindkey -v '^O' vi-cmd-mode
 bindkey -v '^[' vi-cmd-mode
 bindkey '^[[1;5C' forward-word # arrow-key right
 bindkey '^[[1;5D' backward-word # arrow-key left
+bindkey '  ' autosuggest-accept
+bindkey '^S' autosuggest-execute
 
 # in some terminals the delete character doesn't
 # work properly, so make sure it's bound
