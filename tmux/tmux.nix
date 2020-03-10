@@ -107,7 +107,7 @@
       set-option -g status on
       set-option -g status-interval 1
       set-option -g status-justify left
-      set-option -g status-left-length 20
+      set-option -g status-left-length 40
       set-option -g status-right-length 90
       set-option -g status-left "#(${powerlinePlugin.src}/powerline.sh left)"
       set-option -g status-right "#(${powerlinePlugin.src}/powerline.sh right)"
