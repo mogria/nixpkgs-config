@@ -85,9 +85,6 @@ syntax enable
   " type ! in normal mode to run a command with the current
   noremap ! :!
 
-  " i use <++> in templates and snippets to easily fill out stuff
-  noremap <Leader><Space> /<++><CR>cf>
-
   " SHIFT-ENTER builds not used and doesnt work
   noremap <Leader>b :make %:p<CR>
 
@@ -468,13 +465,23 @@ syntax enable
 
 
 " SNIPPETS (via ultisnips) {{{
-  " Trigger cog:UltiSnipsSnippetDirectoriesg:UltiSnipsSnippetDirectoriesnfiguration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+  " Store Snippets in nixpkgs-config repository
+  let g:UltiSnipsSnippetsDir = "~/.config/nixpkgs/vim/UltiSnips"
+  let g:UltiSnipsSnippetDirectories = [
+    \ 'UltiSnips',
+    \ 'neosnippet-snippets',
+    \ 'vim-snippets',
+    \ $HOME . '/.config/nixpkgs/vim/UltiSnips',
+    \ ]
+
+  " put almost everything on tab and space
   let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsJumpForwardTrigger="<Leader><tab>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+  let g:UltiSnipsListSnippets="<c-tab>"
+  let g:UltiSnipsJumpForwardTrigger="<Leader><Space>"
+  let g:UltiSnipsJumpBackwardTrigger="<Leader><Tab>"
 
   " If you want :UltiSnipsEdit to split your window.
-  let g:UltiSnipsEditSplit="vertical"
+  let g:UltiSnipsEditSplit="context"
 
   " Also Use SnipMate compatible snippets in the runtimepath
   let g:UltiSnipsEnableSnipMate = 1

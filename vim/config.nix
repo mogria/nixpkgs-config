@@ -133,15 +133,6 @@ let
 in ''
   ${builtins.readFile ./vimrc};
 
-  " SNIPPETS UltiSnips snippets directories
-  " Store Snippets in nixpkgs-config repository
-  let g:UltiSnipsSnippetsDir = "~/.config/nixpkgs/vim/UltiSnips"
-  let g:UltiSnipsSnippetDirectories = [
-    \ "~/.config/nixpkgs/vim/UltiSnips",
-    \ "${pkgs.vimPlugins.neosnippet-snippets}/share/vim-plugins/neosnippet-snippets/neosnippets",
-    \ "${pkgs.vimPlugins.vim-snippets}/share/vim-plugins/vim-snippets"
-    \ ]
-
   " nix generated, language specific file search path configurations
   ${fileSearchPathVimConfig}
 
