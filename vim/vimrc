@@ -376,9 +376,11 @@ syntax enable
 
   " inconsistent, gb changes branch in zsh
   noremap <Leader>gb <ESC>:Gblame<CR>
-  " additional goodies
+  " additional goodies for getting opening stuff up in github automatically
   noremap <Leader>gw <ESC>v:Gbrowse<CR>
   vnoremap <Leader>gw :Gbrowse<CR>
+
+  au BufReadPost HUB_EDITMSG* set filetype=markdown
 " }}}
 
 " FOLDING {{{
