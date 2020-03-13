@@ -104,11 +104,13 @@
       ${loadPlugin continuumPlugin}
 
       # tmux-powerline statusbar configuration
+      # see the file ./tmux-powerlinerc for further configuration options
       set-option -g status on
+      set-option -g status-position top
       set-option -g status-interval 1
-      set-option -g status-justify left
-      set-option -g status-left-length 40
-      set-option -g status-right-length 90
+      set-option -g status-justify right
+      set-option -g status-left-length 120
+      set-option -g status-right-length 80
       set-option -g status-left "#(${powerlinePlugin.src}/powerline.sh left)"
       set-option -g status-right "#(${powerlinePlugin.src}/powerline.sh right)"
     '';

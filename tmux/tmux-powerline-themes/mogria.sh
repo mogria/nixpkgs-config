@@ -22,10 +22,17 @@ if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
 		"hostname 19 7" \
 		"tmux_session_info 3 0" \
+		"pwd 4 0" \
+		"vcs_staged 5 0" \
+		"vcs_modified 9 0" \
+		"vcs_branch 3 0" \
+		# "vcs_compare 1 0" \
+		# "vcs_compare 1 0" \
 		#"ifstat 30 255" \
 		#"ifstat_sys 30 255" \
 		# "lan_ip 24 255 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
 		# "wan_ip 24 255" \
+		# "cpu 3 0" \
 	)
 fi
 
@@ -35,15 +42,9 @@ if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 		#"macos_notification_count 29 255" \
 		# "mailcount 9 255" \
 		# "now_playing 234 37" \
-		#"cpu 240 136" \
 		# "load 237 167" \
 		#"tmux_mem_cpu_load 234 136" \
-		"vcs_branch 3 0" \
-		# "vcs_compare 1 0" \
-		"vcs_modified 9 0" \
-		# "vcs_others 245 0" \
-		"vcs_staged 5 0" \
-		"pwd 4 0" \
+		"lan_ip 3 0" \
 		"battery 0 10" \
 		# "weather 37 255" \
 		#"rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}" \
