@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# USAGE: 
+#     Takes no parameters just returns the current tmux window name
+
+set -e
+set -u
+
+# HACKY HACK HACK: search and replace with sed to filter out current window name
+tmux list-windows | sed -e 's/^[0-9]\+: \(.*\)\*.*$/\1/;t;d'
+
+exit 0
