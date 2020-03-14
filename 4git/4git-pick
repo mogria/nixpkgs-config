@@ -15,13 +15,18 @@ if [ -z "$branch" ]; then
 fi
 
 fzf_set_options --multi
-commit=$(fzf-commit "$branch" "$base" | cut -d' ' -f1)
-if [ -z "$commit" ]; then
+
+commits_to_pick="$(mktemp)"
+trap "rm '$commits_to_pick'" EXIT
+
+fzf-commit "$branch" "$base" | cut -d' ' -f1 > "$commits_to_pick"
+if [ -z "$(cat "$commits_to_pick")" ]; then
     echo "ERROR: no commit picked"
     exit 2
 fi
 
-git cherry-pick "$commit"
+# cherry pick them all...
+xargs -n 1 -d '\n' git cherry-pick < "$commits_to_pick"
 
 exit 0
 
