@@ -26,6 +26,7 @@ teardown() {
     [ -d ./src ]
     [ -f ./src/main.c ]
     [ -f ./README.md ]
+    [ "$(cat ./4git-bats-test)" = "$BATS_TEST_NUMBER" ]
 }
 # }}}
 # {{{

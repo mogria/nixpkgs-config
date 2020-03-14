@@ -1,4 +1,3 @@
-
 setup_git_repo() {
     REPOSITORY=`mktemp -d`
     echo "$BATS_TEST_NUMBER" > "$REPOSITORY/4git-bats-test"
@@ -23,7 +22,7 @@ int main(int argc, char ** argv) {
 MAIN_C
 
     git add .
-    git commit -m 'Initial Commit'
+    # git commit -m 'Initial Commit'
 
     export REPOSITORY
 }
@@ -39,6 +38,6 @@ delete_git_repo() {
 
 
     if [ -n "$repo" ] && [ -f "$repo/4git-bats-test" ]  && [ "x$BATS_TEST_NUMBER" = "x$(cat "$repo/4git-bats-test")" ]; then
-        rm -r "$repo"
+        rm -rf "$repo"
     fi
 }
