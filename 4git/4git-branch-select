@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$d/4gitinit.sh"
+
+get_workspace_branches | fzf -0 --preview ='git log --format="%h %s" {}' "$@"
+
+exit 0
