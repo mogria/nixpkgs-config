@@ -1,6 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p discount
+#!nix-shell -i bash -p pandoc
 
-f="`mktemp`.html"
-markdown -o "$f" "$1"
-open "$f"
+pandoc  -o "$1.pdf" "$1"
+open "$1.pdf"
