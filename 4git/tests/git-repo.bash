@@ -5,14 +5,14 @@ setup_git_repo() {
     git init "$REPOSITORY"
     cd "$REPOSITORY" || return 1
 
-    cat > "$REPOSITORY/README.md" <<README
+    cat <<README > "$REPOSITORY/README.md"
 This is just a repository where some tests for 4git are being run.
 Feel free to delete this folder after the test run has finished.
 (It should get deleted automatically tough)
 README
 
     mkdir "$REPOSITORY/src"
-    cat > "$REPOSITORY/src/main.c" <<MAIN_C
+    cat <<MAIN_C > "$REPOSITORY/src/main.c"
 #include <stdlib.h>
 #include <stdio.h>
 
