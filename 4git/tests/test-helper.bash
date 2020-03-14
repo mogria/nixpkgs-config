@@ -9,6 +9,8 @@ export TMUX_WINDOW_NAME
 load tmux-mock
 
 FOURGIT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+TESTDATA_DIR="$(mktemp -d)"
+trap "rm '$TESTDATA_DIR'" EXIT
 export FOURGIT_DIR
 
 unset REAL_BASE_BRANCH
