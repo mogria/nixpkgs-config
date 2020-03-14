@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# make sure the scripts can find each other just by name
+BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export PATH="$BIN_DIR:$PATH"
+
 set -u
 
 if [ -n "${USE_TEST_MOCKS:-}" ];then

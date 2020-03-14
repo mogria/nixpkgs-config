@@ -6,6 +6,7 @@ set -u
 load git-repo
 
 FOURGIT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+BIN_DIR="$FOURGIT_DIR/bin"
 TESTDATA_DIR="$(mktemp -d)"
 trap "test -n '$TESTDATA_DIR' && rm -rf '$TESTDATA_DIR'" EXIT
 export FOURGIT_DIR TESTDATA_DIR
@@ -26,4 +27,4 @@ unset FOURGIT_WORKSPACE
 unset FOURGIT_BASE_BRANCH
 
 # make sure the scripts in the parent folder will be tested
-export PATH="$FOURGIT_DIR/bin:$PATH"
+export PATH="$BIN_DIR:$PATH"
