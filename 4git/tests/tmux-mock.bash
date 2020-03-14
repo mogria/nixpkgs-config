@@ -1,7 +1,7 @@
-#!#/usr/bin/env bash
+#!/usr/bin/env bash
 
 tmux-window-name() {
-    echo "$TMUX_WINDOW_NAME"
+    cat "$TESTDATA_DIR/tmux-window-name"
 }
 
 tmux() {
@@ -9,13 +9,8 @@ tmux() {
 
     case "$1" in
         rename-window)
-                TMUX_WINDOW_NAME="$2"
-                export TMUX_WINDOW_NAME
+                echo "$2" > "$TESTDATA_DIR/tmux-window-name"
             ;;
-        *) echo "WARNING: unknown tmux command" ;;
+        *) echo "WARNING: unknown tmux command" ;
     esac
 }
-
-export TMUX_WINDOW_NAME
-
-export FOURGIT_MOCK_TMUX=1 # signal 4gitlib.sh to load this file
