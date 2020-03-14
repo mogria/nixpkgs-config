@@ -41,19 +41,24 @@
 
       LanguageClient-neovim
 
+      # install plugin to be able to install any base16 theme
+      # but we just just horizon-dark
       base16-vim
 
       syntastic
 
+      # language specific stuff
       plantuml-syntax
+      vimtex # LaTeX
+      bats # tests for bash
 
       # Snippets
       UltiSnips
       vim-snippets
       neosnippet-snippets
 
-      # LaTeX
-      vimtex
+      # Autocompletion
+      # neocomplete  # currently doesn't work because this neovim apparently has no lua? Even though it seems to use luajit..
 
       # saving vim sessions
       vim-obsession
