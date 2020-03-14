@@ -9,4 +9,8 @@ fzf() {
     grep -Fx "$FZF_SELECTION" "$fzf_input"
 }
 
+fzf-input() { cat "$fzf_input"; }
+fzf-options() { cat "$fzf_options"; }
 
+touch "$fzf_input"
+touch "$fzf_options"
