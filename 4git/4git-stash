@@ -11,7 +11,7 @@ message='[WIP] ${1:-4git stash}'
 
 "$d"/4git-branch --create "STASH_$(date +'%Y%m%d_%H%M%S')"
 git add .
-git commit -a -m '[WIP] 4git stash'
+git commit -a -m "$message"
 
 
 exit 0
