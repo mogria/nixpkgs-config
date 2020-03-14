@@ -45,4 +45,9 @@ teardown() {
         echo "$output" | grep -Fx "diff --git a/$f b/$f"
     done
 }
+
+@test "check that 4git-stash takes the commit message as the first parameter" {
+    run 4git-stash  'own message'
+    [ "$(git log --format=%s -n1)" = '[WIP] own message' ]
+}
 # }}}
