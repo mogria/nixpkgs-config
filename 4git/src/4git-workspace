@@ -38,5 +38,8 @@ create_branch "$FOURGIT_BASE_BRANCH" "$REAL_BASE_BRANCH"
 # 4. make sure the set the tmux window name correctly
 set_4git_workspace "$WORKSPACE"
 
+# TODO: bug: you can run this twice and then you get longer and longer branchnames
+# TODO: setup upstream tracking branches
+# TODO: when the branch already exists 4git-workspace should maybe switch to the workspace
 
 exit 0
