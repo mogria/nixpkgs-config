@@ -11,7 +11,7 @@
 set -e
 set -u
 
-d="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 
 # 1. show a listing of branches and commits based upon the upstream branch
