@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+#
+# 
+#
+# USAGE: 
+#
+# PARAMETERS:
+#     
+
+# set -x # debug
+set -e
+set -u
+
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+
+# 1. show a listing of branches and commits based upon the upstream branch
+# 2. be able to select one commits or more while viewing patch
+# 3. cherry-pick toe commits them into the current branch
+
+picked_commit=$(fzf-commit "$("$d"/4git-branch-select)" "$("$d"/4git-branch --workspace)")
+
+if [ -z "$picked_commit" ]; then
+    echo "ERROR: no commit picked"
+fi
+
+git cherry-pick "$picked_commit"
+
+exit 0
+
+
+
+
