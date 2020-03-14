@@ -2,4 +2,11 @@
 
 set -e
 
-git log --format="%h %s" "${1:-}...${2:-}" | fzf -0 | cut -d" " -f1
+
+if [ "$#" -lt 1 ]; then
+    git log --format="%h %s" | fzf -0 | cut -d" " -f1
+elif [ "$#" -lt 2 ]; then
+    git log --format="%h %s" "$1" | fzf -0 | cut -d" " -f1
+elif [ "$#" -lt 3 ]; then
+    git log --format="%h %s" "$1...$2" | fzf -0 | cut -d" " -f1
+fi
