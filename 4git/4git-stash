@@ -7,7 +7,7 @@ set -u
 
 d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-message='[WIP] ${1:-4git stash}'
+message="[WIP] ${1:-4git stash}"
 
 "$d"/4git-branch --create "STASH_$(date +'%Y%m%d_%H%M%S')"
 git add .
