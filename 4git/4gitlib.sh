@@ -48,7 +48,11 @@ set_4git_workspace() {
 }
 
 get_workspace_branches() {
-    git branch --list "$FOURGIT_BASE_BRANCH*" | sed 's/^[\* ] //g'
+    git branch --list "$FOURGIT_BASE_BRANCH*" "$@" | sed 's/^[\* ] //g'
+}
+
+get_workspace_subbranches() {
+    get_workspace_branches --contains "$1"
 }
 
 fzf_set_options() {

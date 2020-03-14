@@ -36,6 +36,14 @@ MAIN_C
     export REPOSITORY
 }
 
+dummy_commit() {
+    local f="$RANDOM$RANDOM"
+    touch "$f"
+    git add "$f"
+    git commit -m 'dummy commit'
+    return
+}
+
 delete_git_repo() {
     local repo="${REPOSITORY:-}"
     unset REPOSITORY
