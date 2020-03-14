@@ -1,8 +1,16 @@
+export GIT_PAGER=cat
+export ACTUAL_BASE_BRANCH=fourgit-test
+
 setup_git_repo() {
     REPOSITORY=`mktemp -d`
+    cd "$REPOSITORY" || return 1
+
+
     echo "$BATS_TEST_NUMBER" > "$REPOSITORY/4git-bats-test"
     git init "$REPOSITORY"
-    cd "$REPOSITORY" || return 1
+
+    git add "$REPOSITORY/4git-bats-test"
+    git commit -m 'Initial Commit'
 
     cat <<README > "$REPOSITORY/README.md"
 This is just a repository where some tests for 4git are being run.
@@ -22,7 +30,8 @@ int main(int argc, char ** argv) {
 MAIN_C
 
     git add .
-    # git commit -m 'Initial Commit'
+    git commit -m 'Add hello world program'
+    git checkout -b "$ACTUAL_BASE_BRANCH" 2>/dev/null
 
     export REPOSITORY
 }
