@@ -8,7 +8,7 @@ d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$d/4gitinit.sh"
 
 usage() {
-    echo "Usage: 4git-branch [ --real-base | --workspace | --list | --create name ]"
+    echo "Usage: 4git-branch [ --base | --real-base | --workspace | --list | --create name ]"
     exit 1
 }
 
@@ -19,8 +19,9 @@ fi
 
 
 case "$1" in
+    --base) echo "$FOURGIT_BASE_BRANCH" ;;
     --real-base) echo "$REAL_BASE_BRANCH" ;;
-    --workspace) echo "$FOURGIT_BASE_BRANCH" ;;
+    --workspace) echo "$FOURGIT_WORKSPACE" ;;
     --create)
         if [ "$#" -lt 2 ]; then
             usage

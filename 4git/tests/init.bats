@@ -11,23 +11,23 @@ teardown() {
 
 # TEST CASE: No workspace available {{{
 @test "check that 4git fails when not in a git repository" {
-    run ./4gitinit.sh
+    cd "$(mktemp -d)"
+    run source "$FOURGIT_DIR"/4gitinit.sh
     [ "$status" -eq 1 ]
-    [ "$output" = "$REPOSITORY" ]
+    [ -z "$REAL_BASE_BRANCH" ]
+    [ -z "$FOURGIT_WORKSPACE" ]
+    [ -z "$FOURGIT_BASE_BRANCH" ]
 }
 
 
-@test "check whether temporary test directory has a git repository" {
+@test "check that 4git when no workspace is in the git repository" {
     setup_git_repo
-
-    run git status
-    [ "$status" -eq 0 ]
-    [ -d ./.git ]
-    [ -f ./README.md ]
-    [ -d ./src ]
-    [ -f ./src/main.c ]
-    [ -f ./README.md ]
-    [ "$(cat ./4git-bats-test)" = "$BATS_TEST_NUMBER" ]
+    export TMUX_WINDOW_NAME=
+    run source "$FOURGIT_DIR"/4gitinit.sh
+    [ "$status" -eq 2 ]
+    [ -z "$REAL_BASE_BRANCH" ]
+    [ -z "$FOURGIT_WORKSPACE" ]
+    [ -z "$FOURGIT_BASE_BRANCH" ]
 }
 # }}}
 # {{{

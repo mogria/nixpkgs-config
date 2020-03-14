@@ -9,10 +9,15 @@ source "$d/4gitlib.sh"
 REAL_BASE_BRANCH="$(real_base_branch)"
 FOURGIT_WORKSPACE="$(4git_workspace)"
 
+if [ -z "$REAL_BASE_BRANCH" ]; then
+    echo "ERROR: this doesn't seem to be a git repository"
+    exit 1
+fi
+
 
 if [ -z "$FOURGIT_WORKSPACE" ]; then
-    echo "ERROR: this doesn't seem to be a 4git workspace, please create one first using 4git-create"
-    exit 1
+    echo "ERROR: this doesn't seem to be a 4git workspace, please create one first using 4git-create" 1>&2
+    exit 2
 fi
 
 
