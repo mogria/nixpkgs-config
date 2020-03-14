@@ -3,23 +3,23 @@ export ACTUAL_BASE_BRANCH=fourgit-test
 
 setup_git_repo() {
     REPOSITORY=`mktemp -d`
-    cd "$REPOSITORY" || return 1
-
-
-    echo "$BATS_TEST_NUMBER" > "$REPOSITORY/4git-bats-test"
+    export REPOSITORY
     git init "$REPOSITORY"
+    echo "$BATS_TEST_NUMBER" > "$REPOSITORY/4git-bats-test"
+    cd "$REPOSITORY" || exit 1
+    git config user.name "Chuck Tester"
+    git config user.email  "chuck@example.com"
 
-    git add "$REPOSITORY/4git-bats-test"
+    git add "4git-bats-test"
     git commit -m 'Initial Commit'
-
-    cat <<README > "$REPOSITORY/README.md"
+    cat <<README > "README.md"
 This is just a repository where some tests for 4git are being run.
 Feel free to delete this folder after the test run has finished.
 (It should get deleted automatically tough)
 README
 
-    mkdir "$REPOSITORY/src"
-    cat <<MAIN_C > "$REPOSITORY/src/main.c"
+    mkdir "src"
+    cat <<MAIN_C > "src/main.c"
 #include <stdlib.h>
 #include <stdio.h>
 
