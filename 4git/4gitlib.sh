@@ -2,9 +2,11 @@
 
 set -u
 
-if [ -n "${FOURGIT_MOCK_TMUX:-}" ];then
+if [ -n "${USE_TEST_MOCKS:-}" ];then
     # testing mode lock mock tmux
-    source "$FOURGIT_DIR"/tests/tmux-mock.bash
+    for name in tmux fzf; do
+        source "$FOURGIT_DIR/tests/$name-mock.bash"
+    done
 fi
 
 
