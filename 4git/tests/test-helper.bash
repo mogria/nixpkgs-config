@@ -2,6 +2,10 @@
 
 load git-repo
 # mock the tmux interface so we don't need tmux to run the tests
+
+TMUX_WINDOW_NAME="FOURGIT-TESTSUITE"
+
+export TMUX_WINDOW_NAME
 load tmux-mock
 
 FOURGIT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
