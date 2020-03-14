@@ -18,7 +18,7 @@ teardown() {
 
 # TEST CASE: branch selection via fzf {{{
 @test "check that 4git-branch-select uses the list from 4git-branch --list" {
-    export FZF_SELECTION="$(4git-branch --base)"
+    fzf-select "$(4git-branch --base)"
     4git-branch-select
     run 4git-branch --list
 
