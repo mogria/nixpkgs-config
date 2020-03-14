@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# 
+#
+# USAGE: 
+#
+# PARAMETERS:
+#     
+
+# set -x # debug
+set -e
+set -u
+
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# if [ "$#" -lt 2 ]; then
+#     echo "Usage: $0"
+#     exit 1
+# fi
+
+# 1. show a listing of branches
+# be able to select a base branch
+# maybe rebase --onto
+# be able to select multiple branches to rebase
+
+
+exit 0
