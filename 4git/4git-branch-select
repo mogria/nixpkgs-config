@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$d/4gitinit.sh"
+
+usage() {
+    echo "Usage: 4git-branch-select [ --subbranch [upstream_branch] ] "
+    echo ""
+    echo "    When upstream_branch is not given the current branch is used."
+    echo "    When this command is used without any arguments you can select from"
+    echo "    all branches in the current workspace"
+    echo ""
+    exit 1
+}
+
+fzf_git_branch_logs() {
+    fzf -0 --preview ='git log --format="%h %s" {}' "$@"
+}
+
+case "${1:-}" in
+    --help|-h)
+        usage
+        ;;
+    --subbranch)
+        get_workspace_subbranches "${2:-$(current_branch)}" | fzf_git_branch_logs
+        ;;
+    *)
+        get_workspace_branches | fzf_git_branch_logs
+        ;;
+esac
+
+exit 0

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$d/4gitlib.sh"
+
+base="$("$d"/4git-branch --base)"
+
+branch="$("$d"/4git-branch-select || true)"
+if [ -z "$branch" ]; then
+    echo "ERROR: no branch picked"
+    exit 1
+fi
+
+fzf_set_options --multi
+
+commits_to_pick="$(mktemp)"
+trap "rm '$commits_to_pick'" EXIT
+
+fzf-commit "$branch" "$base" | cut -d' ' -f1 > "$commits_to_pick"
+if [ -z "$(cat "$commits_to_pick")" ]; then
+    echo "ERROR: no commit picked"
+    exit 2
+fi
+
+# cherry pick them all...
+xargs -n 1 -d '\n' git cherry-pick < "$commits_to_pick"
+
+exit 0
+
+
+
+

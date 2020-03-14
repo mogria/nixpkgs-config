@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#
+
+set -e
+set -u
+
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$d/4gitinit.sh"
+
+usage() {
+    echo "Usage: 4git-branch [ --base | --real-base | --workspace | --list | --create name ]"
+    exit 1
+}
+
+
+if [ "$#" -lt 1 ]; then
+    usage
+fi
+
+
+case "$1" in
+    --base) echo "$FOURGIT_BASE_BRANCH" ;;
+    --real-base) echo "$REAL_BASE_BRANCH" ;;
+    --workspace) echo "$FOURGIT_WORKSPACE" ;;
+    --create)
+        if [ "$#" -lt 2 ]; then
+            usage
+        fi
+        create_branch "${FOURGIT_BASE_BRANCH}_$2" "$(current_branch)"
+        ;;
+    --list) get_workspace_branches ;;
+    *) usage ;;
+esac
+
+exit 0

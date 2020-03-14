@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-git log --format="%H %s" --grep="${1:-}" | fzf | cut -d" " -f1
+set -e
+
+git log --format="%h %s" "${1:-}...${2:-}" | fzf -0 | cut -d" " -f1

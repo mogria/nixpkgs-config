@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+set -e
+set -u
+
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$d/4gitinit.sh"
+
+workspace_branch="$("$d"/4git-branch --base)"
+
+usage() {
+    echo "Usage: 4git-rebase  [ --current | --select | --select-all | --to-leaf | --from-leaf ]"
+    exit 1
+}
+
+git_rebase_cmd() {
+    git rebase --interactive --autosquash "$@"
+}
+
+get_upstream_branch() {
+    branch="$("$d"/4git-branch-select || true)"
+    if [ -z "$branch" ]; then
+        echo "ERROR: no intermediary branch to rebase from out has been picked"
+        exit 1
+    fi
+}
+
+get_leaf_branch() {
+    leaf_branch="$("$d"/4git-branch-select --subbranch || true)"
+    if [ -z "$leaf_branch" ]; then
+        echo "ERROR: no leaf branch to rebase to has been picked"
+        exit 1
+    fi
+}
+
+case "$1" in
+    --help) usage ;;
+    --current)
+        git_rebase_cmd "$workspace_branch" $(current_branch)
+        ;;
+    --select)
+        leaf_branch=$(get_leaf_branch)
+        git_rebase_cmd "$workspace_branch" $(branch)
+        ;;
+    --select-all)
+        # this is first the cut off point, so the base branch
+        upstream=$(get_upstream_branch)
+        leaf_branch=$(get_leaf_branch)
+        git_rebase_cmd --onto "$workspace_branch" "$upstream" "$leaf_branch"
+        ;;
+    --to-leaf)
+        leaf_branch=$(get_leaf_branch)
+        git_rebase_cmd --onto "$workspace_branch" "$(current_branch)" "$leaf_branch"
+        ;;
+    --from-leaf)
+        upstream=$(get_upstream_branch)
+        git_rebase_cmd --onto "$workspace_branch" "$upstream" "$(current_branch)"
+        ;;
+esac
+
+
+exit 0

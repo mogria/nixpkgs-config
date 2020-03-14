@@ -2,6 +2,8 @@
 # This is for having an simple drop-in replacement on linux for 
 # the MacOS open command
 
+set -u
+
 if [ "x$(uname)" = "xDarwin" ]; then
     # On MacOS just use the open command provided, if available
     if [ -x /usr/bin/open ]; then

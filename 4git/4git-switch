@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+
+set -e
+set -u
+
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$d/4gitinit.sh"
+
+# 1.TODO:  if there are untracked changes, create a subbranch
+# 2.TODO:  create a fixup commit with the current untracked changes
+
+
+# 3. switch to the new given branch
+fzf_set_options --no-multi
+selected_branch="$("$d"/4git-branch-select)"
+if [ -z "$selected_branch" ]; then
+    echo "ERROR: no branch selected"
+    exit 1
+fi
+
+git switch "$selected_branch"
+
+
+exit 0
