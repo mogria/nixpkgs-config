@@ -1,7 +1,5 @@
 #!#/usr/bin/env bash
 
-TMUX_WINDOW_NAME="GIT-TESTSUITE"
-
 tmux-window-name() {
     echo "$TMUX_WINDOW_NAME"
 }
