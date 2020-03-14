@@ -25,11 +25,21 @@ teardown() {
 @test "check whether temporary test directory has a git repository" {
     run git status
     [ "$status" -eq 0 ]
+}
+
+
+@test "check whether current master branch is checked out into worktree" {
     [ -d ./.git ]
     [ -f ./README.md ]
     [ -d ./src ]
     [ -f ./src/main.c ]
     [ -f ./README.md ]
+}
+
+@test "check whether temporary a git repository has a commit" {
+    run git log --format=%h
+    [ "$status" -eq 0 ]
+    [ "$output" = "a" ]
 }
 # }}}
 # {{{
