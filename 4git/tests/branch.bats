@@ -63,12 +63,26 @@ teardown() {
     [ "$output" = "4git/$ACTUAL_BASE_BRANCH/$TMUX_WINDOW_NAME" ]
 }
 
-@test "check that 4git-branch --list returns all created subbranches in the worktree" {
+@test "check that 4git-branch --list returns a single created subbranches in the worktree" {
     local base_name="4git/$ACTUAL_BASE_BRANCH/$TMUX_WINDOW_NAME"
     4git-branch --create subbranch
     run 4git-branch --list
     [ "$status" -eq 0 ]
     [ "$output" = "$base_name"$'\n'"$base_name"_subbranch ]
+}
+
+
+@test "check that 4git-branch --list returns all created subbranches in the worktree" {
+    local base_name="4git/$ACTUAL_BASE_BRANCH/$TMUX_WINDOW_NAME"
+    for i in `seq 1 10`; do
+        4git-branch --create "br$i"
+    done
+    run 4git-branch --list
+    [ "$status" -eq 0 ]
+    [ "$(echo "$output" | wc -l)" -eq 11 ]
+    for i in `seq 1 10`; do
+        echo "$output" | grep -Fx "${base_name}_br$i"
+    done
 }
 # }}}
 
