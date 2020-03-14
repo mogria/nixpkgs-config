@@ -30,7 +30,7 @@ stdenv.mkDerivation {
     git config --global user.email "nobody@example.com"
     git config --global user.name "Nobody"
 
-    PATH="`pwd`/bin:$PATH" bats -r tests/
+    bats -r tests/
   '';
 
   installPhase = ''
