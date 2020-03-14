@@ -2,6 +2,12 @@
 
 set -u
 
+if [ -n "${FOURGIT_MOCK_TMUX:-}" ];then
+    # testing mode lock mock tmux
+    source "$FOURGIT_DIR"/tests/tmux-mock.bash
+fi
+
+
 current_branch() {
     git branch --show-current
 }

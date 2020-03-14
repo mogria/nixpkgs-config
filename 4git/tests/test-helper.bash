@@ -1,25 +1,16 @@
 #!/usr/bin/env bash
 
 load git-repo
+# mock the tmux interface so we don't need tmux to run the tests
+load tmux-mock
 
 FOURGIT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export FOURGIT_DIR
 
-TMUX_WINDOW_NAME="TESTSUITE"
+unset REAL_BASE_BRANCH
+unset FOURGIT_WORKSPACE
+unset FOURGIT_BASE_BRANCH
 
-tmux-window-name() {
-    echo "$TMUX_WINDOW_NAME"
-}
-
-tmux() {
-    local cmd="$1"
-
-    case "$1" in
-        rename-window)
-                TMUX_WINDOW_NAME="$2"
-            ;;
-        *) echo "WARNING: unknown tmux command" ;;
-    esac
-}
 
 
 export PATH="$FOURGIT_DIR:$PATH"
