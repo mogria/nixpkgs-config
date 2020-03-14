@@ -28,3 +28,48 @@ unset FOURGIT_BASE_BRANCH
 
 # make sure the scripts in the parent folder will be tested
 export PATH="$BIN_DIR:$PATH"
+
+
+# Assertion Function Helpers
+# ==========================
+# These should be helpful in writing tests:
+assert_success() {
+    if [ "$status" -eq 0 ]; then
+        return 0
+    fi
+
+    return 40
+}
+
+
+assert_fail() {
+    local expected_exit_code="$1"
+
+    if [ "$expected_exit_code" -eq 0 ]; then
+        echo "TEST ERROR: The expected exit code cannot be 0 when the program is expected to fail. Exit code 0 means the programm was successful!"
+        return 99
+    fi
+
+    if [ "$status" -eq "$1" ]; then
+        return 0
+    fi
+
+    return 41
+}
+
+assert_current_branch_equals() {
+    local expected_branch="$1"
+    current_branch="$(git branch --show-current)"
+
+    if [ "$current_branch" = "$expected_branch" ]; then
+        return 0
+    fi
+
+    return 42
+}
+
+assert_current_workspace_equals() {
+    local expected_workspace="$1"
+
+    assert_current_branch_equals "4git/$ACTUAL_BASE_BRANCH/$expected_workspace"
+}
