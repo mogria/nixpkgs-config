@@ -14,9 +14,9 @@ teardown() {
     cd "$(mktemp -d)"
     source "$FOURGIT_DIR"/4gitinit.sh
     [ "$status" -eq 1 ]
-    [ -z "$REAL_BASE_BRANCH" ]
-    [ -z "$FOURGIT_WORKSPACE" ]
-    [ -z "$FOURGIT_BASE_BRANCH" ]
+    [ -z "${REAL_BASE_BRANCH:-}" ]
+    [ -z "${FOURGIT_WORKSPACE:-}" ]
+    [ -z "${FOURGIT_BASE_BRANCH:-}" ]
 }
 
 
@@ -25,9 +25,9 @@ teardown() {
     export TMUX_WINDOW_NAME=
     source "$FOURGIT_DIR"/4gitinit.sh
     [ "$status" -eq 2 ]
-    [ -z "$REAL_BASE_BRANCH" ]
-    [ -z "$FOURGIT_WORKSPACE" ]
-    [ -z "$FOURGIT_BASE_BRANCH" ]
+    [ -z "${REAL_BASE_BRANCH:-}" ]
+    [ -z "${FOURGIT_WORKSPACE:-}" ]
+    [ -z "${FOURGIT_BASE_BRANCH:-}" ]
 }
 # }}}
 # TEST CASE: workspace available {{{

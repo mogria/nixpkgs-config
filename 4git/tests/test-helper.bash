@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -e
+set -u
+
 load git-repo
 # mock the tmux interface so we don't need tmux to run the tests
 

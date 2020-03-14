@@ -37,10 +37,10 @@ MAIN_C
 }
 
 delete_git_repo() {
-    local repo="$REPOSITORY"
+    local repo="${REPOSITORY:-}"
     unset REPOSITORY
 
-    if [ -n "$KEEP_GIT_REPO" ]; then
+    if [ -n "${KEEP_GIT_REPO:-}" ]; then
         echo "NOTE: Did not delete test git repository at $repo"
         return 0
     fi
