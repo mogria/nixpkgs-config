@@ -26,4 +26,4 @@ unset FOURGIT_WORKSPACE
 unset FOURGIT_BASE_BRANCH
 
 # make sure the scripts in the parent folder will be tested
-export PATH="$FOURGIT_DIR/src:$PATH"
+export PATH="$FOURGIT_DIR/bin:$PATH"
