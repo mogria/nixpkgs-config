@@ -42,3 +42,13 @@ set_4git_workspace() {
 get_workspace_branches() {
     git branch --list "$FOURGIT_BASE_BRANCH*" | sed 's/^[\* ] //g'
 }
+
+fzf_set_options() {
+    local options=()
+    for opt in "$@"; do
+        options+=" $opt"
+    done
+    export FZF_DEFAULT_OPTIONS="${FZF_DEFAULT_OPTIONS:-}$options"
+}
+
+

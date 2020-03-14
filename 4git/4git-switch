@@ -12,7 +12,8 @@ source "$d/4gitinit.sh"
 
 
 # 3. switch to the new given branch
-selected_branch="$("$d"/4git-branch-select +m)"
+fzf_set_options --no-multi
+selected_branch="$("$d"/4git-branch-select)"
 if [ -z "$selected_branch" ]; then
     echo "ERROR: no branch selected"
     exit 1
