@@ -10,7 +10,7 @@ teardown() {
 
 
 # TEST CASE: No workspace available {{{
-@test "check that 4git fails when not in a git repository" {
+@test "check that 4git initialization fails when not in a git repository" {
     cd "$(mktemp -d)"
     source "$FOURGIT_DIR"/4gitinit.sh
     [ "$status" -eq 1 ]

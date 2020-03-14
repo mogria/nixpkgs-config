@@ -3,6 +3,9 @@
 fzf_input="$TESTDATA_DIR/fzf-input"
 fzf_options="$TESTDATA_DIR/fzf-default-options"
 
+touch "$fzf_input"
+touch "$fzf_options"
+
 fzf() {
     cat > "$fzf_input"
     echo "${DEFAULT_FZF_OPTIONS:-}" > "$fzf_options"
