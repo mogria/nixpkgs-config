@@ -12,7 +12,7 @@ teardown() {
 # TEST CASE: No workspace available {{{
 @test "check that 4git fails when not in a git repository" {
     cd "$(mktemp -d)"
-    run source "$FOURGIT_DIR"/4gitinit.sh
+    source "$FOURGIT_DIR"/4gitinit.sh
     [ "$status" -eq 1 ]
     [ -z "$REAL_BASE_BRANCH" ]
     [ -z "$FOURGIT_WORKSPACE" ]
@@ -23,13 +23,25 @@ teardown() {
 @test "check that 4git when no workspace is in the git repository" {
     setup_git_repo
     export TMUX_WINDOW_NAME=
-    run source "$FOURGIT_DIR"/4gitinit.sh
+    source "$FOURGIT_DIR"/4gitinit.sh
     [ "$status" -eq 2 ]
     [ -z "$REAL_BASE_BRANCH" ]
     [ -z "$FOURGIT_WORKSPACE" ]
     [ -z "$FOURGIT_BASE_BRANCH" ]
 }
 # }}}
-# {{{
-
+# TEST CASE: workspace available {{{
+@test "check that 4gitinit.sh loads fine when everythings is there" {
+    setup_git_repo
+    cd "$REPOSITORY"
+    source "$FOURGIT_DIR"/4gitinit.sh
+    [ "$status" -eq 0 ]
+}
+@test "check that 4git sets REAL_BASE_BRANCH environment varible properly" {
+    setup_git_repo > /dev/null
+    cd "$REPOSITORY"
+    run 4git-branch --real-base
+    [ "$status" -eq 0 ]
+    [ "$output" = "$ACTUAL_BASE_BRANCH" ]
+}
 # }}}

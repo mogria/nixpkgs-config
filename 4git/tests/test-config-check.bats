@@ -4,7 +4,7 @@ load git-repo
 
 
 setup() {
-    setup_git_repo
+    setup_git_repo 1> /dev/null
 }
 
 teardown() {
@@ -27,7 +27,10 @@ teardown() {
     [ "$status" -eq 0 ]
 }
 
+# }}
 
+
+# TEST contents of git repository {{{
 @test "check whether current master branch is checked out into worktree" {
     [ -d ./.git ]
     [ -f ./README.md ]
@@ -36,12 +39,16 @@ teardown() {
     [ -f ./README.md ]
 }
 
-@test "check whether temporary a git repository has a commit" {
-    run git log --format=%h
+@test "check whether the temporary git repository has two commits" {
+    run git log --format=%s -n2
+    echo "$output"
     [ "$status" -eq 0 ]
-    [ "$output" = "a" ]
+    [ "$output" = $'Add hello world program\nInitial Commit' ]
 }
-# }}}
-# {{{
 
+@test "check whether the temporary git repository is on the right branch" {
+    run git branch --show-current
+    [ "$status" -eq 0 ]
+    [ "$output" = "$ACTUAL_BASE_BRANCH" ]
+}
 # }}}
