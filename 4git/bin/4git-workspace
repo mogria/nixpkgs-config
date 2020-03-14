@@ -27,18 +27,18 @@ if [ -z "$WORKSPACE" ]; then
     exit 2
 fi
 
-FOURGIT_BASE_BRANCH="4git/$REAL_BASE_BRANCH/$WORKSPACE"
+FOURGIT_WORKSPACE_BRANCH="4git/$REAL_BASE_BRANCH/$WORKSPACE"
 # TODO: add this to env vars of tmux and/or direnv directly
 
 # 3. create a branch
-create_branch "$FOURGIT_BASE_BRANCH" "$REAL_BASE_BRANCH" || true
-if git branch --list | grep -Fx "* $FOURGIT_BASE_BRANCH"; then
+create_branch "$FOURGIT_WORKSPACE_BRANCH" "$REAL_BASE_BRANCH" || true
+if git branch --list | grep -Fx "* $FOURGIT_WORKSPACE_BRANCH"; then
     # branch has already been selected by create branch
     echo "Successfully created workspace $WORKSPACE"
-elif git branch --list | grep -Fx "  $FOURGIT_BASE_BRANCH"; then
+elif git branch --list | grep -Fx "  $FOURGIT_WORKSPACE_BRANCH"; then
     # branch probably already existed
     echo "Switching to already existent workspace $WORKSPACE"
-    git switch "$FOURGIT_BASE_BRANCH"
+    git switch "$FOURGIT_WORKSPACE_BRANCH"
 else
     echo "ERROR: Can't find the branch I just created before."
     exit 3
@@ -48,7 +48,7 @@ fi
 set_4git_workspace "$WORKSPACE"
 
 # TODO: bug: you can run this twice and then you get longer and longer branchnames
-# TODO: setup upstream tracking branches
+# TODO: setup upstream tracking branches for pr style work
 # TODO: when the branch already exists 4git-workspace should maybe switch to the workspace
 
 exit 0
