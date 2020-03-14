@@ -35,4 +35,13 @@ teardown() {
     [ "$status" -eq 0 ]
     [ "$(git branch --show-current)" = "4git/$ACTUAL_BASE_BRANCH/CLIARGNAME" ]
 }
+
+
+@test "check that 4git-workspace sets tmux window title" {
+    expected=SETTMUXWINDOWNAME
+    run 4git-workspace "$expected"
+    cat /tmp/bats.*.src
+    [ "$status" -eq 0 ]
+    [ "$(tmux-window-name)" = "$expected" ]
+}
 # }}}
