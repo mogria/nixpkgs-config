@@ -2,6 +2,10 @@
 
 load test-helper
 
+# required for rebase --interactive not to block the tests
+export EDITOR=cat
+export VISUAL=cat
+
 setup() {
     setup_git_repo 1> /dev/null
     git checkout -b should_not_be_shown
@@ -47,8 +51,17 @@ teardown() {
 
     [ "$status" -eq 0 ]
     echo "output"
-    false
 }
+
+
+@test "check that 4git-rebase --current rebases when currenly directly on workspace" {
+    git switch $(4git-branch --base)
+    run 4git-rebase --current
+
+    [ "$status" -eq 1 ]
+    echo "error: nothing to do"
+}
+
 
 @test "check that 4git-rebase --select rebases the selected branch on the workspace no mather what branch you're corrently on" {
     git switch $(4git-branch --base)_br1
