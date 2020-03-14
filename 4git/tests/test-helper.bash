@@ -11,7 +11,8 @@ TESTDATA_DIR="$(mktemp -d)"
 trap "test -n '$TESTDATA_DIR' && rm -rf '$TESTDATA_DIR'" EXIT
 export FOURGIT_DIR TESTDATA_DIR
 
-export TMUX_WINDOW_NAME=FOURGIT_TESTSUITE
+# mock the tmux & fzf interface so we don't need them to run the tests
+export TMUX_WINDOW_NAME="FOURGIT_BATS_TESTSUITE"
 load tmux-mock
 load fzf-mock
 
