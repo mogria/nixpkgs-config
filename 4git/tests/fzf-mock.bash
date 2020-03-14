@@ -1,22 +1,12 @@
 #!#/usr/bin/env bash
 
+fzf_input="$TESTDATA_DIR/fzf-input"
+fzf_options="$TESTDATA_DIR/fzf-default-options"
+
 fzf() {
-    echo "$TMUX_WINDOW_NAME"
+    cat > "$fzf_input"
+    echo "$DEFAULT_FZF_OPTIONS" > "$fzf_options"
+    grep -Fx "$FZF_SELECTION" "$fzf_input"
 }
 
-tmux() {
-    local cmd="$1"
-
-    case "$1" in
-        rename-window)
-                TMUX_WINDOW_NAME="$2"
-                export TMUX_WINDOW_NAME
-            ;;
-        *) echo "WARNING: unknown tmux command" ;
-    esac
-}
-
-export TMUX_WINDOW_NAME
-
-export FOURGIT_MOCK_TMUX=1 # signal 4gitlib.sh to load this file
 
