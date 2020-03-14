@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 
-load git-repo
+load test-helper
+
 
 teardown() {
     # export KEEP_GIT_REPO
