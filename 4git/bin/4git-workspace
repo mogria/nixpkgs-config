@@ -13,9 +13,7 @@ usage() {
 }
 
 # 1. use the current branch as the "upstream branch" as the base branch for our workspace
-
-# because of 'set -e' this aborts here with a git error if were not in a git repository
-REAL_BASE_BRANCH="$(git branch --show-current)"
+REAL_BASE_BRANCH="$(real_base_branch)"
 
 # 2. read the workspace name
 if [ "$#" -lt 1 ]; then
