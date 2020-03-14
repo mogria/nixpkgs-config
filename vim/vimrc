@@ -400,6 +400,8 @@ syntax enable
 " }}}
 
 " AUTOCOMPLETION {{{
+  let g:neocomplete#enable_at_startup = 1
+
   " Required for operations modifying multiple buffers like rename.
   set hidden
 

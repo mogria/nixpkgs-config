@@ -52,6 +52,9 @@
       vim-snippets
       neosnippet-snippets
 
+      # Autocompletion
+      # neocomplete  # currently doesn't work because this neovim apparently has no lua? Even though it seems to use luajit..
+
       # LaTeX
       vimtex
 
