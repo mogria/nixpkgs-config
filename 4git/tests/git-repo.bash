@@ -1,12 +1,18 @@
+set -u
+set -e
+
 export GIT_PAGER=cat
 export ACTUAL_BASE_BRANCH=fourgit-test
 
-setup_git_repo() {
-    REPOSITORY=`mktemp -d`
-    export REPOSITORY
-    git init "$REPOSITORY"
-    echo "$BATS_TEST_NUMBER" > "$REPOSITORY/4git-bats-test"
-    cd "$REPOSITORY" || exit 1
+setup_git_repo_template() {
+    TEMPLATE_REPOSITORY="$(mktemp -d)"
+    [ "${#TEMPLATE_REPOSITORY}" -gt 3 ] || exit 1
+    [ -d "$TEMPLATE_REPOSITORY" ] || exit 1
+    cd "$TEMPLATE_REPOSITORY" || exit 1
+    trap "rm -rf '$TEMPLATE_REPOSITORY'" EXIT
+    export TEMPLATE_REPOSITORY
+    git init "$TEMPLATE_REPOSITORY"
+    echo "$BATS_TEST_NUMBER" > "$TEMPLATE_REPOSITORY/4git-bats-test"
     git config user.name "Chuck Tester"
     git config user.email  "chuck@example.com"
 
@@ -27,13 +33,24 @@ int main(int argc, char ** argv) {
     printf("Hello, World");
     return EXIT_SUCCESS;
 }
+
 MAIN_C
 
     git add .
     git commit -m 'Add hello world program'
     git checkout -b "$ACTUAL_BASE_BRANCH" 2>/dev/null
+}
 
+setup_git_repo() {
+    if [ -z "${TEMPLATE_REPOSITORY:-}" ]; then
+        setup_git_repo_template
+    fi
+    REPOSITORY="$(mktemp -d)"
+    cd "$REPOSITORY" || exit 1
     export REPOSITORY
+
+    cp -R "$TEMPLATE_REPOSITORY/*" "$REPOSITORY"
+    cp -R "$TEMPLATE_REPOSITORY/.*" "$REPOSITORY"
 }
 
 dummy_commit() {
