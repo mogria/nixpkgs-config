@@ -33,7 +33,18 @@ FOURGIT_BASE_BRANCH="4git/$REAL_BASE_BRANCH/$WORKSPACE"
 # TODO: add this to env vars of tmux and/or direnv directly
 
 # 3. create a branch
-create_branch "$FOURGIT_BASE_BRANCH" "$REAL_BASE_BRANCH"
+create_branch "$FOURGIT_BASE_BRANCH" "$REAL_BASE_BRANCH" || true
+if git branch --list | grep -Fx "* $FOURGIT_BASE_BRANCH"; then
+    # branch has already been selected by create branch
+    echo "Successfully created workspace $WORKSPACE"
+elif git branch --list | grep -Fx "  $FOURGIT_BASE_BRANCH"; then
+    # branch probably already existed
+    echo "Switching to already existent workspace $WORKSPACE"
+    git switch "$FOURGIT_BASE_BRANCH"
+else
+    echo "ERROR: Can't find the branch I just created before."
+    exit 3
+fi
 
 # 4. make sure the set the tmux window name correctly
 set_4git_workspace "$WORKSPACE"

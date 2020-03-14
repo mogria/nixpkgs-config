@@ -26,15 +26,24 @@ create_branch() {
 }
 
 is_4git_branch() {
-    echo "$1" | grep '^4git/[^/]\+/.\+$' > /dev/null
+    grep '^4git/[^/]\+/.\+$'<<<"$1" > /dev/null
 }
 
+
+###
+# extract_base_branch <workspace-branch>
+#
+# For correct behaviour this function requires a workspace-branch!
 extract_base_branch() {
-    echo "$1" | sed 's|^4git/\([^/]\+\)/.*$|\1|g'
+    sed 's|^4git/\([^/]\+\)/.*$|\1|g'<<<"$1"
 }
 
 real_base_branch() {
-    branch="$(current_branch)"
+    # this is only the correct base branch,
+    # when the user didn't have a workspace before
+    local branch="$(current_branch)"
+
+    # so check if it looks like a 4git/ branch
     if is_4git_branch "$branch"; then
         extract_base_branch "$branch"
     else
