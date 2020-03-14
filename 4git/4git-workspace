@@ -24,6 +24,11 @@ else
     WORKSPACE="${1:-$(4git_workspace)}"
 fi
 
+if [ -z "$WORKSPACE" ]; then
+    echo "ERROR: Please provide a workspace name via an command line argument or use this from within tmux, where the window title is used."
+    exit 2
+fi
+
 FOURGIT_BASE_BRANCH="4git/$REAL_BASE_BRANCH/$WORKSPACE"
 # TODO: add this to env vars of tmux and/or direnv directly
 
