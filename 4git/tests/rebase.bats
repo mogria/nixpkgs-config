@@ -46,32 +46,24 @@ teardown() {
 
 # TEST CASE: branch selection via fzf {{{
 @test "check that 4git-rebase --current rebases the current branch on the workspace" {
-    git switch $(4git-branch --base)_br1-1-1
+    git switch "$(4git-branch --base)_br1-1-1"
     run 4git-rebase --current
-
-    [ "$status" -eq 0 ]
-    echo "output"
+    assert_success
 }
 
 
-@test "check that 4git-rebase --current rebases when currenly directly on workspace" {
-    git switch $(4git-branch --base)
+@test "check that 4git-rebase --current rebases when currently directly on the workspace branch" {
+    git switch "$(4git-branch --base)"
     run 4git-rebase --current
-
-    [ "$status" -eq 1 ]
-    echo "error: nothing to do"
+    assert_success
 }
 
 
-@test "check that 4git-rebase --select rebases the selected branch on the workspace no mather what branch you're corrently on" {
-    git switch $(4git-branch --base)_br1
-    fzf-select "$(4git-branch --base)_br2-2-1"
+@test "check that 4git-rebase --select rebases the selected branch on the workspace no matter what branch you're corrently on" {
+    git switch "$(4git-branch --base)_br1"
+    fzf-select "$(4git-branch --base)_br1-2"
     run 4git-rebase --select
-    fzf-input
-
-    [ "$status" -eq 0 ]
-    echo "$output" 
-    false
+    assert_success
 }
 
 # }}}
