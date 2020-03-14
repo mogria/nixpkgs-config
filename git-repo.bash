@@ -41,5 +41,4 @@ delete_git_repo() {
     if [ -n "$repo" ] && [ -f "$repo/4git-bats-test" ]  && [ "x$BATS_TEST_NUMBER" = "x$(cat "$repo/4git-bats-test")" ]; then
         rm -r "$repo"
     fi
-
 }
