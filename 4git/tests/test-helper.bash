@@ -4,7 +4,6 @@ set -e
 set -u
 
 load git-repo
-# mock the tmux interface so we don't need tmux to run the tests
 
 FOURGIT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TESTDATA_DIR="$(mktemp -d)"
