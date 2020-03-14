@@ -60,15 +60,15 @@ teardown() {
 @test "check that 4git-branch --list returns at least the workspace branch" {
     run 4git-branch --list
     [ "$status" -eq 0 ]
-    [ "$output" = "git/$REAL_BASE_BRANCH/$TMUX_WINDOW_NAME" ]
+    [ "$output" = "4git/$ACTUAL_BASE_BRANCH/$TMUX_WINDOW_NAME" ]
 }
 
 @test "check that 4git-branch --list returns all created subbranches in the worktree" {
-    4git-branch --create a
+    local base_name="4git/$ACTUAL_BASE_BRANCH/$TMUX_WINDOW_NAME"
+    4git-branch --create subbranch
     run 4git-branch --list
     [ "$status" -eq 0 ]
-    echo [ "$output" = "git/$REAL_BASE_BRANCH/$TMUX_WINDOW_NAME" ]
-    false
+    [ "$output" = "$base_name"$'\n'"$base_name"_subbranch ]
 }
 # }}}
 
