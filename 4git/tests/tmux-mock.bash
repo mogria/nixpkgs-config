@@ -14,3 +14,5 @@ tmux() {
         *) echo "WARNING: unknown tmux command" ;
     esac
 }
+
+tmux rename-window "$TMUX_WINDOW_NAME"

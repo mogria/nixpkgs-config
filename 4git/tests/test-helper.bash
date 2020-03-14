@@ -11,6 +11,7 @@ TESTDATA_DIR="$(mktemp -d)"
 trap "test -n '$TESTDATA_DIR' && rm -rf '$TESTDATA_DIR'" EXIT
 export FOURGIT_DIR TESTDATA_DIR
 
+export TMUX_WINDOW_NAME=FOURGIT_TESTSUITE
 load tmux-mock
 load fzf-mock
 
@@ -22,7 +23,7 @@ export TESTDATA_DIR
 export USE_TEST_MOCKS=1 # signal that 4gitlib.sh should include the *-mock.bash
                         # files in this directory for the mocked commands to be used
 
-tmux-window-name FOURGIT_TESTSUITE
+
 
 # make sure to clear whose environment variables if they got in here somehow
 unset REAL_BASE_BRANCH
