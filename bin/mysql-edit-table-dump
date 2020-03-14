@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+set -u
+set -e
+prgname="$(basename "${BASH_SOURCE[0]}")"
+
+if [ "$#" -eq 0 ] || [ "x$1" == "x--help" ] || [ "x$1" == "x-h" ]; then
+    echo "Usage: $prgname database.[table] [mysql-options...]"
+    echo "   All mysql-options are passed to mysqldump and mysql as given."
+    echo "   The given database & table name passed automatically by this script."
+    echo "   Examples: "
+    echo "     $ $prgname my-database.users -u root -h dbserver.example.com"
+    echo "   This will allow you to edit the database dump in $EDITOR"
+    echo ""
+    echo "   WARNING: No warranty, watch the fuck out when using this script,"
+    echo "            This script keeps a temporary backup, but that doesn't "
+    echo "            help when the computer shuts down, or the restore of the"
+    echo "            backup doesn't work!"
+    exit 0
+fi
+
+database="$(echo "$1" | cut -d. -f1)"
+table="$(echo "$1" | cut -d. -f2)"
+
+shift # Now $@ contains only mysql options.
+mysqlopts=("$@")
+
+# Therefore we can just write these
+# two functions and we only have to parse
+# database & table name from the shell arguments.
+function mysqldump_on_database() {
+    [ -z "$table" ] && mysqldump "${mysqlopts[@]}" "$database" \
+                    || mysqldump "${mysqlopts[@]}" "$database" --tables "$table"
+}
+
+mysql_on_database() {
+    set +e
+    mysql "${mysqlopts[@]}" "$database"
+    set -e
+}
+
+
+tmpfile="$(mktemp)"
+backup="$(mktemp)"
+
+mysqldump_on_database > "$tmpfile"
+
+cp "$tmpfile" "$backup"
+
+while true; do
+    "$EDITOR" "$tmpfile"
+    echo "## Playing back the edited dump:"
+
+    mysql_on_database < "$tmpfile"
+    [ "$?" -ne 0 ] && echo "It seems that didn't work."
+
+    read -p "Restore Original State? (Y/n)" restore
+
+    if [ -z "$restore" ] || [ "xy" = "x$restore" ] || [ "xY" = "x$restore" ]; then
+        mysql_on_database < "$backup" && echo "Restore Successful" || echo "Restore FAILED!"
+    fi
+
+    read -p "Edit dump again (no will quit loose the file!)? (Y/n)" edit_again
+
+    if [ -z "$edit_again" ] || [ "xy" = "x$edit_again" ] || [ "xY" = "x$edit_again" ]; then
+        true
+    else
+        exit 0
+    fi
+done
