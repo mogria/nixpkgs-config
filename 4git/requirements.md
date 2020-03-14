@@ -94,6 +94,13 @@ I often forget to commit and my git worktree piles up a lot of garbage files in 
   * and that ontop of upstream
     * it should never ever directly act on-top upstream and rebase it accidentally!
   * should support interactive and squashing commit rebasing
+* fetcher and workspace forwarder
+  * a little tool which fetches git remotes
+  * I want to always be able to *fast-forward* our base branch to our master branch
+* merge & pull request tool
+  * the workspace branches need to be merged against master
+  * this can either happen locally if it's a single person project
+  * or you should be able to automatically create a pull request for example on GitHub (which I use most) and push the workspace branch to your fork.
 
 ## Configuration
 
