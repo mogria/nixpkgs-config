@@ -27,6 +27,7 @@ in {
       "l" = "log";
       "lp" = "log --patch";
       "co" = "checkout";
+      "cop" = "checkout --patch";
       "k" = "checkout";
       "kp" = "checkout --patch";
       "p" = "push";
