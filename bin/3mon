@@ -1,6 +1,25 @@
 #!/usr/bin/env bash
+set -e
+set -u
+
+
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 [narrow|wide]"
+    exit 1
+fi
+
+
+case $1 in
+    wide)
+        HDMIOUT=(--output HDMI-1 --rate 60.00 --mode 1920x1080 --right-of DP-1 --noprimary)
+        ;;
+    narrow)
+        HDMIOUT=(--output HDMI-1 --rate 60.02 --mode 1280x1024 --pos $((1920 - 1280))x-1080 --noprimary)
+     ;;
+esac
+
 
 xrandr \
     --output eDP-1 --rate 60 --mode 1920x1080 --pos 0x0 --primary \
     --output DP-1 --rate 60 --mode 1920x1080  --right-of eDP-1 --noprimary \
-    --output HDMI-1 --rate 60.02 --mode 1280x1024 --pos $((1920 - 1280))x-1080 --noprimary
+    "${HDMIOUT[@]}"
