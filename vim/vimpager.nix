@@ -18,5 +18,13 @@
 
     map Y "+y
     noremap YY ggvG$"+y<C-O><C-O>
+
+    " OLD VIMPAGER CONFIGURATION {{{
+    " let g:vimpager = {}
+    " let g:vimpager.ansiesc = 0
+    " let g:less = {}
+    " Plugin 'rkitover/vimpager'
+    " }}}
+
   '';
 }
