@@ -443,6 +443,7 @@ syntax enable
   let php_parent_error_close = 0
   let php_parent_error_open = 0
 
+  let g:syntastic_php_checkers = ['php', 'phpcs', 'psalm']
 " }}}
 
 " HTML / XML integration {{{
