@@ -433,6 +433,16 @@ syntax enable
 " PHP SUPPORT {{{
   autocmd FileType php set keywordprg=vim-keyword-web-search\ https://www.php.net/\\\%s
   let g:syntastic_php_checkers = ['php', 'psalm']
+
+  " PHP syntax settings (php.vim)
+  " hilight sql queries
+  let php_sql_query = 1
+  let php_baselib = 1
+  let php_htmlInStrings = 0
+  let php_folding = 1
+  let php_parent_error_close = 0
+  let php_parent_error_open = 0
+
 " }}}
 
 " HTML / XML integration {{{
