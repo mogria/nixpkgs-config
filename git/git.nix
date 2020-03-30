@@ -30,7 +30,8 @@ in {
       "k" = "checkout";
       "kp" = "checkout --patch";
       "p" = "push";
-      "pl" = "pull --rebase --autostash";
+      "pl" = "pull --autostash";
+      "plr" = "pull --autostash --rebase";
       "f" = "fetch --prune --all";
       "undo" = "reset --soft HEAD^";
       "fwd" = "forward";
