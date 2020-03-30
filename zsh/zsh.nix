@@ -81,6 +81,9 @@
         # set TERMINFO to the terminfos delivered by the ncurses nix package
         if [ ! -f /etc/NIXOS ]; then
           export TERMINFO=$HOME/.nix-profile/share/terminfo
+          # source system wide zshrc, for nix configuration if it exists
+          # (this might be MacOS/"Darwin" specific)
+          [ -f /etc/zshrc ] && source /etc/zshrc
         fi
       '';
   };
