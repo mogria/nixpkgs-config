@@ -3,21 +3,21 @@ snippet #!
 #
 # $1
 #
-# USAGE: $2
-#
-# PARAMETERS:
-#     $3
 
 # set -x # debug
 set -e
 set -u
 
-d="$(cd "\$(dirname "\${BASH_SOURCE[0]}")/.." && pwd)"
+d="$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
 
-# if [ "\$#" -lt 2 ]; then
-#     echo "Usage: \$0"
-#     exit 1
-# fi
+usage() {
+    echo "Usage: \$0"
+    exit 1
+}
+
+if [ "\$#" -lt 1 ]; then
+    usage
+fi
 
 $4
 
@@ -43,8 +43,6 @@ endsnippet
 snippet if "Bash if"
 if [[ $1 ]]; then
     $2
-else
-    $3
 fi
 endsnippet
 
