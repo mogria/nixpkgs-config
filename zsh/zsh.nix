@@ -38,7 +38,7 @@
       "gk" = "git k";
       "gkp" = "git kp";
       "gp" = "git p"; #push
-      "gpl" = "git pl"; #pull --autostash
+      "gpl" = "git pl"; #pull
       "gplr" = "git plr"; #pull --rebase --autostash
       "gf" = "git f"; # fetch
       "gfwd" = "git forward"; # --ff-only merge
