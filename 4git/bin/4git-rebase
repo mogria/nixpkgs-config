@@ -34,15 +34,15 @@ get_leaf_branch() {
 workspace_branch="$(4git-branch --base)"
 
 case "${1:---help}" in
-    --help) usage ;;
-    --current)
+    -c|--current)
+        # results in a no-op`
         git_rebase_cmd "$workspace_branch" "$(current_branch)"
         ;;
-    --select)
+    -s|--select)
         leaf_branch=$(get_leaf_branch)
         git_rebase_cmd "$workspace_branch" "$leaf_branch"
         ;;
-    --select-all)
+    -a|--select-all)
         # this is first the cut off point, so the base branch
         upstream=$(get_upstream_branch)
         leaf_branch=$(get_leaf_branch)
@@ -56,6 +56,8 @@ case "${1:---help}" in
         upstream=$(get_upstream_branch)
         git_rebase_cmd --onto "$workspace_branch" "$upstream" "$(current_branch)"
         ;;
+    -h|--help) usage ;;
+    *) usage ;;
 esac
 
 
