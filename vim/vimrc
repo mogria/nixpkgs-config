@@ -124,6 +124,7 @@ syntax enable
 " STATUS BAR (vim-airline)
   " show partial commands typed below the status line
   set showcmd
+  set noshowmode " it's shown on the airline anyway
 
   " display all buffers as tab when only one tab is open
   let g:airline#extensions#branch#enabled = 0
