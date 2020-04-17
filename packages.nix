@@ -39,7 +39,9 @@
     gnupg22
     gnutar
     less
-    jq
+    jq # parse/filter/format json
+    q-text-as-data # `q`-cli tool: use sql to query csv/tsv files
+    xsv # query csv files
     wget
     dos2unix
 
