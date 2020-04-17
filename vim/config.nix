@@ -76,6 +76,16 @@ let
         { filePattern = "*.rkt"; makeprg = "racket\\ -f\\ %"; }
       ];
     };
+    "plantuml" = {
+      indent = fourIndent;
+      makeCommands = let
+        makeprg = "plantuml";
+      in [
+        { filePattern = "*/uml/*.txt"; inherit makeprg; }
+        { filePattern = "*.uml"; inherit makeprg; }
+        { filePattern = "*.plantuml"; inherit makeprg; }
+      ];
+    };
   };
 
   getOrDefault = key: attrset: defaultValue:
