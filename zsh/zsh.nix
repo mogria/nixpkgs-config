@@ -53,6 +53,8 @@
       "sudo" = "sudo ";
       "home-config" = "vim ~/.config/nixpkgs/home.nix";
       "system-config" = "sudo vim /etc/nixos/configuration.nix";
+      # make sure I don't use the old broken nix-repl (needs NIX_REMOTE=daemon set on NixOS)
+      "nix-repl" = "nix repl";
       };
       history = {
         ignoreDups = true;
