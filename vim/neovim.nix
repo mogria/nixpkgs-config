@@ -29,6 +29,8 @@
       vim-surround
       vim-nix # nix language support
 
+      indentLine # show indentlines
+
       # Tmux Integration
       vim-tmux-focus-events
 

@@ -188,8 +188,24 @@ syntax enable
   if has("gui_running")
     set antialias
   endif
+
   set cursorline
-  set cursorcolumn
+  " https://github.com/Yggdroot/indentLine
+
+" }}}
+
+
+" INDENT LINES {{{
+" "https://github.com/Yggdroot/indentLine
+  " instead of cursorcolumn show indent lines (using vim 7.3 conceal feature)
+  let g:indentLine_char = '|'
+  " use colors from colorscheme
+  let g:indentLine_setColors = 0
+
+  " this plugin sets by default
+  " set concealcursor inc
+  " set conceallevel 2
+  " it only works with conceallevel == 1/2
 " }}}
 
 " SEARCHING OPTIONS {{{
