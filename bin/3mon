@@ -11,15 +11,16 @@ fi
 
 case $1 in
     wide)
-        HDMIOUT=(--output HDMI-1 --rate 60.00 --mode 1920x1080 --right-of DP-1 --noprimary)
+        VGAOUT=(--output DP-1 --dpi 144 --scale 2x2 --rate 60 --mode 1920x1080  --right-of HDMI-1 --noprimary)
         ;;
     narrow)
-        HDMIOUT=(--output HDMI-1 --rate 60.02 --mode 1280x1024 --pos $((1920 - 1280))x-1080 --noprimary)
+        VGAOUT=( --output DP-1 --scale-from 2560x2048 --dpi 96 --rate 60.02 --mode 1280x1024 --pos $(( 2880 - 2560 ))x-2048 --noprimary)
      ;;
 esac
 
 
+set -x
 xrandr \
-    --output eDP-1 --rate 60 --mode 1920x1080 --pos 0x0 --primary \
-    --output DP-1 --rate 60 --mode 1920x1080  --right-of eDP-1 --noprimary \
-    "${HDMIOUT[@]}"
+    --output eDP-1 --dpi 144 --scale-from 2880x1620 --rate 60 --mode 1920x1080 --pos 0x0 --primary \
+    --output HDMI-1 --dpi 192 --scale 1x1 --rate 30 --mode 3840x2160 --pos 2880x-560 --noprimary \
+    "${VGAOUT[@]}"
