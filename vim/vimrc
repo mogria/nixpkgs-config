@@ -121,7 +121,7 @@ syntax enable
 " }}}
 
 
-" STATUS BAR (vim-airline)
+" STATUS BAR (vim-airline) {{{
   " show partial commands typed below the status line
   set showcmd
   set noshowmode " it's shown on the airline anyway
@@ -161,8 +161,10 @@ syntax enable
 
   " performance
   let g:airline_highlighting_cache = 1
-<
-"'
+
+  " There's also the plugin lightline available
+
+" }}}
 
 " COMMAND MODE EMCAS/SHELL KEYBINDINGS {{{
   " most of them already exist except C-A which autocompletes everything
