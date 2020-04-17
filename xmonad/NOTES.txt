@@ -1,0 +1,24 @@
+maybe dwm is better
+xmonad is based on dwm (a rewrite in haskell of it)
+
+https://en.wikipedia.org/wiki/Dwm
+https://dwm.suckless.org/tutorial/
+
+dwm is from suckless, written in  and needs to be compiled as well (no prob since I we use home-manager already)
+dwm used the suckless dmenu instead of rofi (the dmenu replacement I use to launch apps)
+
+on the other hand awesome is based on dwm as well and allows lua scripting.
+
+
+xmonad configuration looks horrible and complex for multi screen setups:
+
+https://www.reddit.com/r/xmonad/comments/ndww5/dual_screens_multi_monitors_tips_and_tricks/
+https://github.com/nwf/xconfig/blob/master/xmonad/xmonad.hs
+https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/XMonad-Layout-IndependentScreens.html
+
+the xfce panel doesn't work with xmonad as the window manager also knows which windows are on the current workspace/what workspaces are even available.
+So some of this will have to be re-done in the other window manageer
+
+* window list
+* active workspace
+* workspaces
