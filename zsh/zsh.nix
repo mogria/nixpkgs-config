@@ -86,7 +86,8 @@
         if [ ! -f /etc/NIXOS ]; then
           export TERMINFO=$HOME/.nix-profile/share/terminfo
           # source system wide zshrc, for nix configuration if it exists
-          # (this might be MacOS/"Darwin" specific)
+          # so that the nix profile variables get set (e.g. NIX_REMOTE)
+          # (this might be MacOS/"Darwin" specific, or also work the same way other linux distributions)
           [ -f /etc/zshrc ] && source /etc/zshrc
         fi
       '';
