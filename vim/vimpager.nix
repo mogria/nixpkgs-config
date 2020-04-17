@@ -3,6 +3,8 @@
 {
   home.packages = with pkgs; [
     vimpager-latest
+    # there is also the nixpkgs.page package which uses
+    # neovim as a pager...
   ];
 
   home.sessionVariables = {
