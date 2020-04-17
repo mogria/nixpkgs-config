@@ -1,6 +1,9 @@
 { pkgs, lib, ... }:
 
 {
+  imports = [
+    ./xmonad/xmonad.nix
+  ];
   home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [
     /* system management utilities */
     iotop
