@@ -3,7 +3,7 @@
 {
   programs.rofi = {
     enable = true;
-    font = "Monoid HalfTight Bold 9";
+    font = "Monoid HalfTight Regular 16";
     borderWidth = 1;
     lines = 53;
     width = 25;
