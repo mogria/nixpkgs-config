@@ -21,6 +21,7 @@
       "gc" = "git commit";
       "gca" = "git commit --amend";
       "gcf" = "git commit --fixup=`fzf-commit`";
+      "gcp" = "git cp"; #cherry-pick
       "gb" = "git branch";
       "gd" = "git diff";
       "gD" = "nvim -c :Gdiff";

@@ -20,6 +20,7 @@ in {
       "c" = "commit";
       "ca" = "commit --amend";
       "cf" = "commit --fixup";
+      "cp" = "cherry-pick";
       "b" = "branch";
       "d" = "diff";
       "dc" = "diff --cached";
