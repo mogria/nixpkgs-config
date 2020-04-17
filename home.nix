@@ -18,4 +18,6 @@ in {
     executable = true;
     source = ./bin;
   };
+
+  home.stateVersion = "19.09";
 }
