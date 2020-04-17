@@ -70,7 +70,11 @@ let
       indent = fourIndent;
     };
     "lisp" = lispConf;
-    "scheme" = lispConf;
+    "scheme" = lispConf // {
+      makeCommands = [
+        { filePattern = "*.rkt"; makeprg = "racket\\ -f\\ %"; }
+      ];
+    };
   };
 
   getOrDefault = key: attrset: defaultValue:

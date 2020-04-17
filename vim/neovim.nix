@@ -13,6 +13,7 @@
     pythonPackages.sqlparse
     phpPackages.psalm
     ripgrep
+    racket # scheme dialect in use
   ];
 
   programs.neovim = {
