@@ -22,13 +22,14 @@ let
               set lisp
         NOTE: vim -l starts it in lisp mode**/
   };
+  homeManagerMakePrg = "home-manager\\ switch;echo";
   languages = {
     "nix" = {
       indent = smallIndent;
       makeCommands = [
-        { filePattern = "*/.config/nixpkgs/*"; makeprg = "home-manager\\ switch;echo"; }
+        { filePattern = "*/.config/nixpkgs/*"; makeprg = homeManagerMakePrg; }
         { filePattern = "/etc/nixos/*"; makeprg = "nixos-rebuild\\ switch;echo"; }
-        { filePattern = "*"; makeprg = "nix-repl"; }
+        { filePattern = "*"; makeprg = "nix repl"; }
       ];
       fileSearchPath = [ "/etc/nixos" "~/.config/nixpkgs" ];
     };
@@ -60,7 +61,7 @@ let
     "vim" = {
       indent = smallIndent;
       makeCommands = [
-        { filePattern = "*/.config/nixpkgs/vim/*"; makeprg = "home-manager\\ switch"; }
+        { filePattern = "*/.config/nixpkgs/vim/*"; makeprg = homeManagerMakePrg; }
       ];
     };
     "js" = {
