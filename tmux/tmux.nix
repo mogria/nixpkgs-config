@@ -121,4 +121,6 @@
     source = ./tmux-powerlinerc;
     target = ".tmux-powerlinerc";
   };
+
+  # TODO: there is now programs.tmux available.
 }
