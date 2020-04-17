@@ -20,7 +20,7 @@
     /* shell environment programs */
     w3m
 
-    /* shell utilities */
+    /* basic shell and utilities */
     tree
     binutils
     moreutils
@@ -30,6 +30,8 @@
     patchutils
     procps # for watch
     netcat
+    zip
+    unzip
     unrar
     man-pages
     gnumake
