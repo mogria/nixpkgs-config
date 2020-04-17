@@ -21,6 +21,9 @@
     vimAlias = true;
     viAlias = true;
     withPython3 = true;
+    withPython = false;
+    withNodeJs = false;
+    withRuby = false;
     extraPython3Packages = (ps: with ps; [
       python-language-server
       pylint
