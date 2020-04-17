@@ -4,6 +4,7 @@
   imports = [
     ../rofi/rofi.nix
     ../alacritty/alacritty.nix
+    ../firefox/firefox.nix
   ];
 
   home.packages = [
@@ -17,7 +18,6 @@
 
     /* heavier graphical programs */
     pkgs.clementine
-    pkgs.firefox
     pkgs.chromium  # 2nd browser for specific stuff
     pkgs.thunderbird
     pkgs.okular
