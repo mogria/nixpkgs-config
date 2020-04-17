@@ -103,11 +103,24 @@ bindkey '^S' autosuggest-execute
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 
+# These global aliases will be replaced
+# by the respective command. These are evaluated
+# before any other expansion takes place.
 alias -g P=" pbpaste | "
 alias -g Y=" | pbcopy"
 alias -g L=" | less"
+alias -g V=" | vimpager"
+alias -g S=" | rg -n "
+alias -g C=" | rg -c "
+alias -g F=" | tail -f "
+alias -g T=" | tail"
+alias -g H=" | head"
+alias -g W=" | entr "
+alias -g NE=" 2>/dev/null"
 alias -g X=" | xargs"
 alias -g X1=" | xargs -N 1"
+alias -g XRG=" | xargs rg "
+alias -g LL=" | while IFS= read line; do "
 
 
 ## TMUX INTEGRATION
