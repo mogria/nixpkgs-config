@@ -29,6 +29,8 @@
     pkgs.griffin-ghost-icon-theme
 
     pkgs.evince # used by vim for tex preview as well
+
+    pkgs.redshift # blue light filter for when working late
   ];
 }
 
