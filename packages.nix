@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 {
-  home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
+  home.extraOutputsToInstall = [ "doc" "info" "man" "devdoc" ];
 
   imports = [
     ./vim/neovim.nix
