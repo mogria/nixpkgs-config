@@ -7,6 +7,7 @@
   home.language.time = "de_CH.UTF-8";
 
   home.sessionVariables = {
-    LC_ALL = "en_US.UTF-8";
+    LANGUAGE = "en_US.UTF-8";
+    LANG = "en_US.UTF-8";
   };
 }
