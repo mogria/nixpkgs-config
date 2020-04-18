@@ -37,7 +37,9 @@ in {
   ];
 
   home.sessionVariables = {
-    "PAGER" = "vimpager";
+    "PAGER" = "vimpager -u ~/.vimpagerrc";
+    "VIMPAGER_RC" = "\$HOME/.vimpagerrc";
+    "VIMPAGER_VIM" = "vim";
   };
 
   home.file.".vimpagerrc".text = ''
