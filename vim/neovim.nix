@@ -1,6 +1,8 @@
 { pkgs, ...}:
 
-{
+let
+  phpPackages = pkgs.php74Packages; # I can use at least php 7.4 everywhere now I think
+in {
   programs.zsh = {
       sessionVariables = {
         EDITOR = "vim";
@@ -11,10 +13,13 @@
   home.packages = with pkgs; [
     shellcheck
     pythonPackages.sqlparse
-    phpPackages.psalm
     ripgrep # Used in vim-ripgrep plugin to provide :Rg command
     racket # scheme dialect in use
-  ];
+  ] ++ (with phpPackages; [
+    php # ALE linter for php files
+    phpcs # ALE fixer for php files
+    composer # PHP-Package manager (essential for development and for ale to have vendor/bin/<executable>)
+  ]);
 
   programs.neovim = {
     enable = true;
