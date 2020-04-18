@@ -12,7 +12,6 @@ scriptencoding utf-8
 let $MYVIMRC=expand('<sfile>:p')
 
 set nocompatible
-syntax enable
 
 " GENERAL BEHAVIOUR {{{
 "
@@ -238,19 +237,8 @@ syntax enable
 " }}}
 
 
-" VUNDLE SETUP {{{
-    set nocompatible              " be iMproved, required
-    filetype off                  " required
-
-    set rtp+=~/.vim/plugin/binary.vim
-    " set the runtime path to include Vundle and initialize
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
-    " alternatively, pass a path where Vundle should install plugins
-    "call vundle#begin('~/some/path/here')
-
-    " let Vundle manage Vundle, required
-    Plugin 'gmarik/Vundle.vim'
+" VIM-PLUG SETUP {{{
+call plug#begin()
 " }}}
 
 " BASE16 VIM THEME PLUGIN CONFIGURATIOJN {{{
@@ -288,8 +276,7 @@ syntax enable
   set softtabstop=4 " you can use :set sts=2 for temporarily changing tabstop & shiftwidth
   set shiftwidth=4
 
-  " Language specific indents
-  Plugin 'junegunn/vim-easy-align'
+  " Language specific indents / align for tables
   xmap <Leader>a <Plug>(EasyAlign)
   nmap <Leader>a <Plug>(EasyAlign)
 " }}}
@@ -306,9 +293,7 @@ syntax enable
 " }}}
 
 " FZF FUZZY SEARCH {{{
-  Plugin 'junegunn/fzf'
-  Plugin 'junegunn/fzf.vim'
-
+" based on the fzf and fzf.vim plugins from junegunn
   noremap <Leader>sf <ESC>:Files<CR>
   " search lines in current buffe
   noremap <Leader>sl <ESC>:BLines<CR>
@@ -325,13 +310,13 @@ syntax enable
 
 " RIPGREP: FULLTEXT RECURSIVE DIRECTORY SEARCH {{{
   " results will be opened in the quickfix list
-  Plugin 'jremmen/vim-ripgrep'
+  Plug 'jremmen/vim-ripgrep'
   noremap <Leader>f <ESC>:Rg <C-R>/
   noremap <Leader>F <ESC>:Rg <C-R><C-W>
 " }}}
 
 " BASIC UNIX COMMANDS AS EX COMMANDS {{{
-  Plugin 'tpope/vim-eunuch'
+" The plugin vim-eunuch provides most of these
   " this also as the useful, :SudoWrite & s:SudoEdit
   " have ranger mappings
   noremap <F2> :Move <C-R>%
@@ -352,7 +337,7 @@ syntax enable
 " }}}
 
 " POSTGRESQL SUPPORT {{{
-  Plugin 'lifepillar/pgsql.vim'
+  Plug 'lifepillar/pgsql.vim'
   " treat .sql files as pgsql
   let g:sql_type_default = 'pgsql'
 
@@ -469,8 +454,7 @@ syntax enable
 " }}}
 
 " HTML / XML integration {{{
-  " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-  Plugin 'alvan/vim-closetag'
+  Plug 'alvan/vim-closetag'
   let g:closetag_filenames = '*.html,*.htm,*.xhtml,*.phtml,*.xml,*.xsd,*.xsl'
   let g:closetag_xhtml_filenames = '*.xhtml,*.xml,*.xsd,*,xsl'
   let g:closetag_filetypes = 'html,xhtml,phtml'
@@ -483,7 +467,7 @@ syntax enable
 " }}}
 
 " LARGE FILE SUPPORT {{{
-  Plugin 'vim-scripts/LargeFile'
+  Plug 'vim-scripts/LargeFile'
   let g:LargeFile = 500 " > 500 megabytes is a large file
   " Use :Large to toggle largefile mode
 " }}}
@@ -634,15 +618,12 @@ syntax enable
   let g:netrw_list_hide = netrw_gitignore#Hide().'.*\.sw.$'
   let g:netrw_localmkdiropt = '-p'
 
-  Plugin 'tpope/vim-vinegar'
-
-  Plugin 'cosminadrianpopescu/filesync'
+  Plug 'cosminadrianpopescu/filesync'
   noremap <Leader>ua :FileSyncNetrw `pwd` scp://
   noremap <Leader>ul :FileSyncList<CR>
 " }}}
 
 
-Plugin 'tomtom/tcomment_vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

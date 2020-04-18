@@ -12,7 +12,7 @@
     shellcheck
     pythonPackages.sqlparse
     phpPackages.psalm
-    ripgrep
+    ripgrep # Used in vim-ripgrep plugin to provide :Rg command
     racket # scheme dialect in use
   ];
 
@@ -29,7 +29,17 @@
       pylint
     ]);
     plugins = with pkgs.vimPlugins; [
-      vim-surround
+      # the best of the junegunn plugins
+      vim-easy-align
+      fzfWrapper
+      fzf-vim
+
+      # tome good tpope plugins
+      vim-vinegar # browse directory where file resides by pressing "-"
+      vim-surround # add surround keybindings
+      vim-eunuch # unix file management
+      vim-markdown
+
       vim-nix # nix language support
 
       indentLine # show indentlines
@@ -65,6 +75,9 @@
 
       # Autocompletion
       # neocomplete  # currently doesn't work because this neovim apparently has no lua? Even though it seems to use luajit..
+
+      # easier commenting blocks (CTRL-/ CTRL-/ toggles line or selectino)
+      tcomment_vim
 
       # saving vim sessions
       vim-obsession

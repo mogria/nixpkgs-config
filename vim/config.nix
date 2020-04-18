@@ -146,7 +146,11 @@ let
 
 
 in ''
-  ${builtins.readFile ./vimrc};
+  " vim-plug: required for { do: commands } to install coc stuff} this
+  " cannot be installed under the normal plugins either because they
+  " get loaded after the vimrc...
+  source ${pkgs.vimPlugins.vim-plug}/share/vim-plugins/vim-plug/plug.vim
+  ${builtins.readFile ./vimrc}
 
   " nix generated, language specific file search path configurations
   ${fileSearchPathVimConfig}
