@@ -4,6 +4,7 @@ let
   config = import ./user-config.nix;
 in {
   imports = [
+    ./lang.nix
     ./packages.nix
     ./services/dropbox.nix
     ./graphical/packages.nix

@@ -99,7 +99,5 @@
     EDITOR = "vim";
     VISUAL = "vim";
     XDG_CONFIG_HOME = "$HOME/.config";
-    LANG  = "en_US.UTF-8";
-    LC_ALL = "en_US.UTF-8";
   };
 }
