@@ -29,7 +29,7 @@ let
       makeCommands = [
         { filePattern = "*/.config/nixpkgs/*"; makeprg = homeManagerMakePrg; }
         { filePattern = "/etc/nixos/*"; makeprg = "nixos-rebuild\\ switch;echo"; }
-        { filePattern = "*"; makeprg = "nix repl"; }
+        { filePattern = "*"; makeprg = "nix\\ repl"; }
       ];
       fileSearchPath = [ "/etc/nixos" "~/.config/nixpkgs" ];
     };
