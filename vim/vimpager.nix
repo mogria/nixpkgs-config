@@ -14,12 +14,21 @@
   home.file.".vimpagerrc".text = ''
     syntax on
 
+    set incsearch
+    set ignorecase
+    " searches with only small latters are case-insensitive
+    set smartcase
+    " start search again
+    set wrapscan
+
     " easier quitting
     noremap q <Esc>ZQ
     noremap Q <Esc>:q!<CR>
 
     map Y "+y
     noremap YY ggvG$"+y<C-O><C-O>
+
+    nmap <Space> v
 
     " OLD VIMPAGER CONFIGURATION {{{
     " let g:vimpager = {}
