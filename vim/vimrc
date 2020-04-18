@@ -55,6 +55,9 @@ syntax enable
   noremap <Leader>n :cnext<CR>
   noremap <Leader>N :cprevious<CR>
 
+  noremap <Leader>l :lnext<CR>
+  noremap <Leader>L :lprevious<CR>
+
   " activate mouse integration
   set mouse=a
 
