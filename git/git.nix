@@ -94,6 +94,12 @@ in {
           cmd = "nvim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'";
         };
       };
+
+      color = {
+        # this makes vimpager just use syntax highlighting instead of the conceal
+        # and the AnsiEsc plugin which is slow
+        pager = false;
+      };
     };
   };
 }
