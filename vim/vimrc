@@ -238,7 +238,7 @@ set nocompatible
 
 
 " VIM-PLUG SETUP {{{
-call plug#begin()
+call plug#begin(expand('~/.config/nvim/plugged'))
 " }}}
 
 " BASE16 VIM THEME PLUGIN CONFIGURATIOJN {{{
