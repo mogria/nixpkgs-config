@@ -92,4 +92,17 @@ in {
     };
   };
 
+  /** install the few vim-plug plugins in a non-reproducable way
+   automatically upon 'home-manager switch' by running neovim
+   in headless mode to run :PlugInstall
+  */
+  home.activation = {
+    neovimPlugInstall = lib.hm.dag.entryAfter ["installPackages"] ''
+      # plugin update rev 1
+      # update the number above to force plugin updates, and if it works do it on all
+      # machines to have a chance at getting the same setup. Or better yet create a nix derivation for them :)
+      $DRY_RUN_CMD nvim -c ':PlugInstall' -c ':PlugDiff' -c ':PlugClean' -c ':q!' -c 'q!' --headless
+    '';
+  };
+
 }
