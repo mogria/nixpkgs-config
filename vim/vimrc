@@ -428,13 +428,6 @@ call plug#begin()
   nnoremap <silent> <Leader>r :call LanguageClient#textDocument_rename()<CR>
 
 
-  " add the closing bracket when breaking the line
-  " inoremap {<CR> {<CR>}<C-O>O
-  " inoremap (<CR> (<CR>)<C-O>O
-  " inoremap [<CR> [<CR>]<C-O>O
-
-  Plugin 'rstacruz/vim-closer'
-  Plugin 'tpope/vim-endwise'
 " }}}
 
 " PHP SUPPORT {{{
