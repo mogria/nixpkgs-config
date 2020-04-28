@@ -619,8 +619,8 @@ call plug#begin()
 
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
+
 
 " VDEBUG OPTIONS {{{
 " if !exists('g:vdebug_options')
