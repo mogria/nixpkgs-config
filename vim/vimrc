@@ -229,7 +229,7 @@ set nocompatible
 
 " SPELLING OPTIONS {{{
   set spell
-  set spelllang=en,de,en,de
+  set spelllang=en,de
   set spellsuggest=best
 
   nnoremap <Leader>U gUiw
