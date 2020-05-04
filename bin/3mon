@@ -4,23 +4,39 @@ set -u
 
 
 if [ "$#" -lt 1 ]; then
-    echo "Usage: $0 [narrow|wide]"
+    echo "Usage: $0 [narrow|wide|open]"
     exit 1
 fi
 
+# definition of settings for each monitor that could gets
+# configured as the part of the given monitor arrangement
+LAPTOP_SCREEN=(--scale-from 2880x1620 --rate 60 --mode 1920x1080 --pos 0x0)
+EIZO_SMALL=(--output DP-1-1 --scale 1.75x1.75 --rate 60.02 --mode 1280x1024 --pos $(( 2880 - (1280 * 7 / 4) ))x-1780)
+FULLHD_24INCH=(--scale 2x2 --rate 60 --mode 1920x1080)
+ASUS_4K=(--scale 1x1 --rate 30 --mode 3840x2160 --pos 2880x-560)
 
+
+
+# screen to output mapping
+HDMIOUT=(--output HDMI-1-1 "${ASUS_4K[@]}")
 case $1 in
     wide)
-        VGAOUT=(--output DP-1 --dpi 144 --scale 2x2 --rate 60 --mode 1920x1080  --right-of HDMI-1 --noprimary)
+        VGAOUT=(--output DP-1-1  --scale 2x2 --rate 60 --mode 1920x1080  --right-of HDMI-1-1)
         ;;
     narrow)
-        VGAOUT=( --output DP-1 --scale-from 2560x2048 --dpi 96 --rate 60.02 --mode 1280x1024 --pos $(( 2880 - 2560 ))x-2048 --noprimary)
-     ;;
+        VGAOUT=(--output DP-1-1 "${EIZO_SMALL[@]}")
+        ;;
+
+    open)
+        VGAOUT=(--output DP-1-1 "${EIZO_SMALL[@]}")
+        HDMIOUT=(--output HDMI-1-1 "${FULLHD_24INCH[@]}" --pos 2880x-2160)
+        ;;
 esac
 
 
+# apply new display configuration
 set -x
-xrandr \
-    --output eDP-1 --dpi 144 --scale-from 2880x1620 --rate 60 --mode 1920x1080 --pos 0x0 --primary \
-    --output HDMI-1 --dpi 192 --scale 1x1 --rate 30 --mode 3840x2160 --pos 2880x-560 --noprimary \
-    "${VGAOUT[@]}"
+# always set the laptop screen as the primary
+xrandr --output eDP-1-1 --primary "${LAPTOP_SCREEN[@]}"
+xrandr --output eDP-1-1 --primary "${LAPTOP_SCREEN[@]}" "${HDMIOUT[@]}"
+xrandr --output eDP-1-1 --primary "${LAPTOP_SCREEN[@]}" "${HDMIOUT[@]}" "${VGAOUT[@]}"
