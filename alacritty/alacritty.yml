@@ -49,6 +49,8 @@ window:
   #     - transparent: Title bar, transparent background, but no title bar buttons
   decorations: full
 
+  dynamic_title: true
+
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
@@ -152,9 +154,10 @@ debug:
 #
 # To completely disable the visual bell, set its duration to 0.
 #
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
+  # command: shell command to run
 
 # Background opacity
 #
@@ -209,8 +212,6 @@ mouse:
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
-dynamic_title: true
-
 cursor:
   # Cursor style
   #
@@ -223,6 +224,9 @@ cursor:
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
   unfocused_hollow: true
+
+  # set cursor thickness
+  # thickness: 400
 
 # Live config reload (changes require restart)
 live_config_reload: true
