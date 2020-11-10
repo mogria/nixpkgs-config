@@ -4,7 +4,7 @@ let
   config = import ../user-config.nix;
 in {
   imports = [
-    ../4git/4git.nix
+    # ../4git/4git.nix
   ];
   programs.git = {
     enable = true;
