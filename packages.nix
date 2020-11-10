@@ -14,6 +14,7 @@
     ./tmux/tmux.nix
     ./ripgrep/ripgrep.nix
     ./linux-packages.nix
+   #  ./dwm/dwm.nix
   ];
 
   home.packages = with pkgs; [
