@@ -71,3 +71,11 @@ endsnippet
 snippet fd "Friendly Dump"
 friendly_dump($1);
 endsnippet
+
+snippet modelfactory "Eloquent Model Factory"
+\$factory->define($1::class, function (Faker $faker) {
+    return [
+        $2
+    ];
+});
+endsnippet
