@@ -342,6 +342,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   let g:sql_type_default = 'pgsql'
 
   " set equalprg for sql files to format sql
+  " sqlformat is not available as a ale linter yet..
   autocmd FileType sql setlocal equalprg=sqlformat\ --reindent\ --keywords\ upper\ --identifiers\ lower\ -
 " }}}
 
@@ -390,49 +391,149 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   au BufReadPost HUB_EDITMSG* set filetype=markdown
 " }}}
 
+" MARKDOWN INTEGRATION {{{
+" * easy align/ultisnips can be used to create tables easier.
+let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
+  au BufReadPost *.md,*.markdown set filetype=markdown
+
+" }}}
+
 " FOLDING {{{
   set foldmethod=marker
-  set foldnestmax=3 " at most 3 folds in each other, or it gets annoying
-
+  set foldnestmax=4 " at most 4 folds in each other, or it gets annoying
 
   " set foldopen=block,hor,insert,mark,percent,quickfix,search,tag
   set foldopen=all
   set foldclose=all
-  set foldlevelstart=1
-  set foldcolumn=1
+  set foldlevelstart=2
+  set foldcolumn=0
   " augroup vimrc
     " au BufReadPre * setlocal foldmethod=syntax
     " au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=manual | endif
   " augroup END
 " }}}
 
+
 " AUTOCOMPLETION {{{
-  let g:neocomplete#enable_at_startup = 1
+  " ale replaces sets this s weill, deoplete behaves differently as well
+  " set completeopt=menu,menuone,preview,noinsert,noselect
+  let g:deoplete#enable_at_startup = 0
 
-  " Required for operations modifying multiple buffers like rename.
-  set hidden
+  function ConfigureDeoplete() " {{{
+    call deoplete#initialize()
 
-  let g:LanguageClient_serverCommands = {
-      \ 'python': ['/usr/local/bin/pyls'],
-      \ 'php': ['psalm', '--language-server'],
-      \ }
-      " \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      "\ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-      " \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-      " \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
 
-  nnoremap <Leader>dm :call LanguageClient_contextMenu()<CR>
-  " Or map each action separately
-  nnoremap <silent> <Leader>dl :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <silent> <Leader>dd :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <silent> <Leader>r :call LanguageClient#textDocument_rename()<CR>
+    call deoplete#custom#option({
+    \ 'auto_complete_delay': 0,
+    \ 'min_pattern_length': 0,
+    \ 'max_list': 50,
+    \ 'smart_case': v:true,
+    \ })
 
+    call deoplete#custom#var('around', {
+    \   'range_above': 15,
+    \   'range_below': 15,
+    \   'mark_above': '[^]',
+    \   'mark_below': '[v]',
+    \   'mark_changes': '[*]',
+    \})
+
+    " Use ALE and also some plugin 'foobar' as completion sources for all code.
+    " 'tag' is also a source
+    call deoplete#custom#option('sources', {
+    \ '_': ['ultisnips', 'lsp', 'member', 'around', 'buffer', 'tmux-complete', 'file', 'dictionary'],
+    \ 'vim': [ 'neco-vim' ],
+    \ })
+
+    " call deoplete#custom#option('ignore_sources', {
+    " \ '_': ['ale', 'member', 'around', 'file', 'buffer']
+    " \ })
+
+  call deoplete#custom#source('_', 'matchers', ['matcher_cpsm', 'matcher_length'])
+  call deoplete#custom#source('_', 'sorters', ['sorter_rank'])
+  call deoplete#custom#source('_', 'converters', ['converter_remove_overlap', 'converter_auto_paren'])
+
+  call deoplete#custom#source('ultisnips', 'min_pattern_length', 1)
+  call deoplete#custom#source('ultisnips', 'mark', 'S')
+  call deoplete#custom#source('ultisnips', 'rank', 1000)
+  call deoplete#custom#source('ultisnips', 'max_candidates', 3)
+
+  call deoplete#custom#source('lsp', 'min_pattern_length', 2)
+  call deoplete#custom#source('lsp', 'mark', 'L')
+  call deoplete#custom#source('lsp', 'rank', 900)
+
+  call deoplete#custom#source('member', 'rank', 250)
+  call deoplete#custom#source('member', 'min_pattern_length', 2)
+
+  call deoplete#custom#source('around', 'rank', 300)
+  call deoplete#custom#source('around', 'min_pattern_length', 3)
+  call deoplete#custom#source('around', 'max_candidates', 10)
+
+  let g:tmuxcomplete#trigger = ''
+
+  call deoplete#custom#source('tmux-complete', 'mark', 'T')
+  call deoplete#custom#source('tmux-complete', 'min_pattern_length', 3)
+  call deoplete#custom#source('tmux-complete', 'rank', 300)
+  call deoplete#custom#source('tmux-complete', 'max_candidates', 3)
+
+
+
+
+    call deoplete#custom#option('keyword_patterns', {
+    \ '_': '[a-zA-Z_]\k*',
+    \ 'tex': '\\?[a-zA-Z_]\w*',
+    \ 'ruby': '[a-zA-Z_]\w*[!?]?',
+    \ 'scheme': '[a-zA-Z_]\k*[!?]?',
+    \ 'php': '[$a-zA-Z_]\k*',
+    \ })
+    " calls omni func when the following patterns match
+    " call deoplete#custom#option('omni_patterns', {
+    "   \ 'php': ['::', '\->', '\$'],
+    "   \ 'java': '[^. *\t]\.\w*',
+    "   \ 'html': ['<', '</', '<[^>]*\s[[:alnum:]-]*'],
+    "   \ 'xhtml': ['<', '</', '<[^>]*\s[[:alnum:]-]*'],
+    "   \ 'xml': ['<', '</', '<[^>]*\s[[:alnum:]-]*'],
+    "   \})
+    "
+
+    " Keybdindings:
+    " inoremap <silent><expr> <tab>
+    "       \ pumvisible() ? "\<C-n>" :
+    "       \ <SID>check_back_space() ? "\<TAB>" :
+    "       \ deoplete#manual_complete()
+
+
+    function CompleteFunc()
+      let comstr = deoplete#complete_common_string()
+      if comstr ==# ''
+        call deoplete#auto_complete()
+      endif
+      return comstr
+    endfunction
+    inoremap <expr><TAB> CompleteFunc()
+    inoremap <expr><C-TAB> deoplete#undo_completion()
+    inoremap <expr><C-h>
+    \ deoplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS>
+    \ deoplete#smart_close_popup()."\<C-h>"
+
+  endfunction() " }}}
+
+  " autocmd VimEnter * call ConfigureDeoplete()
+
+
+" }}}
+
+" SHOW SIGNATURES {{{
+  set cmdheight=1
+  " temporarily disabled, coc does the same
+  let g:echodoc_enable_at_startup = 0
+  let g:echodoc#type = 'signature'
 
 " }}}
 
 " PHP SUPPORT {{{
   autocmd FileType php set keywordprg=vim-keyword-web-search\ https://www.php.net/\\\%s
-  let g:syntastic_php_checkers = ['php', 'psalm']
 
   " PHP syntax settings (php.vim)
   " hilight sql queries
@@ -443,7 +544,118 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   let php_parent_error_close = 0
   let php_parent_error_open = 0
 
-  let g:syntastic_php_checkers = ['php', 'phpcs', 'psalm']
+  let g:PHP_vintage_case_default_indent = 1
+  let g:PHP_noArrowMatching = 1
+
+  " let g:syntastic_php_checkers = ['php', 'phpcs', 'psalm']
+  " au FileType php setlocal makeprg=psdev\ php-cs-fixer\ fix
+  "
+  au FileType php setlocal makeprg=vendor/bin/phpunit
+" }}}
+"
+" ALE SYNTAX CHECKING & FIXING {{{
+  " vim restart required for new executables
+  let g:ale_linters = {
+  \   '_': ['proselint', 'writegood'],
+  \   'c': ['clang'],
+  \   'sh': ['shellcheck', 'shell'],
+  \   'hack': ['hack'],
+  \   'php': ['psalm', 'phpcs', 'php'],
+  \   'html': ['htmlhint', 'tidy'],
+  \   'css': ['csslint'],
+  \   'nix': ['nix'],
+  \   'sql': ['sqlint'],
+  \   'java': ['javac', 'checkstyle', 'pmd'],
+  \   'tex': ['lacheck', 'chktex', 'proselint'],
+  \   'rust': ['cargo'],
+  \   'scheme': ['raco'],
+  \}
+  " this is required for make the psalm language server work
+
+  " alternatively activate all and ignore the ones we don't like
+  " let g:ale_linters = 'all'
+  " let g:ale_linters_ignore = {
+  " }
+  let g:ale_linter_aliases = {
+  \ 'pgsql': ['pgsql', 'sql'],
+  \ 'bash': 'sh',
+  \ 'zsh': 'sh',
+  \ 'xsd': ['xsd', 'xml'],
+  \ 'xslt': ['xslt', 'xml'],
+  \ 'php': ['php', 'sql', 'html'],
+  \ 'smarty': [ 'html' ],
+  \ 'html': ['html', 'javascript', 'css'],
+  \ 'gitcommit': ['gitlint'],
+  \ 'racket': ['scheme'],
+  \ }
+
+  let g:ale_echo_msg_format = '%linter%: %code%: %s'
+
+
+  let g:ale_fixers = {
+  \   '_': ['trim_whitespace'],
+  \   'c': ['clangtidy'],
+  \   'php': ['php_cs_fixer'],
+  \ }
+  
+  let g:ale_fix_on_save = 1
+  let g:ale_fix_on_save_ignore = {
+  \ 'markdown': ['trim_whitespace'],
+  \ }
+
+  " let g:ale_completion_symbols = {
+  " \ 'text': 'txt',
+  " \ 'method': 'mtd',
+  " \ 'function': 'fun',
+  " \ 'constructor': 'new',
+  " \ 'field': 'attr',
+  " \ 'variable': 'var',
+  " \ 'class': 'cls',
+  " \ 'interface': 'intf',
+  " \ 'module': 'mod',
+  " \ 'property': 'prop',
+  " \ 'unit': 'unit',
+  " \ 'value': 'val',
+  " \ 'enum': 'enum',
+  " \ 'keyword': 'keyword',
+  " \ 'snippet': 'S',
+  " \ 'color': 'color',
+  " \ 'file': 'file',
+  " \ 'reference': 'ref',
+  " \ 'folder': 'dir',
+  " \ 'enum member': 'enumval',
+  " \ 'constant': 'const',
+  " \ 'struct': 'struct',
+  " \ 'event': 'event',
+  " \ 'operator': 'op',
+  " \ 'type_parameter': 'type param',
+  " \ '<default>': 'v',
+  " \ }
+
+
+" ALE LANGUAGE SERVER CLIENT (disabled){{{
+  "let g:ale_lsp_root = {
+  "      \'php': '/var/www/webapp',
+  "      \}
+  let g:ale_disable_lsp = 1
+  let g:ale_completion_enabled = 0
+  "" let g:ale_cursor_detail = 1
+  "let g:ale_pattern_options = {'\.min\.js$': {'ale_enabled': 0}}
+  "let g:ale_cache_executable_check_failures = 0
+  "
+  "" let g:ale_lint_on_text_changed = "always" " always saves also on changes in insert mode
+  "let g:ale_command_wrapper = 'psdev exec app'
+  "" let g:ale_use_global_executables = 1
+  "" let g:ale_php_psalm_use_global = 1
+  "" let g:ale_php_psalm_executable = $HOME.'/bin/ale-psalm'
+  "" let g:ale_python_flake8_executable = '/foo/bar/flake8'
+  "" let g:ale_python_flake8_use_global = 1
+  "let g:ale_lsp_show_message_severity = 'information' " 'warning'
+"})}
+
+
+" NVIM-LSP LANGUAGE SERVER CLIENT (DISABLED){{{
+
 " }}}
 
 " HTML / XML integration {{{
@@ -587,11 +799,10 @@ call plug#begin(expand('~/.config/nvim/plugged'))
     \ $HOME . '/.config/nixpkgs/vim/UltiSnips',
     \ ]
 
-  " put almost everything on tab and space
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsListSnippets="<c-tab>"
-  let g:UltiSnipsJumpForwardTrigger="<Leader><Space>"
-  let g:UltiSnipsJumpBackwardTrigger="<Leader><Tab>"
+  let g:UltiSnipsExpandTrigger='<C-Space>'
+  let g:UltiSnipsListSnippets='<C-L>'
+  let g:UltiSnipsJumpForwardTrigger='<C-J>'
+  let g:UltiSnipsJumpBackwardTrigger='<C-H>'
 
   " If you want :UltiSnipsEdit to split your window.
   let g:UltiSnipsEditSplit="context"
@@ -616,11 +827,169 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   noremap <Leader>ul :FileSyncList<CR>
 " }}}
 
+" COC LANGUAGE SERVER {{{
 
+  Plug 'iamcco/coc-actions'
+  Plug 'voldikss/coc-todolist'
+  Plug 'iamcco/coc-spell-checker'
+  Plug 'neoclide/coc-rls'
+  Plug 'neoclide/coc-highlight'
+  Plug 'marlonfan/coc-phpls', { 'do': ':CocInstall coc-phpls' }
+
+  " " Required for operations modifying multiple buffers like rename.
+  set hidden
+  " Some servers have issues with backup files, see #649.
+  set nobackup
+  set nowritebackup
+
+  " " Give more space for displaying messages.
+  set cmdheight=2
+
+  " " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+  " " delays and poor user experience.
+  set updatetime=300
+
+  " " Don't pass messages to |ins-completion-menu|.
+  set shortmess+=c
+
+  " " Always show the signcolumn, otherwise it would shift the text each time
+  " " diagnostics appear/become resolved.
+  set signcolumn=yes
+
+  " Use tab for trigger completion with characters ahead and navigate.
+  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+  " other plugin before putting this into your config.
+  " inoremap <silent><expr> <TAB>
+  "       \ pumvisible() ? "\<C-n>" :
+  "       \ <SID>check_back_space() ? "\<TAB>" :
+  "       \ (Ulti_ExpandOrJump_and_getRes() > 0) ? "\<TAB>" :
+  "       \ coc#refresh() | coc#expandableOrJumpable () ? 
+  " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  "
+  " inoremap <NL> <C-R>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":IMAP_Jumpfunc('', 0)<CR>
+  "
+  " function! s:check_back_space() abort
+  "   let col = col('.') - 1
+  "   return !col || getline('.')[col - 1]  =~# '\s'
+  " endfunction
+  "
+  " let g:ulti_expand_or_jump_res = 0 "default value, just set once
+  " function! Ulti_ExpandOrJump_and_getRes()
+  "   call UltiSnips#ExpandSnippetOrJump()
+  "   return g:ulti_expand_or_jump_res
+  " endfunction
+  "
+  inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#expandable() ? coc#refresh() : "\<TAB>"
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
+  let g:coc_snippet_next = '<tab>'
+
+  " Use <c-space> to trigger completion.
+  inoremap <silent><expr> <c-space> coc#refresh()
+
+  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+  " position. Coc only does snippet and additional edit on confirm.
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+  autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+
+  " Use `[g` and `]g` to navigate diagnostics
+  nmap <silent> [g <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+  " GoTo code navigation.
+  nmap <silent> <Leader>d <Plug>(coc-definition)
+  nmap <silent> <Leader>t <Plug>(coc-type-definition)
+  nmap <silent> <Leader>i <Plug>(coc-implementation)
+  nmap <silent> <Leader>cc <Plug>(coc-references)
+
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  " Use K to show documentation in preview window.
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  " Symbol renaming.
+  nmap <leader>r <Plug>(coc-rename)
+
+  " Formatting selected code.
+  xmap <leader>cf  <Plug>(coc-format-selected)
+  nmap <leader>cf  <Plug>(coc-format-selected)
+
+" " Introduce function text object
+" " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+  xmap if <Plug>(coc-funcobj-i)
+  xmap af <Plug>(coc-funcobj-a)
+  omap if <Plug>(coc-funcobj-i)
+  omap af <Plug>(coc-funcobj-a)
+
+" " Use <TAB> for selections ranges.
+" " NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" " coc-tsserver, coc-python are the examples of servers that support it.
+" nmap <silent> <TAB> <Plug>(coc-range-select)
+" xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" " Add `:Format` command to format current buffer.
+" command! -nargs=0 Format :call CocAction('format')
+
+" " Add `:Fold` command to fold current buffer.
+  command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" " Add `:OR` command for organize imports of the current buffer.
+  command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" " Add (Neo)Vim's native statusline support.
+" " NOTE: Please see `:h coc-status` for integrations with external plugins that
+" " provide custom statusline: lightline.vim, vim-airline.
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" " Mappings using CoCList:
+" " Show all diagnostics.
+  nnoremap <silent> <space>ca  :<C-u>CocList diagnostics<cr>
+  " Show commands.
+  nnoremap <silent> <space>cC  :<C-u>CocList commands<cr>
+  " Find symbol of current document.
+  nnoremap <silent> <space>cs  :<C-u>CocList outline<cr>
+  " Search workspace symbols.
+  nnoremap <silent> <space>cS  :<C-u>CocList -I symbols<cr>
+  " Do default action for next item.
+  nnoremap <silent> <space>cj  :<C-u>CocNext<CR>
+  " Do default action for previous item.
+  nnoremap <silent> <space>ck  :<C-u>CocPrev<CR>
+  " Resume latest coc list.
+  nnoremap <silent> <space>cl  :<C-u>CocListResume<CR>
+
+  " restart when tsserver gets wonky
+  nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
+
+  let g:airline#extensions#coc#enabled = 1
+
+
+" }}}
 
 " All of your Plugins must be added before the following line
 call plug#end()
-
 
 " VDEBUG OPTIONS {{{
 " if !exists('g:vdebug_options')
