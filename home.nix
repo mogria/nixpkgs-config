@@ -6,7 +6,6 @@ in {
   imports = [
     ./lang.nix
     ./packages.nix
-    ./services/dropbox.nix
     ./graphical/packages.nix
   ];
   programs.home-manager = {
