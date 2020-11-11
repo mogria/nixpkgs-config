@@ -13,7 +13,6 @@
     /* programming utilities */
     gdb
     cmake
-    gcc
     xsel # required by tmux for copy paste into X clipboard and for macos compatible pbcopy
   ]);
 
