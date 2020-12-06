@@ -10,6 +10,7 @@
     /* basic graphical programs */
     pkgs.feh
     (pkgs.keepass.override { xdotool = pkgs.xdotool; })
+    pkgs.keepassxc
     pkgs.meld
     pkgs.qutebrowser # maybe use this instead of firefox in the furture
     pkgs.pavucontrol
