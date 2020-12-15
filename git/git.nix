@@ -59,6 +59,10 @@ in {
         default = "simple";
       };
 
+      pull = {
+        ff = "only";
+      };
+
       # see https://stackoverflow.com/questions/41029654/ignore-fsck-zero-padded-file-mode-errors-in-git-clone
       transfer = {
         fsckobjects = true;
