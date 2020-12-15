@@ -21,7 +21,5 @@ in {
 
   home.stateVersion = "19.09";
 
-  # on 20.03 the manual-combined package does not build
-  # https://github.com/nix-community/home-manager/issues/254
-  manual.manpages.enable = false;
+  manual.manpages.enable = true;
 }
