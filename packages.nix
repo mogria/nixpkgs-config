@@ -50,7 +50,6 @@
     dnsutils
 
     git
-    git-hub
     entr
     fd
     exa

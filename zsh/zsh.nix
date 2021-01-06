@@ -48,7 +48,7 @@
       "gx" = "git undo";
       "gm" = "git m"; # merge
       "gmt" = "git mergetool"; # mergetool
-      "gh" = "git hub";
+      "github" = "gh";
       # make alias expansion work with the following commands as prefix
       "xargs" = "xargs ";
       "sudo" = "sudo ";
