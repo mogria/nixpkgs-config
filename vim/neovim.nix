@@ -47,13 +47,13 @@ in {
     "diagnostic.displayByAle": true,
     "codeLens.enable": true,
     "languageserver": {
-      "intelephense": {
-          "command": "intelephense",
-          "args": ["--stdio"],
-          "filetypes": ["php"],
-          "initializationOptions": {
-              "storagePath": "/tmp/intelephense"
-          }
+      "psalmls": {
+        "command": "vendor/bin/psalm-language-server",
+        "args": ["--find-dead-code", "--disable-on-change=100000", "--use-extended-diagnostic-codes", "--verbose"],
+        "filetypes": ["php"],
+        "rootPatterns": ["psalm.xml", "psalm.xml.dist"],
+        "requireRootPattern": true,
+        "trace.server": "verbose"
       }
     },
   }
