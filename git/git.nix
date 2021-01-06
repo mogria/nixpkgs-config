@@ -4,8 +4,9 @@ let
   config = import ../user-config.nix;
 in {
   imports = [
-    # ../4git/4git.nix
+    ./github.nix
   ];
+
   programs.git = {
     enable = true;
     userName = config.name;
@@ -109,8 +110,4 @@ in {
       };
     };
   };
-
-  home.packages = with pkgs; [
-    gitAndTools.gh
-  ];
 }
