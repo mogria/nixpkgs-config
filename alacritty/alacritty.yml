@@ -86,19 +86,19 @@ font:
   # The normal (roman) font face to use.
   normal:
     # family: Source Code Pro For Powerline # should be "Menlo" or something on macOS.
-    family: Monoid HalfTight # should be "Menlo" or something on macOS.
+    family: "Monoid HalfTight" # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     style: Regular
 
   # The bold font face
   bold:
-    family: Monoid HalfTight
+    family: "Monoid HalfTight"
     # The `style` can be specified to pick a specific face.
     style: Bold
 
   # The italic font face
   italic:
-    family: Monoid HalfTight
+    family: "Monoid HalfTight"
     # The `style` can be specified to pick a specific face.
     style: Italic
     # Point size
