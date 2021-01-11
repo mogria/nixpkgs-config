@@ -4,8 +4,9 @@ let
   config = import ../user-config.nix;
 in {
   imports = [
-    # ../4git/4git.nix
+    ./github.nix
   ];
+
   programs.git = {
     enable = true;
     userName = config.name;
@@ -49,6 +50,9 @@ in {
       ".DS_Store" # get rid of the mac shit
       "*.log" # you probably never want to commit a log file
       "*.md.pdf" # those get built when using :make when ft=markdown
+
+      "Session.vim" # vim session file
+      ".root" # file denoting the root of a project
     ];
     extraConfig = {
       merge = {
@@ -57,6 +61,10 @@ in {
 
       push = {
         default = "simple";
+      };
+
+      pull = {
+        ff = "only";
       };
 
       # see https://stackoverflow.com/questions/41029654/ignore-fsck-zero-padded-file-mode-errors-in-git-clone

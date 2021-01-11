@@ -1,8 +1,14 @@
-{ pkgs, ...}:
+{ pkgs, lib, ... }:
 
 let
-  phpPackages = pkgs.php74Packages; # I can use at least php 7.4 everywhere now I think
+  # I can use at least php 7.4 everywhere now I think
+  phpPackages = pkgs.php74Packages;
 in {
+
+  imports = [
+    ./coc-vim.nix
+  ];
+
   programs.zsh = {
       sessionVariables = {
         EDITOR = "vim";
@@ -14,50 +20,13 @@ in {
     neovim-remote # control nvim processes from terminal
     proselint # lint text data
 
-    clang # ALE linter for C/C++ 
-    shellcheck # linter for shell scripts
-    shfmt # ale fixer for shell scripts
-    pythonPackages.sqlparse # ALE lint sql code (postgresql)
-    python37Packages.pylint # ALE lint python code # doesn't work because python enchant dependency has problems with python 2.7?
-    python37Packages.python-language-server # coc-python
+    # clang # ALE linter for C/C++ 
     ripgrep # Used in vim-ripgrep plugin to provide :Rg command
     plantuml # for building plantuml files
     vim-vint # Ale Linter lint vimscript/vimrc
     racket # scheme dialect in use
+  ];
 
-    nixpkgs-fmt # ale fixer (nixfmt exists as well)
-
-    bibclean # fix format BibTex bibliography files
-   # python-language-server
-
-    ## rust programming
-    # rls
-    # rustc
-    # cargo
-    rustup # toolchain installer, conflicts with others..
-  ] ++ (with phpPackages; [
-    php # ALE linter for php files
-    phpcs # ALE fixer for php files
-    composer # PHP-Package manager (essential for development and for ale to have vendor/bin/<executable>)
-  ]);
-
-  xdg.configFile."nvim/coc-settings.json".text = ''
-  {
-    "suggest.enablePreview":  true,
-    "diagnostic.displayByAle": true,
-    "codeLens.enable": true,
-    "languageserver": {
-      "intelephense": {
-          "command": "intelephense",
-          "args": ["--stdio"],
-          "filetypes": ["php"],
-          "initializationOptions": {
-              "storagePath": "/tmp/intelephense"
-          }
-      }
-    },
-  }
-  '';
 
   programs.neovim = {
     enable = true;
@@ -97,20 +66,6 @@ in {
       vim-airline
       vim-airline-themes
 
-      # LanguageClient-neovim
-      coc-nvim
-      coc-vimtex
-      coc-python # achtung: benötigt :CocCommand python.setInterpreter pythonXX
-      coc-css
-      coc-html
-      coc-java
-      coc-yaml
-      coc-json
-      coc-neco
-      coc-fzf
-      coc-git
-      coc-yank
-      coc-rls # requires rustup package
 
       # install plugin to be able to install any base16 theme
       # but we just just horizon-dark
@@ -126,7 +81,6 @@ in {
 
       # Snippets
       UltiSnips
-      coc-snippets
       vim-snippets
       neosnippet-snippets
 
@@ -135,13 +89,11 @@ in {
       deoplete-nvim
       neco-vim
       deoplete-dictionary
-      deoplete-zsh
-      deoplete-clang
+      # deoplete-zsh
+      # deoplete-clang
       cpsm # fast fuzzy matching for completion
       tmux-complete-vim # complete in vim from tmux panes
       context_filetype-vim
-      coc-pairs
-      coc-neco
       # nvim-lsp isused as the language server Language Server
       # deoplete-lsp # nvim-lsp integration
 

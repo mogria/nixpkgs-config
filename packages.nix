@@ -14,6 +14,7 @@
     ./tmux/tmux.nix
     ./ripgrep/ripgrep.nix
     ./linux-packages.nix
+    ./ssh/ssh.nix
    #  ./dwm/dwm.nix
   ];
 
@@ -49,7 +50,6 @@
     dnsutils
 
     git
-    git-hub
     entr
     fd
     exa

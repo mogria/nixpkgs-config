@@ -48,7 +48,6 @@
       "gx" = "git undo";
       "gm" = "git m"; # merge
       "gmt" = "git mergetool"; # mergetool
-      "gh" = "git hub";
       # make alias expansion work with the following commands as prefix
       "xargs" = "xargs ";
       "sudo" = "sudo ";
@@ -65,9 +64,12 @@
 
       oh-my-zsh= {
         enable = true;
-        plugins = [ "dircycle" "zsh-navigation-tools" ];
+        plugins = [ "dircycle" "zsh-navigation-tools" "ssh-agent" ];
         /* ugly hack: oh my zsh only wants a relative path, so lets go back to the system root */
-        theme = "../../../../../../../../../../../${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k";
+        theme = "../../../../../../../../../../../${pkgs.zsh-powerlevel9k}/share/zsh-powerlevel9k/powerlevel9k";
+        extraConfig = ''
+          zstyle :omz:plugins:ssh-agent identities id_ed25519
+        '';
       };
 
       sessionVariables = config.home.sessionVariables;
