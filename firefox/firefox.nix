@@ -2,7 +2,7 @@
 
 {
   programs.firefox = {
-    /* package = pkgs.firefoxPackages.icecat; */
+    package = pkgs.shadowfox;
     # these extensions seem to be from the NUR
     # https://github.com/nix-community/NUR
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -67,13 +67,12 @@
 
           # disable telemetry for privacy reasons
           "toolkit.telemetry.enabled" = "false";
-          "extensions.webcompat-reporter.enabled" = "false";
+          "extensions.webcompat-reporter.enabled" = "false"; # don't report compability problems to mozilla
           "datareporting.policy.dataSubmissionEnabled" = "false";
           "datareporting.healthreport.uploadEnabled" = "false";
           "browser.ping-centre.telemetry" = "false";
           "browser.urlbar.eventTelemetry.enabled" = "false";
           "toolkit.telemetry.unified" = "false";
-          "extensions.webcompat-reporter.enabled" = "false"; # dont report compability problems to mozilla
 
 
           # disable auto update (as updates are done through nixpkgs
@@ -115,14 +114,15 @@
 
         };
 
-        userChrome = ''
-          ''
+        # Custom CSS for user chrome
+        # userChrome = ''
+        # '';
       };
     };
   };
 
   home.packages = with pkgs; [
-    # kee pass http??
+    # TODO: Password manager integration?
   ];
 
-};
+}
