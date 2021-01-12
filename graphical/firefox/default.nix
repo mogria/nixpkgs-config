@@ -2,24 +2,40 @@
 
 {
   programs.firefox = {
-    package = pkgs.shadowfox;
+    enable = true;
+    # package = pkgs.firefox-unwrapped; # {
+      # pname = "blackwolf";
+      #  src = pkgs.firefox-unwrapped;
+      # pname
+      # unpackPhase
+      # patches =
+      # extraNativeBuildInputs =
+      # extraConfigureFlags =
+      # extraMakeFlags
+    # };
     # these extensions seem to be from the NUR
     # https://github.com/nix-community/NUR
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       https-everywhere
       ublock-origin
-      user-agent-switcher
-      cookie-editor
-      dark-mode
+      # user-agent-switcher
+      # cookie-editor
+      tridactyl
+      ipfs-companion
+      keepassxc-browser
+      auto-tab-discard
+      peertubeify
+      duckduckgo-privacy-essentials
+      unpaywall
     ];
 
     profiles = {
       "hm-default" = {
         id = 0;
         isDefault = true;
-        # path = ...;
+        # path = ~/.mozilla/firefox/hm-default;
         settings = {
-          "layout.css.devPixelsPerPx" = "1.5"; # when hi-dpi workstation
+          "layout.css.devPixelsPerPx" = "1.25"; # when hi-dpi workstation
           "browser.ctrlTab.recentlyUsedOrder" = "false";
           # "browser.download.lastDir" = "/home/.../Downloads"
 
@@ -44,7 +60,7 @@
           "media.eme.enabled" = "false";
 
           # this allows firefox devs changing options for a small amount of users to test out stuff
-          # not with me please ... 
+          # not with me please ...
           "app.normandy.enabled" = "false";
           "app.shield.optoutstudies.enabled" = "true";
 
@@ -57,7 +73,7 @@
           # i don't need geolocation in my browser...
           "geo.enabled" = "false";
 
-          # encrypted SNI (domain nanme) when using SSL 
+          # encrypted SNI (domain nanme) when using SSL
           "network.security.esni.enabled" = "true";
 
           # don't predict network requests
