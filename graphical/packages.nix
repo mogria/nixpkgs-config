@@ -4,7 +4,7 @@
   imports = [
     ../rofi/rofi.nix
     ../alacritty/alacritty.nix
-    ../firefox/firefox.nix
+    ./firefox
   ];
 
   home.packages = [
