@@ -21,5 +21,6 @@ in {
 
   home.stateVersion = "19.09";
 
-  manual.manpages.enable = true;
+  # TODO: the home-manager manual doesn't build ...
+  manual.manpages.enable = false;
 }
