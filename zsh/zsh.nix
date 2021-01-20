@@ -6,9 +6,22 @@
     enableCompletion = true;
     enableAutosuggestions = true;
     shellAliases = {
+      # FZF cd widget
       "c" = "fzf-cd-widget";
+
+      # override some default options on interactive use
       "ls" = "exa --git";
-      "ll" = "exa -l -a --sort=modified --git";
+      "la" = "exa --git -a";
+      "ll" = "exa -l -g -a --sort=modified --git";
+      "cp" = "cp -iv";
+      "mv" = "mv -iv";
+      "rm" = "rm -iv";
+      "mkdir" = "mkdir -pv";
+      "du" = "du -h";
+      "df" = "df -h";
+      "grep" = "grep --color=auto";
+      "curl" = "curl -v";
+
       # git aliases, they should be mostly consistent with
       # git configured git aliases, and a lot of times even
       # uses the aliases to provide the correct default options.
@@ -55,6 +68,10 @@
       "system-config" = "sudo vim /etc/nixos/configuration.nix";
       # make sure I don't use the old broken nix-repl (needs NIX_REMOTE=daemon set on NixOS)
       "nix-repl" = "nix repl";
+
+      # Often used commands
+      "hs" = "home-manager switch";
+      "hsu" = "nix-channel --update && home-manager switch";
       };
       history = {
         ignoreDups = true;
