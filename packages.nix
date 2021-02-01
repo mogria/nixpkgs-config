@@ -50,8 +50,9 @@
 
     git
     entr
-    fd
-    exa
+    fd  # find replacement
+    exa # ls replacement
+    bat # cat replacement, aliases to p
 
     /* LaTeX */
     pkgs.texlive.combined.scheme-full

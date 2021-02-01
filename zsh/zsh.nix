@@ -8,6 +8,9 @@
     shellAliases = {
       # FZF cd widget
       "c" = "fzf-cd-widget";
+      "bat" = "bat -pp --theme base16-256 --italic-text always";
+      "p" = "bat";
+      "pc" = "bat -d --color=always";
 
       # override some default options on interactive use
       "ls" = "exa --git";
