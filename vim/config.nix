@@ -100,7 +100,7 @@ let
       if builtins.hasAttr option languageOptions
         then vimConfigFunc lang (builtins.getAttr option languageOptions)
         else ""; # just generate an empty string if no option is set
-    in builtins.concatStringsSep "\n" (stdenv.lib.mapAttrsToList generateLanguageOptions languages);
+    in builtins.concatStringsSep "\n" (pkgs.lib.mapAttrsToList generateLanguageOptions languages);
 
   indentVimConfig = let
       vimConfigFunc = lang: indentOption: let
