@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  home.packages = [
+    # https://github.com/phenax/bsp-layout
+    bsp-layout
+  ];
+
   xsession.windowManager.bspwm = {
     enable = true;
     # package = pkgs.bspwm-unstable;
