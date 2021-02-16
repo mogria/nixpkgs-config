@@ -150,7 +150,8 @@ set nocompatible
   " themes are automatically selected based on the matching colorscheme. this can be overridden by defining a value. >
   let g:airline_theme='base16'
 
-  let g:airline_powerline_fonts = 1
+  let g:airline_powerline_fonts = 0
+  let g:airline_symbols_ascii = 0
 
   let g:airline_theme_patch_func = 'AirlineThemePatch'
   function! AirlineThemePatch(palette)
@@ -166,6 +167,8 @@ set nocompatible
 
   " There's also the plugin lightline available
 
+
+  let g:airline_skip_empty_sections = 1
 " }}}
 
 " COMMAND MODE EMCAS/SHELL KEYBINDINGS {{{
