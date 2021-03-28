@@ -576,7 +576,7 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
   \   'nix': ['nix'],
   \   'sql': ['sqlint'],
   \   'java': ['javac', 'checkstyle', 'pmd'],
-  \   'tex': ['lacheck', 'chktex', 'proselint'],
+  \   'tex': ['lacheck', 'proselint'],
   \   'rust': ['cargo'],
   \   'scheme': ['raco'],
   \}
