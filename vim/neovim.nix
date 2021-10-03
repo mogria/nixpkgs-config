@@ -77,8 +77,10 @@ in {
 
       # language specific stuff
       plantuml-syntax
-      vimtex # LaTeX
       sved
+
+      vimtex # LaTeX
+      vim-latex-live-preview
 
       # Snippets
       UltiSnips
