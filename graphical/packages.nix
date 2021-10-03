@@ -23,6 +23,8 @@
     pkgs.thunderbird
     pkgs.okular
     pkgs.audacity
+    pkgs.inkscape
+    pkgs.vlc
 
     /* icon themes */
     pkgs.gnome-themes-standard
