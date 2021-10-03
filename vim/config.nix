@@ -1,7 +1,6 @@
 { pkgs }:
 
 let
-  stdenv = pkgs.stdenv;
   smallIndent = { size = 2; useTabs = false; };
   fourIndent = { size = 4; useTabs = false; };
   cssConf = {
@@ -149,7 +148,7 @@ in ''
   " vim-plug: required for { do: commands } to install coc stuff} this
   " cannot be installed under the normal plugins either because they
   " get loaded after the vimrc...
-  source ${pkgs.vimPlugins.vim-plug}/share/vim-plugins/vim-plug/plug.vim
+  source ${pkgs.vimPlugins.vim-plug}/plug.vim
   ${builtins.readFile ./vimrc}
 
   " nix generated, language specific file search path configurations
@@ -163,4 +162,7 @@ in ''
 
   " nix generated, language specific keyword character definition
   ${addKeywordCharsVimConfig}
+
+  " somehow this config get's doubled and functions get redefined, so stop executing here
+  finish
 ''

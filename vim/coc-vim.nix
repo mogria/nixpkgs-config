@@ -70,5 +70,8 @@
       coc-snippets
       coc-pairs
       coc-neco
+      coc-spell-checker
+      coc-rls
+      coc-highlight
   ];
 }

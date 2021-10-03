@@ -23,11 +23,11 @@ let
         done
       '';
 
-      meta = with lib; {
+      meta = {
         description = "Vimpager which starts without ansiesc";
         homepage = https://github.com/rkitover/vimpager;
-        license = licenses.mit;
-        maintainers = maintainers.mogria;
+        license = lib.licenses.mit;
+        maintainers = lib.maintainers.mogria;
         platforms = vimpager-latest.meta.platforms;
       };
     };

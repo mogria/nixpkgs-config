@@ -17,7 +17,7 @@ set nocompatible
 "
   " use space as the mapleader for easy combos to type
   " these bindings can be user-defined
-  let mapleader = " "
+  let mapleader = ' '
   " and use \ as the maplocalleader (key bindings with <LocalLeader> prefix
   " this one is global as the mapleader, but bindings from filetype plugins
   " should use <LocalLeader> instead of <Leader>
@@ -67,7 +67,7 @@ set nocompatible
   " show line & column number
   set ruler
 
-  if &term =~ '^screen'
+  if &term =~? '^screen' || &term =~? '^tmux'
       " tmux will send xterm-style keys when its xterm-keys option
       " is on
       execute "set <xUp>=\e[1;*A"
@@ -131,23 +131,18 @@ set nocompatible
   " display all buffers as tab when only one tab is open
   let g:airline#extensions#branch#enabled = 0
 
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#enabled = 'unique_tail_improved'
-
   let g:airline_skip_empty_sections = 1
-
 
   let g:airline_detect_modified=1
   let g:airline_detect_paste=1
   let g:airline_detect_crypt=1
   let g:airline_detect_spell=0
-
-  let g:airline_detect_spelllang=1
+  let g:airline_detect_spelllang=0
   let g:airline_detect_iminsert=0
 
   let g:airline_inactive_collapse=1
-  let g:airline_inactive_alt_sep=0
-  " themes are automatically selected based on the matching colorscheme. this can be overridden by defining a value. >
+  let g:airline_inactive_alt_sep=1
+  " themes are automatically selected based on the matching colorscheme. This can be overridden by defining a value.
   let g:airline_theme='base16'
 
   let g:airline_powerline_fonts = 0
@@ -181,13 +176,9 @@ set nocompatible
 " INSERT MODE EMACS/SHELL KEYBINDINGS {{{
     inoremap <C-b> <Left>
     inoremap <C-f> <Right>
-    " overrides repeat last insert, to start of the line, use CTRL-Space instead
-    inoremap <C-Space> <C-a>
     " beginning of indented line"
     imap <C-a> <Esc>^i
     inoremap <C-e> <End>
-    " overrides digraphs functionality
-    imap <C-k> <Esc>d$A
 " }}}
 
 " CURSOR AND SIDEBAR LAYOUT {{{
@@ -300,9 +291,9 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   noremap <Leader>sf <ESC>:Files<CR>
   " search lines in current buffe
   noremap <Leader>sl <ESC>:BLines<CR>
-  noremap <Leader>t <Esc>:Tags<CR>
-  noremap <Leader>T <Esc>:BTags<CR>
-  noremap <Leader>h <ESC>:Helptags<CR>
+  " noremap <Leader>t <Esc>:Tags<CR>
+  " noremap <Leader>T <Esc>:BTags<CR>
+  " noremap <Leader>h <ESC>:Helptags<CR>
   " search history
   noremap <Leader>/  <ESC>:History/<CR>n
   " command mode history
@@ -394,7 +385,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   au BufReadPost HUB_EDITMSG* set filetype=markdown
 " }}}
 
-" MARKDOWN INTEGRATION {{{
+" MARKDOWN INTEGRATIN {{{
 " * easy align/ultisnips can be used to create tables easier.
 let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
   au BufReadPost *.md,*.markdown set filetype=markdown
@@ -429,7 +420,7 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
   " set completeopt=menu,menuone,preview,noinsert,noselect
   let g:deoplete#enable_at_startup = 0
 
-  function ConfigureDeoplete() " {{{
+  function ConfigureDeoplete()
     call deoplete#initialize()
 
 
@@ -459,34 +450,46 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
     " \ '_': ['ale', 'member', 'around', 'file', 'buffer']
     " \ })
 
-  call deoplete#custom#source('_', 'matchers', ['matcher_cpsm', 'matcher_length'])
-  call deoplete#custom#source('_', 'sorters', ['sorter_rank'])
-  call deoplete#custom#source('_', 'converters', ['converter_remove_overlap', 'converter_auto_paren'])
+    call deoplete#custom#source('_', 'matchers', ['matcher_cpsm', 'matcher_length'])
+    call deoplete#custom#source('_', 'sorters', ['sorter_rank'])
+    call deoplete#custom#source('_', 'converters', ['converter_remove_overlap', 'converter_auto_paren'])
 
-  call deoplete#custom#source('ultisnips', 'min_pattern_length', 1)
-  call deoplete#custom#source('ultisnips', 'mark', 'S')
-  call deoplete#custom#source('ultisnips', 'rank', 1000)
-  call deoplete#custom#source('ultisnips', 'max_candidates', 3)
+    call deoplete#custom#source('ultisnips', 'min_pattern_length', 1)
+    call deoplete#custom#source('ultisnips', 'mark', 'S')
+    call deoplete#custom#source('ultisnips', 'rank', 1000)
+    call deoplete#custom#source('ultisnips', 'max_candidates', 3)
 
-  call deoplete#custom#source('lsp', 'min_pattern_length', 2)
-  call deoplete#custom#source('lsp', 'mark', 'L')
-  call deoplete#custom#source('lsp', 'rank', 900)
+    call deoplete#custom#source('lsp', 'min_pattern_length', 2)
+    call deoplete#custom#source('lsp', 'mark', 'L')
+    call deoplete#custom#source('lsp', 'rank', 900)
 
-  call deoplete#custom#source('member', 'rank', 250)
-  call deoplete#custom#source('member', 'min_pattern_length', 2)
+    call deoplete#custom#source('member', 'rank', 250)
+    call deoplete#custom#source('member', 'min_pattern_length', 2)
 
-  call deoplete#custom#source('around', 'rank', 300)
-  call deoplete#custom#source('around', 'min_pattern_length', 3)
-  call deoplete#custom#source('around', 'max_candidates', 10)
+    call deoplete#custom#source('around', 'rank', 300)
+    call deoplete#custom#source('around', 'min_pattern_length', 3)
+    call deoplete#custom#source('around', 'max_candidates', 10)
 
-  let g:tmuxcomplete#trigger = ''
+    let g:tmuxcomplete#trigger = ''
 
-  call deoplete#custom#source('tmux-complete', 'mark', 'T')
-  call deoplete#custom#source('tmux-complete', 'min_pattern_length', 3)
-  call deoplete#custom#source('tmux-complete', 'rank', 300)
-  call deoplete#custom#source('tmux-complete', 'max_candidates', 3)
+    call deoplete#custom#source('tmux-complete', 'mark', 'T')
+    call deoplete#custom#source('tmux-complete', 'min_pattern_length', 3)
+    call deoplete#custom#source('tmux-complete', 'rank', 300)
+    call deoplete#custom#source('tmux-complete', 'max_candidates', 3)
 
 
+
+  " call deoplete#custom#filter('converter_reorder_attr',
+  " \ 'attrs_order', {
+  " \   'ruby': {
+  " \     'kind': [
+  " \       '!Class',
+  " \     ],
+  " \     'abbr': [
+  " \       'ExtensionClass'
+  " \     ]
+  " \ },
+  " \})
 
 
     call deoplete#custom#option('keyword_patterns', {
@@ -527,9 +530,11 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
     inoremap <expr><BS>
     \ deoplete#smart_close_popup()."\<C-h>"
 
-  endfunction() " }}}
+  endfunction()
 
-  " autocmd VimEnter * call ConfigureDeoplete()
+  augroup DEOPLETE
+    autocmd VimEnter * call ConfigureDeoplete()
+  augroup END
 
 
 " }}}
@@ -645,7 +650,8 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
 
 " ALE LANGUAGE SERVER CLIENT (disabled){{{
   "let g:ale_lsp_root = {
-  "      \'php': '/var/www/webapp',
+  "      \'psalm': '/var/webapps/popscan',
+  "      \'php': '/var/webapps/popscan',
   "      \}
   let g:ale_disable_lsp = 1
   let g:ale_completion_enabled = 0
@@ -663,13 +669,74 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
   "let g:ale_lsp_show_message_severity = 'information' " 'warning'
 "})}
 
+" VIM LSP LANGUAGE SERVER  CLIENT (DISABLED){{{
+"
+"   Plug 'prabirshrestha/async.vim'
+"   Plug 'prabirshrestha/vim-lsp'
+"   Plug 'thomasfaingnaert/vim-lsp-snippets'
+"   Plug 'thomasfaingnaert/vim-lsp-ultisnips'
+"   "" deoplete-lsp makes vim-lsp compatible with deoplete
+"
+"   " " Required for operations modifying multiple buffers like rename.
+"   set hidden
+"   " Some servers have issues with backup files, see #649.
+"   set nobackup
+"   set nowritebackup
+"
+"   " completion is handled by deoplete, ale is
+"   " configured as the completion source
+"   " imap <silent> <C-Space> <Plug>(ale-complete)
+"   " nnoremap <leader>d :ALEGoToDefinition<CR>
+"   " nnoremap <leader>sd :ALEGoToDefinitionInSplit<CR>
+"   " nnoremap <leader>vd :ALEGoToDefinitionInVSplit<CR>
+"   " nnoremap <leader>t :ALEGoToTypeDefinition<CR>
+"   " nnoremap <Leader>r :ALERename<CR>
+"   " nnoremap <Leader>c :ALEFindReferences<CR>
+"     :LspCodeAction 	Gets a list of possible commands that can be applied to a file so it can be fixed (quick fix)
+"   nnoremap <leader>D  :LspDeclaration<CR>
+"   nnoremap <leader>d  :LspDefinition<CR>
+"     " :LspDocumentDiagnostics 	Get current document diagnostics information
+"     " :LspDocumentFormat 	Format entire document
+"     " :LspDocumentRangeFormat 	Format document selection
+"     " :LspDocumentSymbol 	Show document symbols
+"   nnoremap <leader>h  :LspHover<CR>
+"   nnoremap <leader>i  :LspImplementation<CR>
+"     " :LspNextDiagnostic 	jump to next diagnostic (all of error, warning, information, hint)
+"     " :LspNextError 	jump to next error
+"   nnoremap <leader>c :LspNextReference<CR>
+"     " :LspNextWarning 	jump to next warning
+"     " :LspPeekDeclaration 	Go to the declaration of the word under the cursor, but open in preview window
+"   nnoremap <leader>vd  :LspPeekDefinition 	Go to the definition of the word under the cursor, but open in preview window
+"   nnoremap <leader>vi  :LspPeekImplementation 	Go to the implementation of an interface, but open in preview window
+"   nnoremap <leader>vt :LspPeekTypeDefinition 	Go to the type definition of the word under the cursor, but open in preview window
+"   ":LspPreviousDiagnostic 	jump to previous diagnostic (all of error, warning, information, hint)
+"   " :LspPreviousError 	jump to previous error
+"   " :LspPreviousReference 	jump to previous reference to the symbol under cursor
+"   " :LspPreviousWarning 	jump to previous warning
+"   nnoremap <leader>C  :LspReferences
+"   nnoremap <leader>r :LspRename
+"   " :LspStatus 	Show the status of the language server
+"   nnoremap <leader>t :LspTypeDefinition<CR>
+"   nnoremap <leader>T :LspTypeHierarchy<CR>
+"   nnoremap <leader>sS :LspWorkspaceSymbol <C-R><C-W>
+"   nnoremap <leader>ss :LspWorkspaceSymbol
+"
+"   " maybe replace K in some filetypes?
+"   " let g:ale_close_preview_on_insert = 1 " shows hovers in previerw
+"   " let g:ale_hover_to_preview = 1 " shows hovers in previerw
+"   " nnoremap <Leader>h :ALEHover<CR>
+"   "
+"   " nnoremap <Leader>sS :ALESymbolSearch
+"   " nnoremap <Leader>ss :ALESymbolSearch <C-R><C-W>
+
+" }}}
 
 " NVIM-LSP LANGUAGE SERVER CLIENT (DISABLED){{{
 
 " }}}
 
 " HTML / XML integration {{{
-  Plug 'alvan/vim-closetag'
+  " vim-closetag configuration
   let g:closetag_filenames = '*.html,*.htm,*.xhtml,*.phtml,*.xml,*.xsd,*.xsl'
   let g:closetag_xhtml_filenames = '*.xhtml,*.xml,*.xsd,*,xsl'
   let g:closetag_filetypes = 'html,xhtml,phtml'
@@ -693,10 +760,11 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
   " as the first line of a text file to define which file to
   " preview and which file needs to be compiled
 
-  let g:vimtex_mappings_enabled = 1
   let g:tex_flavor = 'latex'
-" }}}
+  let g:vimtex_mappings_enabled = 1
 
+  let g:livepreview_use_biber = 1
+" }}}
 
 " SNIPPETS (via ultisnips) {{{
   " Store Snippets in nixpkgs-config repository
@@ -723,7 +791,6 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
 
 " }}}
 
-
 " FILE MANAGER (NETRW + VINEGAR + SYNC) {{{
   let g:netrw_banner = 0
   let g:netrw_liststyle = 3
@@ -739,10 +806,6 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
 " COC LANGUAGE SERVER {{{
 
   Plug 'iamcco/coc-actions'
-  Plug 'voldikss/coc-todolist'
-  Plug 'iamcco/coc-spell-checker'
-  Plug 'neoclide/coc-rls'
-  Plug 'neoclide/coc-highlight'
   Plug 'marlonfan/coc-phpls', { 'do': ':CocInstall coc-phpls' }
 
   " " Required for operations modifying multiple buffers like rename.
@@ -846,6 +909,24 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
   xmap <leader>cf  <Plug>(coc-format-selected)
   nmap <leader>cf  <Plug>(coc-format-selected)
 
+" augroup mygroup
+"   autocmd!
+"   " Setup formatexpr specified filetype(s).
+"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"   " Update signature help on jump placeholder.
+"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+" augroup end
+
+" " Applying codeAction to the selected region.
+" " Example: `<leader>aap` for current paragraph
+" " xmap <leader>a  <Plug>(coc-codeaction-selected)
+" " nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" " Remap keys for applying codeAction to the current line.
+" " nmap <leader>ac  <Plug>(coc-codeaction)
+" " Apply AutoFix to problem on the current line.
+" " nmap <leader>qf  <Plug>(coc-fix-current)
+
 " " Introduce function text object
 " " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
   xmap if <Plug>(coc-funcobj-i)
@@ -894,7 +975,56 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
 
   let g:airline#extensions#coc#enabled = 1
 
+"
+" " COC snippets configuration
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
 
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
+" let g:coc_snippet_next = '<tab>'
+"
+"
+" Vim Language Client configuration
+" " Don't load language server settings (because i have none?)
+" let g:LanguageClient_loadSettings = 0
+" " let g:LanguageClient_settingsPath is set to <CWD>/.vim/settings.json
+
+
+" let g:LanguageClient_serverCommands = {
+"     \ 'python': ['/usr/local/bin/pyls'],
+"     \ 'php': ['php', 'vendor/bin/psalm-language-server'],
+"     \ }
+"     " \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"     "\ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+"     " \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+"     " \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+
+" let g:LanguageClient_loggingFile = expand('~/.vim-LanguageClient.log')
+
+" function EnableLSP()
+"   nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
+"   nnoremap <Leader>r :call LanguageClient#textDocument_rename()<CR>
+"   nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+"   nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+"   nnoremap <leader>lr :call LanguageClient#textDocument_references()<CR>
+"   nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+"   nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+"   nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+"   nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+"   nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+" endfunction()
+
+" augroup LSP
+"   autocmd!
+"   autocmd FileType php,python call EnableLSP()
+" augroup END
 " }}}
 
 " All of your Plugins must be added before the following line
@@ -908,6 +1038,34 @@ call plug#end()
 "           \ "/home/guezzl-deployer/guezzlpage" : "/home/mkuettel/Code/guezzlpage"
 "           \ }
 " let g:vdebug_options.break_on_open = 0
+" }}}
+
+" VIM MARKDOWN {{{
+    " Disable concealing of code blocks
+    let g:vim_markdown_conceal_code_blocks = 0
+    " enable yaml front matter for Jekyll
+    let g:vim_markdown_frontmatter = 1
+
+    " set show links but not italic and stuff
+    let g:vim_markdown_conceal = 1
+
+    " enable strikethrough support
+    let g:vim_markdown_strikethrough = 1
+
+    " markdown list indent 2
+    let g:vim_markdown_new_list_item_indent = 2
+
+    " when using ge to follow a link the file to opened can have an additional .md extension
+    let g:vim_markdown_no_extensions_in_markdown = 1
+
+    " let ge also follow link anchors e.g. #section-1
+    let g:vim_markdown_follow_anchor = 1
+
+    " markdown code block language to filetype translation map, to syntax
+    " highligh fences ```csharp
+    " ``` would result in ft=cs
+    let g:vim_markdown_fenced_languages = ['csharp=cs', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
+
 " }}}
 
 noremap <F12> :color zellner<enter>:set nonumber<enter>:TOhtml<enter>:w<enter>:!open %<enter>:q<enter>:set number<enter>:set background=dark<enter>:color solarized<enter>

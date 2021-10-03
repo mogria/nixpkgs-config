@@ -1,4 +1,10 @@
+<<<<<<< Updated upstream
 { pkgs, lib, ... }:
+||||||| constructed merge base
+{ pkgs, ...}:
+=======
+{ pkgs, lib, ...}:
+>>>>>>> Stashed changes
 
 let
   # I can use at least php 7.4 everywhere now I think
@@ -28,27 +34,107 @@ in {
     racket # scheme dialect in use
   ];
 
+<<<<<<< Updated upstream
+||||||| constructed merge base
+    nixpkgs-fmt # ale fixer (nixfmt exists as well)
+
+    bibclean # fix format BibTex bibliography files
+   # python-language-server
+
+    ## rust programming
+    # rls
+    # rustc
+    # cargo
+    rustup # toolchain installer, conflicts with others..
+  ] ++ (with phpPackages; [
+    php # ALE linter for php files
+    phpcs # ALE fixer for php files
+    composer # PHP-Package manager (essential for development and for ale to have vendor/bin/<executable>)
+  ]);
+
+  xdg.configFile."nvim/coc-settings.json".text = ''
+  {
+    "suggest.enablePreview":  true,
+    "diagnostic.displayByAle": true,
+    "codeLens.enable": true,
+    "languageserver": {
+      "intelephense": {
+          "command": "intelephense",
+          "args": ["--stdio"],
+          "filetypes": ["php"],
+          "initializationOptions": {
+              "storagePath": "/tmp/intelephense"
+          }
+      }
+    },
+  }
+  '';
+=======
+    nixpkgs-fmt # ale fixer (nixfmt exists as well)
+
+    bibclean # fix format BibTex bibliography files
+   # python-language-server
+
+    ## rust programming
+    # rls
+    # rustc
+    # cargo
+    rustup # toolchain installer, conflicts with others..
+  ] ++ (with phpPackages; [
+    php # ALE linter for php files
+    phpcs # ALE fixer for php files
+    composer # PHP-Package manager (essential for development and for ale to have vendor/bin/<executable>)
+  ]);
+
+  # "phplang": {
+  #   "command": "php",
+  #   "args": ["/path/to/vendor/felixfbecker/language-server/bin/php-language-server.php"],
+  #   "filetypes": ["php"]
+  # }
+
+  # Does't start? just hangs...
+  # "psalmls": {
+  #   "command": "vendor/bin/psalm-language-server",
+  #   "filetypes": ["php"],
+  #   "trace.server": "verbose", // doesn't work exits with 255 after initalization command
+  #   "rootPatterns": ["psalm.xml", "psalm.xml.dist"],
+  #   "requireRootPattern": true
+  # }
+  xdg.configFile."nvim/coc-settings.json".text = ''
+  {
+    "suggest.enablePreview":  true,
+    "diagnostic.displayByAle": true,
+    "codeLens.enable": true,
+    "languageserver": {
+      "intelephense": {
+          "command": "intelephense",
+          "args": ["--stdio"],
+          "filetypes": ["php"],
+          "initializationOptions": {
+              "storagePath": "/tmp/intelephense"
+          }
+      }
+    },
+  }
+  '';
+>>>>>>> Stashed changes
 
   programs.neovim = {
     enable = true;
     vimAlias = true;
     viAlias = true;
-    vimdiffAlias = true;
     withPython3 = true;
+    withPython = false;
     withNodeJs = true;
     withRuby = false;
     extraPython3Packages = (ps: with ps; [
       pynvim
     ]);
     plugins = with pkgs.vimPlugins; [
-      ## also configurable like this:
-      ## { plugin = vim-startify; config = "let g:startify_change_to_vcs_root = 0"; }
-
       # the best of the junegunn plugins
       vim-easy-align
       fzfWrapper
       fzf-vim
-
 
       # tome good tpope plugins
       vim-vinegar # browse directory where file resides by pressing "-"
@@ -57,8 +143,6 @@ in {
       vim-markdown
 
       vim-nix # nix language support
-
-      bats-vim # bash automated scripting system
 
       indentLine # show indentlines
 
@@ -83,10 +167,8 @@ in {
 
       # language specific stuff
       plantuml-syntax
-      sved
-
       vimtex # LaTeX
-      vim-latex-live-preview
+      sved
 
       # Snippets
       UltiSnips
@@ -119,9 +201,6 @@ in {
 
       # saving vim sessions
       vim-obsession
-
-      # close XML/HTML tags
-      vim-closetag 
     ];
     extraConfig = import ./config.nix {
       inherit pkgs;
@@ -138,7 +217,7 @@ in {
       # plugin update rev 1
       # update the number above to force plugin updates, and if it works do it on all
       # machines to have a chance at getting the same setup. Or better yet create a nix derivation for them :)
-      $DRY_RUN_CMD nvim -c ':PlugInstall!' -c ':PlugDiff' -c ':PlugClean!' -c ':q!' -c 'q!' --headless
+      $DRY_RUN_CMD nvim -c ':PlugInstall' -c ':PlugDiff' -c ':PlugClean' -c ':q!' -c 'q!' --headless
     '';
   };
 
