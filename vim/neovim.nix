@@ -33,7 +33,6 @@ in {
     vimAlias = true;
     viAlias = true;
     withPython3 = true;
-    withPython = false;
     withNodeJs = true;
     withRuby = false;
     extraPython3Packages = (ps: with ps; [
