@@ -52,6 +52,8 @@ in {
 
       vim-nix # nix language support
 
+      bats-vim # bash automated scripting system
+
       indentLine # show indentlines
 
       # Tmux Integration
