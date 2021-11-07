@@ -123,7 +123,7 @@ in {
       vim-obsession
 
       # close XML/HTML tags
-      vim-closetag 
+      vim-closetag
     ];
     extraConfig = (import ./config.nix {
       inherit pkgs;
@@ -143,7 +143,7 @@ in {
       # plugin update rev 1
       # update the number above to force plugin updates, and if it works do it on all
       # machines to have a chance at getting the same setup. Or better yet create a nix derivation for them :)
-      $DRY_RUN_CMD nvim -c ':PlugInstall!' -c ':PlugDiff' -c ':PlugClean!' -c ':q!' -c 'q!' --headless
+      $DRY_RUN_CMD nvim -c ':PlugInstall!' -c ':PlugDiff' -c ':PlugClean!' -c ':UpdateRemotePlugins' -c ':q!' -c 'q!' --headless
     '';
   };
 
