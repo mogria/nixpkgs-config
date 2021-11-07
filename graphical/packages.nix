@@ -5,6 +5,7 @@
     ../rofi/rofi.nix
     ../alacritty/alacritty.nix
     ./firefox
+    ./systemd-user-tray-target.nix
   ];
 
   home.packages = [
