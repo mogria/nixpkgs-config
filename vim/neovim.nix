@@ -44,6 +44,8 @@ in {
       ## also configurable like this:
       ## { plugin = vim-startify; config = "let g:startify_change_to_vcs_root = 0"; }
 
+      vim-plug # some plugins are not nixexpressions, use vim-plug as plugin manager
+
       # the best of the junegunn plugins
       vim-easy-align
       fzfWrapper
@@ -123,11 +125,14 @@ in {
       # close XML/HTML tags
       vim-closetag 
     ];
-    extraConfig = import ./config.nix {
+    extraConfig = (import ./config.nix {
       inherit pkgs;
-    };
+    });
     package = pkgs.neovim-unwrapped;
   };
+
+  # vim-plug needs to be autoloaded for the :Plug command to be available in the vimrc
+  xdg.configFile."nvim/autoload/plug.vim".source = "${pkgs.vimPlugins.vim-plug}/share/vim-plugins/vim-plug/plug.vim";
 
   /** install the few vim-plug plugins in a non-reproducable way
    automatically upon 'home-manager switch' by running neovim
