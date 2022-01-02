@@ -45,6 +45,7 @@
     xsv # query csv files
     wget
     dos2unix
+    rsync
 
     dnsutils
 
