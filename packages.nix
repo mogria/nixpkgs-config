@@ -62,6 +62,9 @@
 
     # backup tool
     duplicity
+
+    # development tools
+    nur.repos.kalbasit.nixify
   ];
 
   # programs.command-not-found.enable = true;
