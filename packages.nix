@@ -60,6 +60,8 @@
     pandoc
 
 
+    # backup tool
+    duplicity
   ];
 
   # programs.command-not-found.enable = true;
