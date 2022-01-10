@@ -27,9 +27,9 @@
     pkgs.vlc
 
     /* icon themes */
-    pkgs.gnome-themes-standard
-    pkgs.faience-ng-icon-theme
-    pkgs.griffin-ghost-icon-theme
+    # pkgs.gnome-themes-standard
+    # pkgs.faience-ng-icon-theme
+    # pkgs.griffin-ghost-icon-theme
 
     pkgs.evince # used by vim for tex preview as well
 
