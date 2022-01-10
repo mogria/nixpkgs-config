@@ -5,7 +5,7 @@ set encoding=utf-8
 " this vim configuration is in utf8
 scriptencoding utf-8
 
-" the vimrc config file is somewhere in the nix store and passed 
+" the vimrc config file is somewhere in the nix store and passed
 " to neovim with the -c option in the wrapper script
 " This finds out where this vimrc lies during runtime
 " for certain plugins to work like UltiSnips
@@ -59,6 +59,9 @@ set nocompatible
 
   " activate mouse integration
   set mouse=a
+  " have popup menu for right-click acations
+  set mousemodel=popup_setpos
+  set mousetime=300
 
   " have some minumum space between border
   " and the cursor on the top and bottom
@@ -221,19 +224,40 @@ set nocompatible
   cmap <C-_> <C-G>
 " }}}
 
+" VIM-PLUG SETUP {{{
+call plug#begin(expand('~/.config/nvim/plugged'))
+" }}}
+"
 " SPELLING OPTIONS {{{
+  lang en_US.utf8
   set spell
-  set spelllang=en_us,de_ch,de_de
-  set spellsuggest=best
+  set spelllang=en_us,de_ch,de,en,fr
+  " maybe fast is required here because of the dictionaries
+  set spellsuggest=double,30,file:$XDG_CONFIG_HOME/.config/nvim/bad2good.txt
+  " setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+  "
+
+
+  if filewritable(expand('$XDG_CONFIG_HOME').'/nvim')
+    " have dictionary fixes into config dir to be able to commit it via git
+    set spellfile=$XDG_CONFIG_HOME/nvim/spell/dictionary-fixes.utf-8.add
+  else
+    if filewritable(expand('$HOME').'/.dotfiles/nvim/spell')
+      " have the .dotfiles repo in place
+      set spellfile=~/.dotfiles/nvim/spell/dictionary-fixes.utf-8.add
+    else
+      " but in the case of home-manger/nix this directory is not writable
+      set spellfile=$XDG_DATA_HOME/nvim/spell/dictionary-fixes.utf-8.add
+    endif
+  endif
+
+  let g:spell_clean_limit = 60 * 60
+  runtime spell/cleanadd.vim
 
   nnoremap <Leader>U gUiw
   nnoremap <Leader>u viwbUl
 " }}}
 
-
-" VIM-PLUG SETUP {{{
-call plug#begin(expand('~/.config/nvim/plugged'))
-" }}}
 
 " BASE16 VIM THEME PLUGIN CONFIGURATIOJN {{{
   let base16colorspace=256
@@ -247,9 +271,24 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   " Set style for gVim
   hi SpellBad gui=undercurl
 
+  hi clear SpellCap
+  hi SpellCap cterm=underline
+  " Set style for gVim
+  hi SpellCap gui=undercurl
+
+  hi clear SpellRare
+  hi SpellRare cterm=underline
+  " Set style for gVim
+  hi SpellRare gui=undercurl
+
+  hi clear SpellLocal
+  hi SpellLocal cterm=underline
+  " Set style for gVim
+  hi SpellLocal gui=undercurl
+
   " Comments in italics
   hi Comment cterm=italic
-  hi Comment gui=undercurl
+  hi Comment gui=italic
 
 " }}}
 
@@ -571,7 +610,9 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
 " ALE SYNTAX CHECKING & FIXING {{{
   " vim restart required for new executables
   let g:ale_linters = {
-  \   '_': ['proselint', 'writegood'],
+  \   '*': ['proselint', 'writegood', 'languagetool'],
+  \   'text': ['proselint', 'writegood', 'languagetool'],
+  \   'markdown': ['proselint', 'writegood', 'languagetool'],
   \   'c': ['clang'],
   \   'sh': ['shellcheck', 'shell'],
   \   'hack': ['hack'],
@@ -581,7 +622,7 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
   \   'nix': ['nix'],
   \   'sql': ['sqlint'],
   \   'java': ['javac', 'checkstyle', 'pmd'],
-  \   'tex': ['lacheck', 'proselint'],
+  \   'tex': ['lacheck', 'proselint', 'languagetool'],
   \   'rust': ['cargo'],
   \   'scheme': ['raco'],
   \}
@@ -608,15 +649,20 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
 
 
   let g:ale_fixers = {
-  \   '_': ['trim_whitespace'],
+  \   '*': ['trim_whitespace'],
+  \   'markdown': [],
   \   'c': ['clangtidy'],
   \   'php': ['php_cs_fixer'],
   \ }
-  
+
   let g:ale_fix_on_save = 1
   let g:ale_fix_on_save_ignore = {
   \ 'markdown': ['trim_whitespace'],
   \ }
+
+  " ale languagetool spellchecking config
+  let g:ale_languagetool_executable = 'languagetool-commandline'
+  let g:ale_languagetool_options = '--autoDetect --mothertongue de-CH'
 
   " let g:ale_completion_symbols = {
   " \ 'text': 'txt',
@@ -659,7 +705,7 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
   "let g:ale_pattern_options = {'\.min\.js$': {'ale_enabled': 0}}
   "let g:ale_cache_executable_check_failures = 0
   "
-  "" let g:ale_lint_on_text_changed = "always" " always saves also on changes in insert mode
+  let g:ale_lint_on_text_changed = 1 " always saves also on changes in insert mode
   "let g:ale_command_wrapper = 'psdev exec app'
   "" let g:ale_use_global_executables = 1
   "" let g:ale_php_psalm_use_global = 1
@@ -755,7 +801,7 @@ let g:markdown_fenced_languages = ['bash', 'php', 'css', 'sql', 'javascript']
 " }}}
 
 " LaTeX support {{{
-  " use 
+  " use
   "  % !TEX root = <root-filename>
   " as the first line of a text file to define which file to
   " preview and which file needs to be compiled
