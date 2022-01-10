@@ -354,7 +354,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   " have ranger mappings
   noremap <F2> :Move <C-R>%
   noremap <F5> :e<CR>
-  noremap <F7> :Mkdir 
+  noremap <F7> :Mkdir<Space>
   noremap <F8> :Unlink<C-R>
 " }}}
 
@@ -402,7 +402,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   " unstaging / checkout
   noremap <Leader>gu <ESC>:Git unstage --patch -- %<CR>
   noremap <Leader>gU <ESC>:Git unstage -- %<CR>
-  noremap <Leader>gc <ESC>:Gcommit<CR>
+  noremap <Leader>gc <ESC>:Git commit<CR>
   noremap <Leader>gx <ESC>:Git undo<CR>
   noremap <Leader>gd <ESC>:Gdiff<CR>
   noremap <Leader>gl <ESC>:Glog<CR>
