@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../rofi/rofi.nix
+    # ../rofi/rofi.nix
     ../alacritty/alacritty.nix
     ./systemd-user-tray-target.nix
   ];
