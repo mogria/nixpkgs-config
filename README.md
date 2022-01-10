@@ -1,4 +1,4 @@
-# Mogria's .dotfiles
+# Mogria's `.dotfiles`
 
 These are [Home-Manager](https://github.com/rycee/home-manager/) based
 configuration for my home directory files.
