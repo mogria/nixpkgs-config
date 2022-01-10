@@ -43,6 +43,10 @@ def autostart():
     wallpaper()
     # os.system('kscreen-doctor output.DP-1-1.position.1,1920 output.HDMI-1-1.position,0,600 output.eDP-1-1.position.1,1024')
 
+@hook.subscribe.screen_change
+def restart_on_randr(qtile, ev):
+    qtile.cmd_restart()
+
 mod = "mod4"
 terminal = guess_terminal()
 
