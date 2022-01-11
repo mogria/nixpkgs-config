@@ -36,6 +36,7 @@
     unrar
     man-pages
     gnumake
+    stow
     gnused
     gnupg22
     gnutar
