@@ -22,13 +22,16 @@ c.content.blocking.adblock.lists = [
 # block youtube ads from playing. still have to skip them however.
 def filter_yt(info: interceptor.Request):
 	url = info.request_url
-	if (url.host() == "www.youtube.com" 
+	if (url.host() == "www.youtube.com"
 		and url.path() == "/get_video_info"
 		and "&adformat=" in url.query()
 	):
 		info.block()
 
 interceptor.register(filter_yt)
+
+# Qumatrix Plugin / CCCZH
+# https://gitlab.com/s3lph/qumatrix/
 
 # spawn mpv
 config.bind('w', 'spawn -d mpv {url}', mode='normal')
