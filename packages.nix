@@ -38,7 +38,7 @@
     gnumake
     stow
     gnused
-    gnupg22
+    gnupg
     gnutar
     less
     jq # parse/filter/format json
