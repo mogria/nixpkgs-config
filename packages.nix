@@ -51,6 +51,7 @@
     dnsutils
 
     git
+    tea
     entr
     fd  # find replacement
     exa # ls replacement
