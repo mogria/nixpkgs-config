@@ -18,8 +18,9 @@
 
     /* heavier graphical programs */
     pkgs.clementine
-    pkgs.chromium  # 2nd browser for specific stuff
+    # pkgs.chromium  # 2nd browser for specific stuff
     pkgs.firefox
+    pkgs.librewolf
     pkgs.thunderbird
     pkgs.okular
     pkgs.audacity
