@@ -252,7 +252,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   endif
 
   let g:spell_clean_limit = 60 * 60
-  runtime spell/cleanadd.vim
+  " runtime spell/cleanadd.vim # No such variiable "s:fname" for s:fname in split(globpath(&rtp, "spell/*.add"), "\n")
 
   nnoremap <Leader>U gUiw
   nnoremap <Leader>u viwbUl
