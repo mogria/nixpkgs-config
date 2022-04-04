@@ -410,9 +410,9 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   noremap <Leader>gk <ESC>:Git kp -- %<CR>
   " this is required untracked files
   noremap <Leader>gK <ESC>:Git k -- %<CR>
-  noremap <Leader>gp <ESC>:Gpush<CR>
-  noremap <Leader>gP <ESC>:Gpull --autostash<CR>
-  noremap <Leader>gf <ESC>:Gfetch --prune --all<CR>
+  noremap <Leader>gp <ESC>:Git push<CR>
+  noremap <Leader>gP <ESC>:Git pull --autostash<CR>
+  noremap <Leader>gf <ESC>:Git fetch --prune --all<CR>
   noremap <Leader>gF <ESC>:Git forward
 
   " inconsistent, gb changes branch in zsh
