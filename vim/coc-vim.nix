@@ -66,12 +66,11 @@
       # coc-fzf
       coc-git
       coc-yank
-      coc-rls # requires rustup package
+      coc-rust-analyzer
       coc-snippets
       coc-pairs
       coc-neco
       coc-spell-checker
-      coc-rls
       coc-highlight
   ];
 }
