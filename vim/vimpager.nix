@@ -27,7 +27,7 @@ let
         description = "Vimpager which starts without ansiesc";
         homepage = https://github.com/rkitover/vimpager;
         license = lib.licenses.mit;
-        maintainers = lib.maintainers.mogria;
+        maintainers = with lib.maintainers; [ Mogria ];
         platforms = vimpager-latest.meta.platforms;
       };
     };
