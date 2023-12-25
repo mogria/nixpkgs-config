@@ -113,5 +113,10 @@ Different graphical tools are included as well but only on Linux. This includes
 
       git clone https://github.com/mogria/nixpkgs-config.git ~/.config/home-manager
 
+* Symlink the used nixpkgs configuration from this repo into ~/.config/nixpkgs
+
+      mkdir ~/.config/nixpkgs
+      ln -s ~/.config/home-manager/config.nix ~/.config/nixpkgs/config.nix
+
 * Configure your git settings and github repositories in [`user-config.nix`](https://github.com/mogria/nixpkgs-config/blob/master/user-config.nix)
 * Install Home-Manager: [https://github.com/nix-community/home-manager](https://github.com/nix-community/home-manager#installation)
