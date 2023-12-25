@@ -109,9 +109,9 @@ Different graphical tools are included as well but only on Linux. This includes
 ## Installation
 
 * [Install Nix](https://nixos.org/nix/) or even [NixOS](https://nixos.org/nixos/)
-* Clone this repository into `~/.config/nixpkgs`
+* Clone this repository into `~/.config/home-manager`
 
-      git clone https://github.com/mogria/nixpkgs-config.git ~/.config/nixpkgs
+      git clone https://github.com/mogria/nixpkgs-config.git ~/.config/home-manager
 
 * Configure your git settings and github repositories in [`user-config.nix`](https://github.com/mogria/nixpkgs-config/blob/master/user-config.nix)
 * Install Home-Manager: [https://github.com/nix-community/home-manager](https://github.com/nix-community/home-manager#installation)
