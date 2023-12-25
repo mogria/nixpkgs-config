@@ -54,7 +54,7 @@
     tea
     entr
     fd  # find replacement
-    exa # ls replacement
+    eza # ls replacement
     bat # cat replacement, aliases to p
 
     /* LaTeX */
