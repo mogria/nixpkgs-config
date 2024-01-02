@@ -9,6 +9,7 @@
     ./direnv/direnv.nix
     ./git/git.nix
     ./zsh/zsh.nix
+    ./bash/bash.nix
     ./fzf/fzf.nix
     ./tmux/tmux.nix
     ./ripgrep/ripgrep.nix
