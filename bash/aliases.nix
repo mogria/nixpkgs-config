@@ -6,9 +6,9 @@
   "pc" = "bat -d --color=always";
 
   # override some default options on interactive use
-  "ls" = "exa --git";
-  "la" = "exa --git -a";
-  "ll" = "exa -l -g -a --sort=modified --git";
+  "ls" = "eza --git";
+  "la" = "eza --git -a";
+  "ll" = "eza -l -g -a --sort=modified --git";
   "cp" = "cp -iv";
   "mv" = "mv -iv";
   "rm" = "rm -iv";
