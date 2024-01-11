@@ -26,8 +26,12 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Nix
-source $HOME/.nix-profile/etc/profile.d/nix.sh
+
+if [ -f "$home/.nix-profile/etc/profile.d/nix.sh" ]; then
+    source $HOME/.nix-profile/etc/profile.d/nix.sh
+fi
+
+export PATH="$PATH:$HOME/.nix-profile/bin"
 
 # Home-Manager
 source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
