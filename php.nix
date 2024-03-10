@@ -52,11 +52,10 @@ in {
   home.packages = with pkgs.php83Packages; [
     phpEnv
     composer
-    # phpcs
     # phpmd
     # phpstan
     # psalm
-    phpcs
+    php-codesniffer
     ];
 }
 
