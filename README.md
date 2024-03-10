@@ -120,3 +120,5 @@ Different graphical tools are included as well but only on Linux. This includes
 
 * Configure your git settings and github repositories in [`user-config.nix`](https://github.com/mogria/nixpkgs-config/blob/master/user-config.nix)
 * Install Home-Manager: [https://github.com/nix-community/home-manager](https://github.com/nix-community/home-manager#installation)
+    nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+    nix-shell '<home-manager>' -A install

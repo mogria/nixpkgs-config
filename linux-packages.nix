@@ -33,7 +33,6 @@
     emscripten
 
     pdftk
-    # ca-certificates
   ]);
 
   systemd.user.startServices = pkgs.stdenv.isLinux;
