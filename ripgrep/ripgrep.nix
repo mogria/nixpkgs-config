@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 let
-  configFilePath = "ripgrep/ripgrep-config.txt";
+  configFilePath = ".ripgrep-config";
 in {
   home.packages = with pkgs; [
     ripgrep

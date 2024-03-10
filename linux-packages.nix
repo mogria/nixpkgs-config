@@ -1,6 +1,9 @@
 { pkgs, lib, ... }:
 
 {
+  imports = [
+    ./php.nix
+  ];
   home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [
     /* system management utilities */
     iotop
@@ -14,6 +17,23 @@
     gdb
     cmake
     xsel # required by tmux for copy paste into X clipboard and for macos compatible pbcopy
+
+    docker
+    docker-compose
+
+    appimagekit
+    fuse
+    fuse-common
+    appimage-run
+
+    patchelf
+
+    cacert
+
+    emscripten
+
+    pdftk
+    # ca-certificates
   ]);
 
   systemd.user.startServices = pkgs.stdenv.isLinux;

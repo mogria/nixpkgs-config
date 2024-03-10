@@ -1,9 +1,7 @@
 { pkgs, lib, ... }:
 
-let
-  # I can use at least php 7.4 everywhere now I think
-  phpPackages = pkgs.php74Packages;
-in {
+
+{
 
   imports = [
     ./coc-vim.nix

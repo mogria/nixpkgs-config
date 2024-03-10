@@ -68,6 +68,15 @@
 
     # development tools
     nur.repos.kalbasit.nixify
+
+    # Javascript Development Tools
+    typescript
+    nodejs
+    nodePackages.npm
+
+    # Audio tools
+    flac
+    ffmpeg
   ];
 
   # programs.command-not-found.enable = true;
