@@ -8,7 +8,6 @@
 
   home.packages = with pkgs; [
       ## Nix Language Support
-      rnix-lsp
       nixpkgs-fmt # ale fixer (nixfmt exists as well)
 
       ## Rust Language Support
@@ -43,10 +42,6 @@
         "rootPatterns": ["psalm.xml", "psalm.xml.dist"],
         "requireRootPattern": true,
         "trace.server": "verbose"
-      },
-      "nix": {
-        "command": "rnix-lsp",
-        "filetypes": ["nix"]
       },
     },
   }
