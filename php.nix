@@ -44,7 +44,7 @@ let
 
       ]));
       extraConfig = ''
-          xdebug.mode=debug
+          xdebug.mode=coverage
       '';
     };
 in {

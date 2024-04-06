@@ -1,6 +1,11 @@
 { pkgs, lib, ... }:
 
 {
+
+  imports = [
+  	../php.nix
+  ];
+
   home.packages = with pkgs; [
       ## Nix Language Support
       rnix-lsp
@@ -23,11 +28,6 @@
       pylint # ALE lint python code
       # python-language-server # coc-python # MacOS: errors in tests
     
-    ]) ++ (with pkgs.phpPackages; [
-      ## PHP Language Support
-      php # ALE linter for php files
-      phpcs # ALE fixer for php files
-      composer # PHP-Package manager (essential for development and for ale to have vendor/bin/<executable>)
     ]);
 
   xdg.configFile."nvim/coc-settings.json".text = ''
