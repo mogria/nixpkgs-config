@@ -20,7 +20,7 @@
       /* ugly hack: oh my zsh only wants a relative path, so lets go back to the system root */
       theme = "../../../../../../../../../../../${pkgs.zsh-powerlevel9k}/share/zsh-powerlevel9k/powerlevel9k";
       extraConfig = ''
-        zstyle :omz:plugins:ssh-agent identities id_ecdsa
+        zstyle :omz:plugins:ssh-agent identities id_ed25519
       '';
     };
 
