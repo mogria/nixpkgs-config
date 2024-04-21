@@ -7,9 +7,6 @@ in {
     ripgrep
   ];
 
-  home.sessionVariables = {
-    "RIPGREP_CONFIG_PATH" = "$XDG_CONFIG_HOME/${configFilePath}";
-  };
 
   xdg.configFile."${configFilePath}".text = ''
     # make rg also understand POSIX regex, for example from vim not only PCRE2
