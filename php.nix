@@ -31,13 +31,13 @@ let
           readline
           redis
           session
-          simplexml
+          # simplexml
           sockets
           sqlite3
-          xml
-          xmlreader
-          xmlwriter
-          xsl
+          # xml
+          # xmlreader
+          # xmlwriter
+          # xsl
           yaml
           zip
           zlib
