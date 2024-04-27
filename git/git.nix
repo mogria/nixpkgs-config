@@ -108,6 +108,10 @@ in {
         # and the AnsiEsc plugin which is slow
         pager = false;
       };
+
+      commit = {
+        signingkey = config.git.signingKey;
+      };
     };
   };
 }

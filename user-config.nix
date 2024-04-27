@@ -4,6 +4,7 @@ let
     username = "mogria";
     git = rec {
       email = "m0gr14@gmail.com";
+      signingKey = null;
     };
     github = rec {
       inherit username;
